@@ -1,22 +1,17 @@
-.App {
-  text-align: center;
+.calendar {
+  width: 80%;
+  border-collapse: collapse;
+}
+.calendar td,
+.calendar th {
+  border: 1px solid #d9d9d9;
 }
 
-.App-logo {
-  height: 40vmin;
+.calendar th {
+  background-color: #f9d2e0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #09d3ac;
+.calendar td.days {
+  height: 66px;
+  vertical-align: top;
 }

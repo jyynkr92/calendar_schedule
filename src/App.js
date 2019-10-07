@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
-import Calendar from "./components/Calendar";
+import CalendarContainer from "./containers/CalendarContainer";
 
 function App() {
-  return <Calendar></Calendar>;
+  return <CalendarContainer></CalendarContainer>;
 }
 
 export default App;

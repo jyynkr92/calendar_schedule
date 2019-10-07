@@ -1,16 +1,25 @@
-import React from "react";
+import React, { Component } from "react";
 import MonthSelect from "./MonthSelect";
 import Month from "./Month";
 
-const Calendar = () => {
-  return (
-    <table className="calendar">
-      <tbody>
-        <MonthSelect></MonthSelect>
-        <Month></Month>
-      </tbody>
-    </table>
-  );
-};
+export default class Calendar extends Component {
+  render() {
+    const { date, dayList, today, setCalendar, setModal } = this.props;
 
-export default Calendar;
+    return (
+      <table className="calendar">
+        <tbody>
+          <MonthSelect
+            date={date === "" ? "" : date}
+            setCalendar={setCalendar}
+          ></MonthSelect>
+          <Month
+            dayList={dayList.length === 0 ? [] : dayList}
+            today={today}
+            setModal={setModal}
+          ></Month>
+        </tbody>
+      </table>
+    );
+  }
+}

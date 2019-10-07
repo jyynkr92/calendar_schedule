@@ -1,12 +1,12 @@
 import React from "react";
 import Day from "./Day";
 
-const Week = ({ line }) => {
+const Week = ({ line, today, setModal }) => {
   return (
     <>
       <tr>
-        {line.map((day, index) => (
-          <Day day={day}></Day>
+        {line.map(day => (
+          <Day day={day} today={today} setModal={setModal}></Day>
         ))}
       </tr>
     </>

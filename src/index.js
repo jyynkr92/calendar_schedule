@@ -8,6 +8,7 @@ import * as serviceWorker from "./serviceWorker";
 import ReduxThunk from "redux-thunk";
 import { createLogger } from "redux-logger";
 import rootReducer from "./modules/rootReducer";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const logger = createLogger();
 const store = createStore(rootReducer, applyMiddleware(logger, ReduxThunk));

@@ -4,7 +4,7 @@ import leftArrow from "../img/left-arrow.png";
 
 const MonthSelect = ({ date, setCalendar }) => {
   return (
-    <tr>
+    <tr className="month_select">
       <th colSpan="7">
         <span>
           <img

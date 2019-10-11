@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { setInitMonth, setMonth } from "../modules/calendar";
 import { setModal, closeModal } from "../modules/schedule";
 import Calendar from "../components/Calendar";
-import Modal from "../components/Modal";
+import CustomModal from "../components/CustomModal";
 
 class CalendarContainer extends Component {
   componentDidMount() {
@@ -45,9 +45,11 @@ class CalendarContainer extends Component {
           setCalendar={setCalendar}
           setModal={setModal}
         ></Calendar>
-        {modal ? (
-          <Modal modalDate={modalDate} closeModal={closeModal}></Modal>
-        ) : null}
+        <CustomModal
+          show={modal}
+          modalDate={modalDate}
+          onHide={closeModal}
+        ></CustomModal>
       </div>
     );
   }

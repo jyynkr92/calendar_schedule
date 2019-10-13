@@ -63,3 +63,7 @@
 #startTime_separator {
   text-align: center;
 }
+
+#memo_area {
+  resize: none;
+}

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setInitMonth, setMonth } from "../modules/calendar";
-import { setModal, closeModal } from "../modules/schedule";
+import { setModal } from "../modules/modal";
 import Calendar from "../components/Calendar";
-import CustomModal from "../components/CustomModal";
+import ModalContainer from "./ModalContainer";
 
 class CalendarContainer extends Component {
   componentDidMount() {
@@ -28,14 +28,9 @@ class CalendarContainer extends Component {
     setModal(date);
   };
 
-  closeModal = () => {
-    const { closeModal } = this.props;
-    closeModal();
-  };
-
   render() {
     const { date, dayList, today, modal, modalDate } = this.props;
-    const { setCalendar, setModal, closeModal } = this;
+    const { setCalendar, setModal } = this;
     return (
       <div>
         <Calendar
@@ -45,11 +40,7 @@ class CalendarContainer extends Component {
           setCalendar={setCalendar}
           setModal={setModal}
         ></Calendar>
-        <CustomModal
-          show={modal}
-          modalDate={modalDate}
-          onHide={closeModal}
-        ></CustomModal>
+        <ModalContainer modal={modal} modalDate={modalDate}></ModalContainer>
       </div>
     );
   }
@@ -179,8 +170,8 @@ const mapStateToProps = state => ({
   date: state.calendar.date,
   dayList: state.calendar.dayList,
   today: state.calendar.today,
-  modal: state.schedule.modal,
-  modalDate: state.schedule.modalDate
+  modal: state.modal.modal,
+  modalDate: state.modal.modalDate
 });
 
 const mapToDispatch = dispatch => ({
@@ -192,9 +183,6 @@ const mapToDispatch = dispatch => ({
   },
   setModal: date => {
     dispatch(setModal(date));
-  },
-  closeModal: () => {
-    dispatch(closeModal());
   }
 });
 

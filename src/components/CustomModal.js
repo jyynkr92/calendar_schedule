@@ -114,7 +114,7 @@ const CustomModal = ({ modalDate, show, onHide }) => {
           </Form.Row>
           <Form.Group>
             <Form.Label>메모</Form.Label>
-            <Form.Control as="textarea" rows="3" />
+            <Form.Control as="textarea" rows="3" controlId="memo_area" />
           </Form.Group>
         </Form>
       </Modal.Body>

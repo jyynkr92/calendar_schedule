@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { setInitMonth, setMonth } from "../modules/calendar";
 import { setModal } from "../modules/modal";
 import Calendar from "../components/Calendar";
 import ModalContainer from "./ModalContainer";
 
-class CalendarContainer extends Component {
+class CalendarContainer extends PureComponent {
   componentDidMount() {
     const { settingInitial, date } = this.props;
     const initMonth = getMonthInfo(0, date);
@@ -29,7 +29,7 @@ class CalendarContainer extends Component {
   };
 
   render() {
-    const { date, dayList, today, modal, modalDate } = this.props;
+    const { date, dayList, today, modal } = this.props;
     const { setCalendar, setModal } = this;
     return (
       <div>
@@ -40,7 +40,7 @@ class CalendarContainer extends Component {
           setCalendar={setCalendar}
           setModal={setModal}
         ></Calendar>
-        <ModalContainer modal={modal} modalDate={modalDate}></ModalContainer>
+        {modal ? <ModalContainer /> : null}
       </div>
     );
   }

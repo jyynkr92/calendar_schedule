@@ -28,7 +28,7 @@ export const selectSchedule = scheduleId => ({
 /** dfine initial state */
 const initialState = {
   scheduleList: [],
-  selectedSchedule: {}
+  scheduleId: 0
 };
 
 /** define reduce function */
@@ -63,9 +63,7 @@ function schedule(state = initialState, action) {
       };
     case SELECT_SCHEDULE:
       return {
-        selectedSchedule: state.scheduleList.filter(schedule => {
-          return schedule.scheduleId === action.scheduleId;
-        })
+        scheduleId: action.scheduleId
       };
     default:
       return state;

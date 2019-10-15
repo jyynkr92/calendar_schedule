@@ -85,7 +85,7 @@ class ModalContainer extends PureComponent {
       allDayFlag,
       memo
     } = this.state;
-    const { changeInput, addSchedule } = this;
+    const { changeInput, addSchedule, closeModal } = this;
     return (
       <CustomModal
         show={modal}
@@ -102,6 +102,7 @@ class ModalContainer extends PureComponent {
         endMinute={endMinute}
         allDayFlag={allDayFlag}
         memo={memo}
+        onHide={closeModal}
       ></CustomModal>
     );
   }

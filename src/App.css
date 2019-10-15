@@ -67,3 +67,7 @@
 #memo_area {
   resize: none;
 }
+
+.allday_display {
+  display: inline-block;
+}

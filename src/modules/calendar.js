@@ -28,6 +28,7 @@ function calendar(state = initialState, action) {
   switch (action.type) {
     case SET_MONTH:
       return {
+        ...state,
         date: action.date,
         dayList: action.dayList
       };

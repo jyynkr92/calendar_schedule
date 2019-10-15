@@ -64,17 +64,26 @@ const getMonthInfo = (gap, date) => {
     nowDate.setDate(strDate);
   }
 
+  const nowYear = nowDate.getFullYear();
+  const nowMonth =
+    nowDate.getMonth() + 1 < 10
+      ? "0" + (nowDate.getMonth() + 1)
+      : nowDate.getMonth() + 1;
+
+  const nowday =
+    nowDate.getDate() < 10 ? "0" + nowDate.getDate() : nowDate.getDate();
+  const today = nowYear + "-" + nowMonth + "-" + nowday;
+
   nowDate.setMonth(nowDate.getMonth() + gap);
 
   const year = nowDate.getFullYear();
   const month = nowDate.getMonth() + 1;
-  const day = nowDate.getDate();
   let monthStr = month;
 
   if (month < 10) {
     monthStr = "0" + monthStr;
   }
-  const today = year + "-" + monthStr + "-" + day;
+
   dateStr = year + "-" + monthStr + "-01";
 
   //dayList arr

@@ -1,5 +1,5 @@
 .calendar {
-  width: 690px;
+  width: 700px;
   border-collapse: collapse;
 }
 .calendar td,
@@ -12,8 +12,20 @@
 }
 
 .calendar td.days {
-  height: 66px;
+  height: 80px;
   vertical-align: top;
+  width: 100px;
+}
+
+.calendar td.days div {
+  width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.calendar td.days div.schedule_title {
+  font-size: 0.8em;
 }
 
 .arrow_img {

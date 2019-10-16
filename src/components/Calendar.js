@@ -4,8 +4,15 @@ import Month from "./Month";
 
 export default class Calendar extends Component {
   render() {
-    const { date, dayList, today, setCalendar, setModal } = this.props;
-
+    const {
+      date,
+      dayList,
+      today,
+      setCalendar,
+      setModal,
+      scheduleList
+    } = this.props;
+    console.log(scheduleList);
     return (
       <table className="calendar">
         <tbody>
@@ -17,6 +24,7 @@ export default class Calendar extends Component {
             dayList={dayList.length === 0 ? [] : dayList}
             today={today}
             setModal={setModal}
+            scheduleList={scheduleList}
           ></Month>
         </tbody>
       </table>

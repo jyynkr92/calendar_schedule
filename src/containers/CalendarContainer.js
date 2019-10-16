@@ -29,7 +29,7 @@ class CalendarContainer extends PureComponent {
   };
 
   render() {
-    const { date, dayList, today, modal } = this.props;
+    const { date, dayList, today, modal, scheduleList } = this.props;
     const { setCalendar, setModal } = this;
     return (
       <div>
@@ -39,6 +39,7 @@ class CalendarContainer extends PureComponent {
           today={today}
           setCalendar={setCalendar}
           setModal={setModal}
+          scheduleList={scheduleList}
         ></Calendar>
         {modal ? <ModalContainer /> : null}
       </div>
@@ -180,7 +181,8 @@ const mapStateToProps = state => ({
   dayList: state.calendar.dayList,
   today: state.calendar.today,
   modal: state.modal.modal,
-  modalDate: state.modal.modalDate
+  modalDate: state.modal.modalDate,
+  scheduleList: state.schedule.scheduleList
 });
 
 const mapToDispatch = dispatch => ({

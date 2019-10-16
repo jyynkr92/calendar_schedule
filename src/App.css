@@ -1,6 +1,21 @@
 .calendar {
   width: 700px;
   border-collapse: collapse;
+  background-size: cover;
+  position: relative;
+}
+
+.calendar:after {
+  content: "";
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: 100%;
+  background-image: url("./img/calendar_background.jpg");
+  z-index: -1;
+  opacity: 0.4;
 }
 .calendar td,
 .calendar th {
@@ -38,8 +53,8 @@
   font-size: 25px;
 }
 
-.today {
-  background-color: #f2e8ff;
+.today .dayText {
+  background-color: #cecfff;
 }
 
 .not_thisMonth {

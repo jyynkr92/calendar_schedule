@@ -16,13 +16,34 @@ class ModalContainer extends PureComponent {
     endHour: "01",
     endMinute: "00",
     allDayFlag: false,
-    memo: ""
+    memo: "",
+    lastScheduleId: 1
   };
 
   componentDidMount() {
+    const { selectScheduleId, scheduleList } = this.props;
+
+    const selectedSchedule = scheduleList.filter(schedule => {
+      return schedule.scheduleId === selectScheduleId;
+    });
+
+    if (selectedSchedule === null || selectedSchedule === undefined) {
+      this.setState({});
+    }
+
     this.setState({
       startDate: this.props.modalDate,
-      endDate: this.props.modalDate
+      endDate: this.props.modalDate,
+      title: this.props.title,
+      startAmPm: this.props.startAmPm,
+      startHour: this.props.startHour,
+      startMinute: this.props.startMinute,
+      endAmPm: this.props.endAmPm,
+      endHour: this.props.endHour,
+      endMinute: this.props.endMinute,
+      allDayFlag: this.props.allD,
+      memo: this.props.memo,
+      lastScheduleId: this.props.lastScheduleId
     });
   }
 
@@ -38,7 +59,7 @@ class ModalContainer extends PureComponent {
   };
 
   addSchedule = () => {
-    const { addSchedule } = this.props;
+    const { addSchedule, lastScheduleId } = this.props;
     const {
       title,
       startDate,
@@ -64,7 +85,8 @@ class ModalContainer extends PureComponent {
       endHour,
       endMinute,
       allDayFlag,
-      memo
+      memo,
+      lastScheduleId: lastScheduleId
     };
     addSchedule(schedule);
     this.closeModal();
@@ -83,7 +105,8 @@ class ModalContainer extends PureComponent {
       endHour,
       endMinute,
       allDayFlag,
-      memo
+      memo,
+      lastScheduleId
     } = this.state;
     const { changeInput, addSchedule, closeModal } = this;
     return (
@@ -103,6 +126,7 @@ class ModalContainer extends PureComponent {
         allDayFlag={allDayFlag}
         memo={memo}
         onHide={closeModal}
+        lastScheduleId={lastScheduleId}
       ></CustomModal>
     );
   }
@@ -111,7 +135,10 @@ class ModalContainer extends PureComponent {
 const mapStateToProps = state => ({
   modal: state.modal.modal,
   modalDate: state.modal.modalDate,
-  scheduleForm: state.schedule.scheduleForm
+  scheduleForm: state.schedule.scheduleForm,
+  scheduleList: state.schedule.scheduleList,
+  lastScheduleId: state.schedule.lastScheduleId,
+  selectScheduleId: state.schedule.selectScheduleId
 });
 
 const mapToDispatch = dispatch => ({

@@ -28,7 +28,8 @@ export const selectSchedule = scheduleId => ({
 /** dfine initial state */
 const initialState = {
   scheduleList: [],
-  scheduleId: 0
+  lastScheduleId: 1,
+  selectScheduleId: 0
 };
 
 /** define reduce function */
@@ -36,7 +37,8 @@ function schedule(state = initialState, action) {
   switch (action.type) {
     case ADD_SCHEDULE:
       return {
-        scheduleList: [...state.scheduleList, action.schedule]
+        scheduleList: [...state.scheduleList, action.schedule],
+        lastScheduleId: state.lastScheduleId + 1
       };
     case DELETE_SCHEDULE:
       return {
@@ -63,7 +65,7 @@ function schedule(state = initialState, action) {
       };
     case SELECT_SCHEDULE:
       return {
-        scheduleId: action.scheduleId
+        selectScheduleId: action.scheduleId
       };
     default:
       return state;

@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { setInitMonth, setMonth } from "../modules/calendar";
 import { setModal } from "../modules/modal";
+import { selectSchedule } from "../modules/schedule";
 import Calendar from "../components/Calendar";
 import ModalContainer from "./ModalContainer";
 
@@ -25,6 +26,12 @@ class CalendarContainer extends PureComponent {
 
   setModal = date => {
     const { setModal } = this.props;
+    setModal(date);
+  };
+
+  selectSchedule = (scheduleId, date) => {
+    const { selectSchedule, setModal } = this.props;
+    selectSchedule(scheduleId);
     setModal(date);
   };
 
@@ -194,6 +201,9 @@ const mapToDispatch = dispatch => ({
   },
   setModal: date => {
     dispatch(setModal(date));
+  },
+  selectSchedule: scheduleId => {
+    dispatch(selectSchedule(scheduleId));
   }
 });
 

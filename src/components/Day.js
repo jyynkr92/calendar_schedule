@@ -1,7 +1,7 @@
 import React from "react";
 import DayText from "./DayText";
 
-const Day = ({ day, today, setModal, scheduleList }) => {
+const Day = ({ day, today, setModal, scheduleList, selectSchedule }) => {
   const isToday = today === day.date ? "today" : "";
   const isThisMonth = day.isThisMonth ? "" : "not_thisMonth";
   const classes = `days ${isToday} ${isThisMonth}`;
@@ -21,7 +21,16 @@ const Day = ({ day, today, setModal, scheduleList }) => {
     >
       <DayText key={day.date} dayName={day.dayNum}></DayText>
       {schedules.map(schedule => (
-        <div className="schedule_title">{schedule.title}</div>
+        <div
+          id={schedule.scheduleId}
+          onClick={e => {
+            e.stopPropagation();
+            selectSchedule(schedule.scheduleId, day.date);
+          }}
+          className="schedule_title"
+        >
+          {schedule.title}
+        </div>
       ))}
     </td>
   );

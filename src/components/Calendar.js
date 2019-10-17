@@ -10,9 +10,10 @@ export default class Calendar extends Component {
       today,
       setCalendar,
       setModal,
-      scheduleList
+      scheduleList,
+      selectSchedule
     } = this.props;
-    console.log(scheduleList);
+
     return (
       <table className="calendar">
         <tbody>
@@ -25,6 +26,7 @@ export default class Calendar extends Component {
             today={today}
             setModal={setModal}
             scheduleList={scheduleList}
+            selectSchedule={selectSchedule}
           ></Month>
         </tbody>
       </table>

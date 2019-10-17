@@ -2,7 +2,7 @@ import React from "react";
 import Week from "./Week";
 import WeekName from "./WeekName";
 
-const Month = ({ dayList, today, setModal, scheduleList }) => {
+const Month = ({ dayList, today, setModal, scheduleList, selectSchedule }) => {
   const weekName = ["일", "월", "화", "수", "목", "금", "토"];
   return (
     <>
@@ -17,6 +17,7 @@ const Month = ({ dayList, today, setModal, scheduleList }) => {
           today={today}
           setModal={setModal}
           scheduleList={scheduleList}
+          selectSchedule={selectSchedule}
         ></Week>
       ))}
     </>

@@ -1,8 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { closeModal } from "../modules/modal";
 import CustomModal from "../components/CustomModal";
-import { addSchedule } from "../modules/schedule";
+import { addScheduleToFirebase, closeModal } from "../modules/schedule";
 
 class ModalContainer extends PureComponent {
   state = {
@@ -16,36 +15,8 @@ class ModalContainer extends PureComponent {
     endHour: "01",
     endMinute: "00",
     allDayFlag: false,
-    memo: "",
-    lastScheduleId: 1
+    memo: ""
   };
-
-  componentDidMount() {
-    const { selectScheduleId, scheduleList } = this.props;
-
-    const selectedSchedule = scheduleList.filter(schedule => {
-      return schedule.scheduleId === selectScheduleId;
-    });
-
-    if (selectedSchedule === null || selectedSchedule === undefined) {
-      this.setState({});
-    }
-
-    this.setState({
-      startDate: this.props.modalDate,
-      endDate: this.props.modalDate,
-      title: this.props.title,
-      startAmPm: this.props.startAmPm,
-      startHour: this.props.startHour,
-      startMinute: this.props.startMinute,
-      endAmPm: this.props.endAmPm,
-      endHour: this.props.endHour,
-      endMinute: this.props.endMinute,
-      allDayFlag: this.props.allD,
-      memo: this.props.memo,
-      lastScheduleId: this.props.lastScheduleId
-    });
-  }
 
   closeModal = () => {
     const { closeModal } = this.props;
@@ -59,7 +30,7 @@ class ModalContainer extends PureComponent {
   };
 
   addSchedule = () => {
-    const { addSchedule, lastScheduleId } = this.props;
+    const { addSchedule } = this.props;
     const {
       title,
       startDate,
@@ -85,8 +56,7 @@ class ModalContainer extends PureComponent {
       endHour,
       endMinute,
       allDayFlag,
-      memo,
-      lastScheduleId: lastScheduleId
+      memo
     };
     addSchedule(schedule);
     this.closeModal();
@@ -133,8 +103,8 @@ class ModalContainer extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  modal: state.modal.modal,
-  modalDate: state.modal.modalDate,
+  modal: state.schedule.modal,
+  modalDate: state.schedule.modalDate,
   scheduleForm: state.schedule.scheduleForm,
   scheduleList: state.schedule.scheduleList,
   lastScheduleId: state.schedule.lastScheduleId,
@@ -146,7 +116,7 @@ const mapToDispatch = dispatch => ({
     dispatch(closeModal());
   },
   addSchedule: schedule => {
-    dispatch(addSchedule(schedule));
+    dispatch(addScheduleToFirebase(schedule));
   }
 });
 

@@ -1,8 +1,11 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { setInitMonth, setMonth } from "../modules/calendar";
-import { setModal } from "../modules/modal";
-import { selectSchedule } from "../modules/schedule";
+import {
+  setModal,
+  selectSchedule,
+  getScheuleFromFirebase
+} from "../modules/schedule";
 import Calendar from "../components/Calendar";
 import ModalContainer from "./ModalContainer";
 
@@ -14,6 +17,7 @@ class CalendarContainer extends PureComponent {
     const dayList = initMonth.dayList;
     const today = initMonth.today;
     settingInitial(dateStr, dayList, today);
+    getScheuleFromFirebase();
   }
 
   setCalendar = gap => {
@@ -188,8 +192,8 @@ const mapStateToProps = state => ({
   date: state.calendar.date,
   dayList: state.calendar.dayList,
   today: state.calendar.today,
-  modal: state.modal.modal,
-  modalDate: state.modal.modalDate,
+  modal: state.schedule.modal,
+  modalDate: state.schedule.modalDate,
   scheduleList: state.schedule.scheduleList
 });
 

@@ -15,8 +15,13 @@ class ModalContainer extends PureComponent {
     endHour: "01",
     endMinute: "00",
     allDayFlag: false,
-    memo: ""
+    memo: "",
+    scheduleId: 1
   };
+
+  componentDidMount() {
+    console.log(this.props.selectSchedule);
+  }
 
   closeModal = () => {
     const { closeModal } = this.props;
@@ -30,7 +35,7 @@ class ModalContainer extends PureComponent {
   };
 
   addSchedule = () => {
-    const { addSchedule } = this.props;
+    const { addSchedule, lastScheduleId } = this.props;
     const {
       title,
       startDate,
@@ -56,7 +61,8 @@ class ModalContainer extends PureComponent {
       endHour,
       endMinute,
       allDayFlag,
-      memo
+      memo,
+      scheduleId: lastScheduleId
     };
     addSchedule(schedule);
     this.closeModal();
@@ -105,7 +111,7 @@ class ModalContainer extends PureComponent {
 const mapStateToProps = state => ({
   modal: state.schedule.modal,
   modalDate: state.schedule.modalDate,
-  scheduleForm: state.schedule.scheduleForm,
+  selectSchedule: state.schedule.selectSchedule,
   scheduleList: state.schedule.scheduleList,
   lastScheduleId: state.schedule.lastScheduleId,
   selectScheduleId: state.schedule.selectScheduleId

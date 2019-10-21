@@ -25,6 +25,7 @@ const Day = ({ day, today, setModal, scheduleList, selectSchedule }) => {
           id={schedule.scheduleId}
           onClick={e => {
             e.stopPropagation();
+            console.log(schedule.scheduleId);
             selectSchedule(schedule.scheduleId, day.date);
           }}
           className="schedule_title"

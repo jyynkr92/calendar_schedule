@@ -11,12 +11,13 @@ import ModalContainer from "./ModalContainer";
 
 class CalendarContainer extends PureComponent {
   componentDidMount() {
-    const { settingInitial, date } = this.props;
+    const { settingInitial, date, getScheuleFromFirebase } = this.props;
     const initMonth = getMonthInfo(0, date);
     const dateStr = initMonth.date;
     const dayList = initMonth.dayList;
     const today = initMonth.today;
     settingInitial(dateStr, dayList, today);
+
     getScheuleFromFirebase();
   }
 
@@ -34,9 +35,8 @@ class CalendarContainer extends PureComponent {
   };
 
   selectSchedule = (scheduleId, date) => {
-    const { selectSchedule, setModal } = this.props;
+    const { selectSchedule } = this.props;
     selectSchedule(scheduleId);
-    setModal(date);
   };
 
   render() {
@@ -209,6 +209,9 @@ const mapToDispatch = dispatch => ({
   },
   selectSchedule: scheduleId => {
     dispatch(selectSchedule(scheduleId));
+  },
+  getScheuleFromFirebase: () => {
+    dispatch(getScheuleFromFirebase());
   }
 });
 

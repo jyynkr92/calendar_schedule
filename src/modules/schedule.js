@@ -58,7 +58,6 @@ export const getScheuleFromFirebase = () => {
 };
 
 export const addScheduleToFirebase = schedule => {
-  console.log("addScheduleStarted");
   return () => {
     const doc = firestore.collection("schedule");
     return doc.add(schedule);
@@ -100,7 +99,20 @@ function schedule(state = initialState, action) {
     case CLOSE_MODAL:
       return {
         ...state,
-        modal: false
+        modal: false,
+        selectSchedule: {
+          title: "",
+          startDate: "",
+          startAmPm: "오전",
+          startHour: "01",
+          startMinute: "00",
+          endDate: "",
+          endAmPm: "오전",
+          endHour: "01",
+          endMinute: "00",
+          allDayFlag: false,
+          memo: ""
+        }
       };
     case ADD_SCHEDULE:
       return {
@@ -127,7 +139,7 @@ function schedule(state = initialState, action) {
               memo: action.schedule.memo
             }
           : { ...schedule };
-      });
+      })[0];
 
       return {
         ...state,
@@ -140,7 +152,7 @@ function schedule(state = initialState, action) {
         mode: "show",
         selectSchedule: state.scheduleList.filter(schedule => {
           return Number(schedule.scheduleId) === Number(action.scheduleId);
-        })
+        })[0]
       };
     case GET_SCHEDULELIST:
       return {

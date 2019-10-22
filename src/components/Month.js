@@ -8,11 +8,16 @@ const Month = ({ dayList, today, setModal, scheduleList, selectSchedule }) => {
     <>
       <tr>
         {weekName.map((text, index) => (
-          <WeekName name={text} index={index}></WeekName>
+          <WeekName
+            key={"weekName" + index}
+            name={text}
+            index={index}
+          ></WeekName>
         ))}
       </tr>
-      {dayList.map(line => (
+      {dayList.map((line, index) => (
         <Week
+          key={"week" + index}
           line={line}
           today={today}
           setModal={setModal}

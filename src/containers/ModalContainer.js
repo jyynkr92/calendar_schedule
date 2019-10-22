@@ -16,11 +16,26 @@ class ModalContainer extends PureComponent {
     endMinute: "00",
     allDayFlag: false,
     memo: "",
-    scheduleId: 1
+    scheduleId: 1,
+    mode: "add"
   };
 
   componentDidMount() {
-    console.log(this.props.selectSchedule);
+    const { selectSchedule } = this.props;
+
+    this.setState({
+      title: selectSchedule.title,
+      startDate: selectSchedule.startDate,
+      startAmPm: selectSchedule.startAmPm,
+      startHour: selectSchedule.startHour,
+      startMinute: selectSchedule.startMinute,
+      endDate: selectSchedule.endDate,
+      endAmPm: selectSchedule.endAmPm,
+      endHour: selectSchedule.endHour,
+      endMinute: selectSchedule.endMinute,
+      allDayFlag: selectSchedule.allDayFlag,
+      memo: selectSchedule.memo
+    });
   }
 
   closeModal = () => {

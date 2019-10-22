@@ -7,6 +7,7 @@ const Week = ({ line, today, setModal, scheduleList, selectSchedule }) => {
       <tr>
         {line.map(day => (
           <Day
+            key={"day_" + day.date}
             day={day}
             today={today}
             setModal={setModal}

@@ -49,8 +49,11 @@ export const getScheuleFromFirebase = () => {
     return firestore.collection("schedule").onSnapshot(function(snapshot) {
       snapshot.docChanges().forEach(change => {
         var childData = change.doc.data();
+
         if (change.type === "added") {
           dispatch(addSchedule(childData));
+        } else if (change.type === "removed") {
+          dispatch(deleteSchedule(childData.scheduleId));
         }
       });
     });

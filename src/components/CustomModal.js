@@ -20,7 +20,8 @@ const CustomModal = ({
   endHour,
   endMinute,
   allDayFlag,
-  memo
+  memo,
+  deleteSchedule
 }) => {
   const changeValue = e => {
     const targetName = e.target.name;
@@ -215,6 +216,7 @@ const CustomModal = ({
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={addSchedule}>입력</Button>
+        <Button onClick={deleteSchedule}>삭제</Button>
       </Modal.Footer>
     </Modal>
   );

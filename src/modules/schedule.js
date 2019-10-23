@@ -64,6 +64,20 @@ export const addScheduleToFirebase = schedule => {
   };
 };
 
+export const deleteScheduleToFirebase = scheduleId => {
+  return dispatch => {
+    const doc = firestore
+      .collection("schedule")
+      .where("scheduleId", "==", scheduleId);
+    return doc.get().then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+        doc.ref.delete();
+      });
+      dispatch(closeModal());
+    });
+  };
+};
+
 /** dfine initial state */
 const initialState = {
   scheduleList: [],

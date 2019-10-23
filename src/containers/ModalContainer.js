@@ -1,7 +1,11 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import CustomModal from "../components/CustomModal";
-import { addScheduleToFirebase, closeModal } from "../modules/schedule";
+import {
+  addScheduleToFirebase,
+  closeModal,
+  deleteScheduleToFirebase
+} from "../modules/schedule";
 
 class ModalContainer extends PureComponent {
   state = {
@@ -34,7 +38,8 @@ class ModalContainer extends PureComponent {
       endHour: selectSchedule.endHour,
       endMinute: selectSchedule.endMinute,
       allDayFlag: selectSchedule.allDayFlag,
-      memo: selectSchedule.memo
+      memo: selectSchedule.memo,
+      scheduleId: selectSchedule.scheduleId
     });
   }
 
@@ -83,6 +88,13 @@ class ModalContainer extends PureComponent {
     this.closeModal();
   };
 
+  deleteSchedule = () => {
+    const { deleteSchedule } = this.props;
+    const { scheduleId } = this.state;
+    console.log(scheduleId);
+    deleteSchedule(scheduleId);
+  };
+
   render() {
     const { modal } = this.props;
     const {
@@ -99,7 +111,7 @@ class ModalContainer extends PureComponent {
       memo,
       lastScheduleId
     } = this.state;
-    const { changeInput, addSchedule, closeModal } = this;
+    const { changeInput, addSchedule, closeModal, deleteSchedule } = this;
     return (
       <CustomModal
         show={modal}
@@ -118,6 +130,7 @@ class ModalContainer extends PureComponent {
         memo={memo}
         onHide={closeModal}
         lastScheduleId={lastScheduleId}
+        deleteSchedule={deleteSchedule}
       ></CustomModal>
     );
   }
@@ -138,6 +151,9 @@ const mapToDispatch = dispatch => ({
   },
   addSchedule: schedule => {
     dispatch(addScheduleToFirebase(schedule));
+  },
+  deleteSchedule: scheduleId => {
+    dispatch(deleteScheduleToFirebase(scheduleId));
   }
 });
 

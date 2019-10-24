@@ -25,15 +25,20 @@ class ModalContainer extends PureComponent {
   };
 
   componentDidMount() {
-    const { selectSchedule } = this.props;
+    const { selectSchedule, modalDate } = this.props;
+
+    const startDate =
+      selectSchedule.startDate === "" ? modalDate : selectSchedule.startDate;
+    const endDate =
+      selectSchedule.endDate === "" ? modalDate : selectSchedule.endDate;
 
     this.setState({
       title: selectSchedule.title,
-      startDate: selectSchedule.startDate,
+      startDate: startDate,
       startAmPm: selectSchedule.startAmPm,
       startHour: selectSchedule.startHour,
       startMinute: selectSchedule.startMinute,
-      endDate: selectSchedule.endDate,
+      endDate: endDate,
       endAmPm: selectSchedule.endAmPm,
       endHour: selectSchedule.endHour,
       endMinute: selectSchedule.endMinute,
@@ -91,7 +96,6 @@ class ModalContainer extends PureComponent {
   deleteSchedule = () => {
     const { deleteSchedule } = this.props;
     const { scheduleId } = this.state;
-    console.log(scheduleId);
     deleteSchedule(scheduleId);
   };
 

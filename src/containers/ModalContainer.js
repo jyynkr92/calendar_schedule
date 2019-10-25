@@ -1,7 +1,12 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import CustomModal from "../components/CustomModal";
-import { addScheduleToFirebase, closeModal, deleteScheduleToFirebase } from "../modules/schedule";
+import {
+  addScheduleToFirebase,
+  closeModal,
+  deleteScheduleToFirebase,
+  modifyScheduleToFirebase
+} from "../modules/schedule";
 
 class ModalContainer extends PureComponent {
   state = {
@@ -21,7 +26,7 @@ class ModalContainer extends PureComponent {
   };
 
   componentDidMount() {
-    const { selectSchedule, modalDate } = this.props;
+    const { selectSchedule, modalDate, mode } = this.props;
     let {
       title,
       startDate,
@@ -52,7 +57,8 @@ class ModalContainer extends PureComponent {
       endMinute,
       allDayFlag,
       memo,
-      scheduleId
+      scheduleId,
+      mode
     });
   }
 
@@ -107,6 +113,41 @@ class ModalContainer extends PureComponent {
     deleteSchedule(scheduleId);
   };
 
+  modifyScheudle = () => {
+    const { modifySchedule } = this.props;
+    const {
+      title,
+      startDate,
+      startAmPm,
+      startHour,
+      startMinute,
+      endDate,
+      endAmPm,
+      endHour,
+      endMinute,
+      allDayFlag,
+      memo,
+      scheduleId
+    } = this.state;
+
+    const schedule = {
+      title,
+      startDate,
+      startAmPm,
+      startHour,
+      startMinute,
+      endDate,
+      endAmPm,
+      endHour,
+      endMinute,
+      allDayFlag,
+      memo,
+      scheduleId
+    };
+
+    modifySchedule(schedule);
+  };
+
   render() {
     const { modal } = this.props;
     const {
@@ -121,9 +162,10 @@ class ModalContainer extends PureComponent {
       endMinute,
       allDayFlag,
       memo,
-      lastScheduleId
+      lastScheduleId,
+      mode
     } = this.state;
-    const { changeInput, addSchedule, closeModal, deleteSchedule } = this;
+    const { changeInput, addSchedule, closeModal, deleteSchedule, modifyScheudle } = this;
     return (
       <CustomModal
         show={modal}
@@ -143,6 +185,8 @@ class ModalContainer extends PureComponent {
         onHide={closeModal}
         lastScheduleId={lastScheduleId}
         deleteSchedule={deleteSchedule}
+        mode={mode}
+        modifyScheudle={modifyScheudle}
       ></CustomModal>
     );
   }
@@ -154,7 +198,7 @@ const mapStateToProps = state => ({
   selectSchedule: state.schedule.selectSchedule,
   scheduleList: state.schedule.scheduleList,
   lastScheduleId: state.schedule.lastScheduleId,
-  selectScheduleId: state.schedule.selectScheduleId
+  mode: state.schedule.mode
 });
 
 const mapToDispatch = dispatch => ({
@@ -166,6 +210,9 @@ const mapToDispatch = dispatch => ({
   },
   deleteSchedule: scheduleId => {
     dispatch(deleteScheduleToFirebase(scheduleId));
+  },
+  modifySchedule: schedule => {
+    dispatch(modifyScheduleToFirebase(schedule));
   }
 });
 

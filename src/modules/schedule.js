@@ -54,6 +54,8 @@ export const getScheuleFromFirebase = () => {
           dispatch(addSchedule(childData));
         } else if (change.type === "removed") {
           dispatch(deleteSchedule(childData.scheduleId));
+        } else if (change.type === "modified") {
+          dispatch(modifySchedule(childData));
         }
       });
     });
@@ -69,9 +71,7 @@ export const addScheduleToFirebase = schedule => {
 
 export const deleteScheduleToFirebase = scheduleId => {
   return dispatch => {
-    const doc = firestore
-      .collection("schedule")
-      .where("scheduleId", "==", scheduleId);
+    const doc = firestore.collection("schedule").where("scheduleId", "==", scheduleId);
     return doc.get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
         doc.ref.delete();
@@ -81,6 +81,17 @@ export const deleteScheduleToFirebase = scheduleId => {
   };
 };
 
+export const modifyScheduleToFirebase = schedule => {
+  return dispatch => {
+    const doc = firestore.collection("schedule").where("scheduleId", "==", schedule.scheduleId);
+    return doc.get().then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+        doc.ref.set(schedule);
+      });
+      dispatch(closeModal());
+    });
+  };
+};
 /** dfine initial state */
 const initialState = {
   scheduleList: [],
@@ -145,18 +156,37 @@ function schedule(state = initialState, action) {
         })
       };
     case MODIFY_SCHEDULE:
+      const {
+        title,
+        startDate,
+        startAmPm,
+        startHour,
+        startMinute,
+        endDate,
+        endAmPm,
+        endHour,
+        endMinute,
+        allDayFlag,
+        memo
+      } = action.schedule;
       const modifyList = state.scheduleList.map(schedule => {
         return schedule.scheduleId === Number(action.schedule.scheduleId)
           ? {
               ...schedule,
-              stateDate: action.schedule.startDate,
-              endDate: action.schedule.endDate,
-              title: action.schedule.title,
-              allDayFlag: action.schedule.allDayFlag,
-              memo: action.schedule.memo
+              title,
+              startDate,
+              startAmPm,
+              startHour,
+              startMinute,
+              endDate,
+              endAmPm,
+              endHour,
+              endMinute,
+              allDayFlag,
+              memo
             }
           : { ...schedule };
-      })[0];
+      });
 
       return {
         ...state,

@@ -1,11 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { setInitMonth, setMonth } from "../modules/calendar";
-import {
-  setModal,
-  selectSchedule,
-  getScheuleFromFirebase
-} from "../modules/schedule";
+import { setModal, selectSchedule, getScheuleFromFirebase } from "../modules/schedule";
 import Calendar from "../components/Calendar";
 import ModalContainer from "./ModalContainer";
 
@@ -67,10 +63,8 @@ const getMonthInfo = (gap, date) => {
   if (dateStr !== "") {
     const strArr = dateStr.split("-");
     const strYear = strArr[0];
-    const strMonth =
-      strArr[1].indexOf("0") === 0 ? strArr[1].substring(1) : strArr[1];
-    const strDate =
-      strArr[2].indexOf("0") === 0 ? strArr[2].substring(1) : strArr[2];
+    const strMonth = strArr[1].indexOf("0") === 0 ? strArr[1].substring(1) : strArr[1];
+    const strDate = strArr[2].indexOf("0") === 0 ? strArr[2].substring(1) : strArr[2];
 
     nowDate.setFullYear(strYear);
     nowDate.setMonth(strMonth - 1);
@@ -79,12 +73,9 @@ const getMonthInfo = (gap, date) => {
 
   const nowYear = nowDate.getFullYear();
   const nowMonth =
-    nowDate.getMonth() + 1 < 10
-      ? "0" + (nowDate.getMonth() + 1)
-      : nowDate.getMonth() + 1;
+    nowDate.getMonth() + 1 < 10 ? "0" + (nowDate.getMonth() + 1) : nowDate.getMonth() + 1;
 
-  const nowday =
-    nowDate.getDate() < 10 ? "0" + nowDate.getDate() : nowDate.getDate();
+  const nowday = nowDate.getDate() < 10 ? "0" + nowDate.getDate() : nowDate.getDate();
   const today = nowYear + "-" + nowMonth + "-" + nowday;
 
   nowDate.setMonth(nowDate.getMonth() + gap);
@@ -109,11 +100,8 @@ const getMonthInfo = (gap, date) => {
     const dayIdx = nowDate.getDay();
     const dailyYear = nowDate.getFullYear();
     const dailyMonth =
-      nowDate.getMonth() + 1 < 10
-        ? "0" + (nowDate.getMonth() + 1)
-        : nowDate.getMonth() + 1;
-    const dailyDay =
-      nowDate.getDate() < 10 ? "0" + nowDate.getDate() : nowDate.getDate();
+      nowDate.getMonth() + 1 < 10 ? "0" + (nowDate.getMonth() + 1) : nowDate.getMonth() + 1;
+    const dailyDay = nowDate.getDate() < 10 ? "0" + nowDate.getDate() : nowDate.getDate();
 
     if (i === 0) {
       if (dayIdx !== 0) {

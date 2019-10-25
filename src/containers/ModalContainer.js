@@ -1,11 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import CustomModal from "../components/CustomModal";
-import {
-  addScheduleToFirebase,
-  closeModal,
-  deleteScheduleToFirebase
-} from "../modules/schedule";
+import { addScheduleToFirebase, closeModal, deleteScheduleToFirebase } from "../modules/schedule";
 
 class ModalContainer extends PureComponent {
   state = {
@@ -26,25 +22,37 @@ class ModalContainer extends PureComponent {
 
   componentDidMount() {
     const { selectSchedule, modalDate } = this.props;
+    let {
+      title,
+      startDate,
+      startAmPm,
+      startHour,
+      startMinute,
+      endDate,
+      endAmPm,
+      endHour,
+      endMinute,
+      allDayFlag,
+      memo,
+      scheduleId
+    } = selectSchedule;
 
-    const startDate =
-      selectSchedule.startDate === "" ? modalDate : selectSchedule.startDate;
-    const endDate =
-      selectSchedule.endDate === "" ? modalDate : selectSchedule.endDate;
+    startDate = startDate || modalDate;
+    endDate = endDate || modalDate;
 
     this.setState({
-      title: selectSchedule.title,
-      startDate: startDate,
-      startAmPm: selectSchedule.startAmPm,
-      startHour: selectSchedule.startHour,
-      startMinute: selectSchedule.startMinute,
-      endDate: endDate,
-      endAmPm: selectSchedule.endAmPm,
-      endHour: selectSchedule.endHour,
-      endMinute: selectSchedule.endMinute,
-      allDayFlag: selectSchedule.allDayFlag,
-      memo: selectSchedule.memo,
-      scheduleId: selectSchedule.scheduleId
+      title,
+      startDate,
+      startAmPm,
+      startHour,
+      startMinute,
+      endDate,
+      endAmPm,
+      endHour,
+      endMinute,
+      allDayFlag,
+      memo,
+      scheduleId
     });
   }
 

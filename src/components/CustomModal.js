@@ -38,10 +38,7 @@ const CustomModal = ({
   const changeDateValue = (day, targetName) => {
     const date = new Date(day);
     const year = date.getFullYear();
-    const month =
-      date.getMonth() + 1 < 10
-        ? "0" + (date.getMonth() + 1)
-        : date.getMonth() + 1;
+    const month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
     const dayNum = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
 
     changeInput(targetName, year + "-" + month + "-" + dayNum);
@@ -56,9 +53,7 @@ const CustomModal = ({
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          일정 등록/수정
-        </Modal.Title>
+        <Modal.Title id="contained-modal-title-vcenter">일정 등록/수정</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
@@ -162,23 +157,13 @@ const CustomModal = ({
             {allDayFlag ? null : (
               <>
                 <Form.Group md="2" as={Col} controlId="endTime_ampm">
-                  <Form.Control
-                    as="select"
-                    onChange={changeValue}
-                    value={endAmPm}
-                    name="endAmPm"
-                  >
+                  <Form.Control as="select" onChange={changeValue} value={endAmPm} name="endAmPm">
                     <option value="am">오전</option>
                     <option value="pm">오후</option>
                   </Form.Control>
                 </Form.Group>
                 <Form.Group as={Col} md="2" controlId="endTime_hour">
-                  <Form.Control
-                    as="select"
-                    onChange={changeValue}
-                    value={endHour}
-                    name="endHour"
-                  >
+                  <Form.Control as="select" onChange={changeValue} value={endHour} name="endHour">
                     {[...Array(12)].map((x, i) => (
                       <option> {i + 1 < 10 ? "0" + (i + 1) : i + 1} </option>
                     ))}
@@ -204,13 +189,7 @@ const CustomModal = ({
           </Form.Row>
           <Form.Group>
             <Form.Label>메모</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows="3"
-              onChange={changeValue}
-              value={memo}
-              name="memo"
-            />
+            <Form.Control as="textarea" rows="3" onChange={changeValue} value={memo} name="memo" />
           </Form.Group>
         </Form>
       </Modal.Body>

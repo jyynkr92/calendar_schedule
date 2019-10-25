@@ -15,9 +15,7 @@ const Day = ({ day, today, setModal, scheduleList, selectSchedule }) => {
           const scheduleStartDate = getDateFromString(startDate);
           const scheduleEndDate = getDateFromString(endDate);
 
-          return (
-            calendarDate >= scheduleStartDate && calendarDate <= scheduleEndDate
-          );
+          return calendarDate >= scheduleStartDate && calendarDate <= scheduleEndDate;
         });
 
   return (

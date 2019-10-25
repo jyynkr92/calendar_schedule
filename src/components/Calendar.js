@@ -17,10 +17,7 @@ export default class Calendar extends Component {
     return (
       <table className="calendar">
         <tbody>
-          <MonthSelect
-            date={date === "" ? "" : date}
-            setCalendar={setCalendar}
-          ></MonthSelect>
+          <MonthSelect date={date === "" ? "" : date} setCalendar={setCalendar}></MonthSelect>
           <Month
             dayList={dayList.length === 0 ? [] : dayList}
             today={today}

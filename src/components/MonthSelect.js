@@ -16,9 +16,7 @@ const MonthSelect = ({ date, setCalendar }) => {
             }}
           />
         </span>
-        <span className="month_name">
-          {date.substring(0, date.lastIndexOf("-"))}
-        </span>
+        <span className="month_name">{date.substring(0, date.lastIndexOf("-"))}</span>
         <span>
           <img
             className="arrow_img"

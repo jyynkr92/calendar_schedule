@@ -94,3 +94,7 @@
 .allday_display {
   display: inline-block;
 }
+
+.btn {
+  margin: 10px;
+}

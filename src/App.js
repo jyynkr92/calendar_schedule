@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
-import CalendarContainer from "./containers/CalendarContainer";
+import ImageModeContainer from "./containers/ImageModeContainer";
 
 function App() {
-  return <CalendarContainer></CalendarContainer>;
+  return <ImageModeContainer></ImageModeContainer>;
 }
 
 export default App;

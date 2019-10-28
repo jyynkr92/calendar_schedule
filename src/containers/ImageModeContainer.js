@@ -7,10 +7,12 @@ import { setMode } from "../modules/imagemode";
 
 class ImageModeContainer extends PureComponent {
   setMode = e => {
-    const { setMode } = this.props;
-    const mode = e.target.id;
+    const { setMode, mode } = this.props;
+    const targetMode = e.target.id;
 
-    setMode(mode);
+    if (mode !== targetMode) {
+      setMode(targetMode);
+    }
   };
 
   render() {

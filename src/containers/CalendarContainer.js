@@ -14,7 +14,7 @@ class CalendarContainer extends PureComponent {
     const today = initMonth.today;
     settingInitial(dateStr, dayList, today);
 
-    getScheuleFromFirebase();
+    getScheuleFromFirebase(dateStr);
   }
 
   setCalendar = gap => {
@@ -200,8 +200,8 @@ const mapToDispatch = dispatch => ({
   selectSchedule: scheduleId => {
     dispatch(selectSchedule(scheduleId));
   },
-  getScheuleFromFirebase: () => {
-    dispatch(getScheuleFromFirebase());
+  getScheuleFromFirebase: dateStr => {
+    dispatch(getScheuleFromFirebase(dateStr));
   }
 });
 

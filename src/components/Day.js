@@ -28,7 +28,7 @@ const Day = ({ day, today, setModal, scheduleList, selectSchedule }) => {
       <DayText key={day.date} dayName={day.dayNum}></DayText>
       {schedules.map(schedule => (
         <div
-          key={"schedule" + schedule.scheduleId}
+          key={"schedule" + schedule.scheduleId + "_" + day.date}
           id={schedule.scheduleId}
           onClick={e => {
             e.stopPropagation();

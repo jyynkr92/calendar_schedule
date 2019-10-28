@@ -7,7 +7,6 @@ const MODIFY_SCHEDULE = "MODIFY_SCHEDULE";
 const SELECT_SCHEDULE = "SELECT_SCHEDULE";
 const SET_MODAL = "SET_MODAL";
 const CLOSE_MODAL = "CLOSE_MODAL";
-const GET_SCHEDULELIST = "GET_SCHEDULELIST";
 
 /** define action function */
 export const setModal = modalDate => ({
@@ -39,16 +38,11 @@ export const selectSchedule = scheduleId => ({
   scheduleId
 });
 
-export const getScheduleList = scheduleList => ({
-  type: GET_SCHEDULELIST,
-  scheduleList
-});
-
-export const getScheuleFromFirebase = () => {
+export const getScheuleFromFirebase = dateStr => {
   return dispatch => {
     return firestore.collection("schedule").onSnapshot(function(snapshot) {
       snapshot.docChanges().forEach(change => {
-        var childData = change.doc.data();
+        const childData = change.doc.data();
 
         if (change.type === "added") {
           dispatch(addSchedule(childData));
@@ -65,6 +59,8 @@ export const getScheuleFromFirebase = () => {
 export const addScheduleToFirebase = schedule => {
   return () => {
     const doc = firestore.collection("schedule");
+    const docId = doc.doc().id;
+    schedule.scheduleId = docId;
     return doc.add(schedule);
   };
 };
@@ -145,8 +141,7 @@ function schedule(state = initialState, action) {
     case ADD_SCHEDULE:
       return {
         ...state,
-        scheduleList: state.scheduleList.concat(action.schedule),
-        lastScheduleId: Number(state.lastScheduleId) + 1
+        scheduleList: state.scheduleList.concat(action.schedule)
       };
     case DELETE_SCHEDULE:
       return {
@@ -170,7 +165,7 @@ function schedule(state = initialState, action) {
         memo
       } = action.schedule;
       const modifyList = state.scheduleList.map(schedule => {
-        return schedule.scheduleId === Number(action.schedule.scheduleId)
+        return schedule.scheduleId === action.schedule.scheduleId
           ? {
               ...schedule,
               title,
@@ -198,14 +193,8 @@ function schedule(state = initialState, action) {
         modal: true,
         mode: "show",
         selectSchedule: state.scheduleList.filter(schedule => {
-          return Number(schedule.scheduleId) === Number(action.scheduleId);
+          return schedule.scheduleId === action.scheduleId;
         })[0]
-      };
-    case GET_SCHEDULELIST:
-      return {
-        ...state,
-        scheduleList: action.scheduleList,
-        lastScheduleId: action.scheduleList.length + 1
       };
     default:
       return state;

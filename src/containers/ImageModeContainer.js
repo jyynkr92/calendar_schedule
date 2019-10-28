@@ -28,7 +28,8 @@ class ImageModeContainer extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  mode: state.imagemode.mode
+  mode: state.imagemode.mode,
+  selectImage: state.imagemode.selectImage
 });
 
 const mapToDispatch = dispatch => ({

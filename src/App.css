@@ -14,9 +14,9 @@
   background-color: white;
 }
 
-.calendar th {
+/* .calendar th {
   background-color: #e5edff;
-}
+} */
 
 .calendar td.days {
   height: 80px;
@@ -47,6 +47,7 @@
 
 .month_name {
   font-size: 25px;
+  vertical-align: middle;
 }
 
 .today .dayText {
@@ -55,10 +56,6 @@
 
 .not_thisMonth {
   color: #ababab;
-}
-
-.month_select {
-  text-align: center;
 }
 
 .datepicker_div input {

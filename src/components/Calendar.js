@@ -11,13 +11,18 @@ export default class Calendar extends Component {
       setCalendar,
       setModal,
       scheduleList,
-      selectSchedule
+      selectSchedule,
+      selectImage
     } = this.props;
 
     return (
       <table className="calendar">
         <tbody>
-          <MonthSelect date={date === "" ? "" : date} setCalendar={setCalendar}></MonthSelect>
+          <MonthSelect
+            date={date === "" ? "" : date}
+            setCalendar={setCalendar}
+            selectImage={selectImage}
+          ></MonthSelect>
           <Month
             dayList={dayList.length === 0 ? [] : dayList}
             today={today}

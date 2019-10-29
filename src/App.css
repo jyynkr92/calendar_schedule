@@ -3,6 +3,8 @@
   border-collapse: collapse;
   background-size: cover;
   position: relative;
+  color: #efe0e0;
+  background-color: #696169;
 }
 
 .calendar td,
@@ -11,7 +13,7 @@
 }
 
 .calendar td.weekName {
-  background-color: #d6e7ff;
+  background-color: #9c7872;
 }
 
 /* .calendar th {

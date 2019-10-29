@@ -92,12 +92,9 @@ const CustomModal = ({
                 />
               </div>
             </Form.Group>
-            <Form.Group md="1" as={Col}>
-              &nbsp;
-            </Form.Group>
             {allDayFlag ? null : (
               <>
-                <Form.Group md="2" as={Col} controlId="startTime_ampm">
+                <Form.Group md="3" as={Col} controlId="startTime_ampm">
                   <Form.Control
                     as="select"
                     onChange={changeValue}
@@ -153,12 +150,9 @@ const CustomModal = ({
                 />
               </div>
             </Form.Group>
-            <Form.Group md="1" as={Col}>
-              &nbsp;
-            </Form.Group>
             {allDayFlag ? null : (
               <>
-                <Form.Group md="2" as={Col} controlId="endTime_ampm">
+                <Form.Group md="3" as={Col} controlId="endTime_ampm">
                   <Form.Control as="select" onChange={changeValue} value={endAmPm} name="endAmPm">
                     <option value="am">오전</option>
                     <option value="pm">오후</option>

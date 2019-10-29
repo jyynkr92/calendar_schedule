@@ -77,8 +77,8 @@
 }
 
 .modal-content {
-  width: 500px !important;
-  height: 590px;
+  width: 510px !important;
+  height: auto;
 }
 
 #endTime_separator,
@@ -95,5 +95,5 @@
 }
 
 .btn {
-  margin: 10px;
+  margin-left: 10px;
 }

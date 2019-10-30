@@ -39,7 +39,7 @@ class CalendarContainer extends PureComponent {
     const { date, dayList, today, modal, scheduleList, selectImage } = this.props;
     const { setCalendar, setModal, selectSchedule } = this;
     return (
-      <div>
+      <div id="calendarDiv">
         <Calendar
           date={date}
           dayList={dayList}

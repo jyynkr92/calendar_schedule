@@ -4,6 +4,7 @@ import CalendarContainer from "./CalendarContainer";
 import ModeBtn from "../components/ModeBtn";
 import SaveImgBtn from "../components/SaveImgBtn";
 import { setMode } from "../modules/imagemode";
+import html2canvas from "html2canvas";
 
 class ImageModeContainer extends PureComponent {
   setMode = e => {
@@ -15,14 +16,29 @@ class ImageModeContainer extends PureComponent {
     }
   };
 
+  saveImage = () => {
+    html2canvas(document.getElementById("calendarDiv")).then(canvas => {
+      var imgSrc = canvas.toDataURL();
+      var fileName = "calendar.png";
+      var a = document.createElement("a");
+      a.href = imgSrc;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function() {
+        document.body.removeChild(a);
+      }, 100);
+    });
+  };
+
   render() {
     const { mode } = this.props;
-    const { setMode } = this;
+    const { setMode, saveImage } = this;
 
     return (
       <div>
         <ModeBtn mode={mode} setMode={setMode} />
-        <SaveImgBtn />
+        <SaveImgBtn saveImage={saveImage} />
         <CalendarContainer />
       </div>
     );

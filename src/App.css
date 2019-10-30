@@ -11,6 +11,10 @@
   margin-bottom: 20px;
 }
 
+.emptyDiv {
+  width: 700px;
+}
+
 .calendar td,
 .calendar th {
   border: 1px solid #d9d9d9;

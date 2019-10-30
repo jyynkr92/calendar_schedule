@@ -36,10 +36,15 @@ class CalendarContainer extends PureComponent {
   };
 
   render() {
-    const { date, dayList, today, modal, scheduleList, selectImage } = this.props;
+    const { date, dayList, today, modal, scheduleList, selectImage, mode } = this.props;
     const { setCalendar, setModal, selectSchedule } = this;
     return (
       <div id="calendarDiv">
+        {/* {mode === "desktop" ? (
+          <div className="desktopImage">
+            <img src={selectImage} alt="desktopImage" />
+          </div>
+        ) : null} */}
         <Calendar
           date={date}
           dayList={dayList}
@@ -49,6 +54,7 @@ class CalendarContainer extends PureComponent {
           scheduleList={scheduleList}
           selectSchedule={selectSchedule}
           selectImage={selectImage}
+          mode={mode}
         ></Calendar>
         {modal ? <ModalContainer /> : null}
       </div>
@@ -184,7 +190,8 @@ const mapStateToProps = state => ({
   modal: state.schedule.modal,
   modalDate: state.schedule.modalDate,
   scheduleList: state.schedule.scheduleList,
-  selectImage: state.imagemode.selectImage
+  selectImage: state.imagemode.selectImage,
+  mode: state.imagemode.mode
 });
 
 const mapToDispatch = dispatch => ({

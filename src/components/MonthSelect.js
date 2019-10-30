@@ -3,10 +3,10 @@ import rightArrow from "../img/arrow-point-to-right.png";
 import leftArrow from "../img/left-arrow.png";
 import styled from "styled-components";
 
-const MonthSelect = ({ date, setCalendar, selectImage }) => {
+const MonthSelect = ({ date, setCalendar, selectImage, mode }) => {
   return (
     <CalendarTR>
-      <CalendarTH selectImage={selectImage} colSpan="7">
+      <CalendarTH mode={mode} selectImage={selectImage} colSpan="7">
         <MonthBtn>
           <span>
             <img
@@ -46,7 +46,10 @@ const CalendarTR = styled.tr`
 `;
 
 const CalendarTH = styled.th`
-  background-image: url(${props => props.selectImage});
+  ${props =>
+    props.mode === "desktop"
+      ? `background-color:#d9d9d9`
+      : `background-image: url(${props.selectImage})`};
   background-repeat: no-repeat;
   background-position: center;
   height: 300px;

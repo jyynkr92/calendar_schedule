@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import MonthSelect from "./MonthSelect";
 import Month from "./Month";
+import styled from "styled-components";
 
 export default class Calendar extends Component {
   render() {
@@ -12,16 +13,25 @@ export default class Calendar extends Component {
       setModal,
       scheduleList,
       selectSchedule,
-      selectImage
+      selectImage,
+      mode
     } = this.props;
 
     return (
       <table className="calendar">
         <tbody>
+          {mode === "desktop" ? (
+            <tr>
+              <DesktopImgTD rowSpan="8" selectImage={selectImage}>
+                <div className="emptyDiv">&nbsp;</div>
+              </DesktopImgTD>
+            </tr>
+          ) : null}
           <MonthSelect
             date={date === "" ? "" : date}
             setCalendar={setCalendar}
             selectImage={selectImage}
+            mode={mode}
           ></MonthSelect>
           <Month
             dayList={dayList.length === 0 ? [] : dayList}
@@ -29,9 +39,17 @@ export default class Calendar extends Component {
             setModal={setModal}
             scheduleList={scheduleList}
             selectSchedule={selectSchedule}
+            selectImage={selectImage}
+            mode={mode}
           ></Month>
         </tbody>
       </table>
     );
   }
 }
+
+const DesktopImgTD = styled.td`
+  background-image: url(${props => props.selectImage});
+  background-size: 100% 100%;
+  background-repeat: norepeat;
+`;

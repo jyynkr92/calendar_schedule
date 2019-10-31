@@ -2,8 +2,9 @@ import React from "react";
 import rightArrow from "../img/arrow-point-to-right.png";
 import leftArrow from "../img/left-arrow.png";
 import styled from "styled-components";
+import ImageList from "../components/ImageList";
 
-const MonthSelect = ({ date, setCalendar, selectImage, mode }) => {
+const MonthSelect = ({ date, setCalendar, selectImage, mode, setImage, imageList }) => {
   return (
     <CalendarTR>
       <CalendarTH mode={mode} selectImage={selectImage} colSpan="7">
@@ -31,6 +32,9 @@ const MonthSelect = ({ date, setCalendar, selectImage, mode }) => {
           </span>
         </MonthBtn>
       </CalendarTH>
+      <th id="imageList" data-html2canvas-ignore="true" rowspan="8">
+        <ImageList setImage={setImage} imageList={imageList} />
+      </th>
     </CalendarTR>
   );
 };

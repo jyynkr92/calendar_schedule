@@ -17,8 +17,18 @@ export const setImage = imageUrl => ({
 const initialState = {
   mode: "mobile",
   selectImage: "../backgroundImg/background2.png",
-  mobileImageList: ["../backgroundImg/background2.png"],
-  desktopImageList: ["../backgroundImg/background.jpg"]
+  mobileImageList: [
+    "../backgroundImg/background2.png",
+    "../backgroundImg/background3.jpg",
+    "../backgroundImg/background4.jpg",
+    "../backgroundImg/background5.jpg"
+  ],
+  desktopImageList: [
+    "../backgroundImg/background.jpg",
+    "../backgroundImg/background6.jpg",
+    "../backgroundImg/background7.jpg",
+    "../backgroundImg/background8.jpg"
+  ]
 };
 
 /** define reduce function */

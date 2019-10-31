@@ -4,6 +4,7 @@ import { setInitMonth, setMonth } from "../modules/calendar";
 import { setModal, selectSchedule, getScheuleFromFirebase } from "../modules/schedule";
 import Calendar from "../components/Calendar";
 import ModalContainer from "./ModalContainer";
+import { setImage } from "../modules/imagemode";
 
 class CalendarContainer extends PureComponent {
   componentDidMount() {
@@ -35,16 +36,31 @@ class CalendarContainer extends PureComponent {
     selectSchedule(scheduleId);
   };
 
+  setImage = e => {
+    const imageUrl = e.target.src;
+    const { setImage } = this.props;
+
+    setImage(imageUrl);
+  };
+
   render() {
-    const { date, dayList, today, modal, scheduleList, selectImage, mode } = this.props;
-    const { setCalendar, setModal, selectSchedule } = this;
+    const {
+      date,
+      dayList,
+      today,
+      modal,
+      scheduleList,
+      selectImage,
+      mode,
+      mobileImageList,
+      desktopImageList
+    } = this.props;
+    const { setCalendar, setModal, selectSchedule, setImage } = this;
+
+    const imageList = mode === "mobile" ? mobileImageList : desktopImageList;
+
     return (
       <div id="calendarDiv">
-        {/* {mode === "desktop" ? (
-          <div className="desktopImage">
-            <img src={selectImage} alt="desktopImage" />
-          </div>
-        ) : null} */}
         <Calendar
           date={date}
           dayList={dayList}
@@ -55,6 +71,8 @@ class CalendarContainer extends PureComponent {
           selectSchedule={selectSchedule}
           selectImage={selectImage}
           mode={mode}
+          setImage={setImage}
+          imageList={imageList}
         ></Calendar>
         {modal ? <ModalContainer /> : null}
       </div>
@@ -191,7 +209,9 @@ const mapStateToProps = state => ({
   modalDate: state.schedule.modalDate,
   scheduleList: state.schedule.scheduleList,
   selectImage: state.imagemode.selectImage,
-  mode: state.imagemode.mode
+  mode: state.imagemode.mode,
+  mobileImageList: state.imagemode.mobileImageList,
+  desktopImageList: state.imagemode.desktopImageList
 });
 
 const mapToDispatch = dispatch => ({
@@ -209,6 +229,9 @@ const mapToDispatch = dispatch => ({
   },
   getScheuleFromFirebase: dateStr => {
     dispatch(getScheuleFromFirebase(dateStr));
+  },
+  setImage: imageUrl => {
+    dispatch(setImage(imageUrl));
   }
 });
 

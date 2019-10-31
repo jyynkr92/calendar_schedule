@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import CalendarContainer from "./CalendarContainer";
 import ModeBtn from "../components/ModeBtn";
 import SaveImgBtn from "../components/SaveImgBtn";
-import { setMode } from "../modules/imagemode";
+import { setMode, setImage } from "../modules/imagemode";
 import html2canvas from "html2canvas";
 
 class ImageModeContainer extends PureComponent {
@@ -17,7 +17,7 @@ class ImageModeContainer extends PureComponent {
   };
 
   saveImage = () => {
-    html2canvas(document.getElementById("calendarDiv")).then(canvas => {
+    html2canvas(document.getElementById("calendarTable")).then(canvas => {
       var imgSrc = canvas.toDataURL();
       var fileName = "calendar.png";
       var a = document.createElement("a");
@@ -53,6 +53,9 @@ const mapStateToProps = state => ({
 const mapToDispatch = dispatch => ({
   setMode: mode => {
     dispatch(setMode(mode));
+  },
+  setImage: imageUrl => {
+    dispatch(setImage(imageUrl));
   }
 });
 

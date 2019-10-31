@@ -1,5 +1,5 @@
 .calendar {
-  width: 700px;
+  width: 100%;
   border-collapse: collapse;
   background-size: cover;
   position: relative;
@@ -104,4 +104,24 @@
 
 .btn {
   margin-left: 10px;
+}
+
+.backgroundImg {
+  width: 100px;
+  height: 100px;
+  margin: 20px;
+}
+
+.backgroundImg img {
+  width: 100px;
+  height: 100px;
+}
+
+#imageList {
+  background-color: #ffffff;
+}
+
+body {
+  margin: 0;
+  padding: 0;
 }

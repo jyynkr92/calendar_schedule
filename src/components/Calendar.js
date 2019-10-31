@@ -14,11 +14,13 @@ export default class Calendar extends Component {
       scheduleList,
       selectSchedule,
       selectImage,
-      mode
+      mode,
+      imageList,
+      setImage
     } = this.props;
 
     return (
-      <table className="calendar">
+      <table id="calendarTable" className="calendar">
         <tbody>
           {mode === "desktop" ? (
             <tr>
@@ -32,6 +34,8 @@ export default class Calendar extends Component {
             setCalendar={setCalendar}
             selectImage={selectImage}
             mode={mode}
+            setImage={setImage}
+            imageList={imageList}
           ></MonthSelect>
           <Month
             dayList={dayList.length === 0 ? [] : dayList}

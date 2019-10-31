@@ -1,10 +1,10 @@
 import React from "react";
 import { ButtonToolbar, Button } from "react-bootstrap";
 
-const SaveImgBtn = ({ saveImage }) => {
+const SaveImgBtn = ({ setSaveImage }) => {
   return (
     <ButtonToolbar>
-      <Button variant="success" onClick={saveImage}>
+      <Button variant="success" onClick={setSaveImage}>
         이미지저장
       </Button>
     </ButtonToolbar>

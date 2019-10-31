@@ -7,6 +7,17 @@ import { setMode, setImage } from "../modules/imagemode";
 import html2canvas from "html2canvas";
 
 class ImageModeContainer extends PureComponent {
+  state = {
+    imageShow: true
+  };
+
+  componentDidUpdate() {
+    const { imageShow } = this.state;
+    if (!imageShow) {
+      this.saveImage();
+    }
+  }
+
   setMode = e => {
     const { setMode, mode } = this.props;
     const targetMode = e.target.id;
@@ -16,7 +27,16 @@ class ImageModeContainer extends PureComponent {
     }
   };
 
+  setSaveImage = () => {
+    const { imageShow } = this.state;
+
+    this.setState({
+      imageShow: !imageShow
+    });
+  };
+
   saveImage = () => {
+    const { setSaveImage } = this;
     html2canvas(document.getElementById("calendarTable")).then(canvas => {
       var imgSrc = canvas.toDataURL();
       var fileName = "calendar.png";
@@ -27,19 +47,21 @@ class ImageModeContainer extends PureComponent {
       a.click();
       setTimeout(function() {
         document.body.removeChild(a);
+        setSaveImage();
       }, 100);
     });
   };
 
   render() {
     const { mode } = this.props;
-    const { setMode, saveImage } = this;
+    const { setMode, setSaveImage } = this;
+    const { imageShow } = this.state;
 
     return (
       <div>
         <ModeBtn mode={mode} setMode={setMode} />
-        <SaveImgBtn saveImage={saveImage} />
-        <CalendarContainer />
+        <SaveImgBtn setSaveImage={setSaveImage} />
+        <CalendarContainer imageShow={imageShow} />
       </div>
     );
   }

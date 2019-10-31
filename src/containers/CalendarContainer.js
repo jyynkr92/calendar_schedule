@@ -53,7 +53,8 @@ class CalendarContainer extends PureComponent {
       selectImage,
       mode,
       mobileImageList,
-      desktopImageList
+      desktopImageList,
+      imageShow
     } = this.props;
     const { setCalendar, setModal, selectSchedule, setImage } = this;
 
@@ -73,6 +74,7 @@ class CalendarContainer extends PureComponent {
           mode={mode}
           setImage={setImage}
           imageList={imageList}
+          imageShow={imageShow}
         ></Calendar>
         {modal ? <ModalContainer /> : null}
       </div>

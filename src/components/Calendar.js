@@ -16,7 +16,8 @@ export default class Calendar extends Component {
       selectImage,
       mode,
       imageList,
-      setImage
+      setImage,
+      imageShow
     } = this.props;
 
     return (
@@ -36,6 +37,7 @@ export default class Calendar extends Component {
             mode={mode}
             setImage={setImage}
             imageList={imageList}
+            imageShow={imageShow}
           ></MonthSelect>
           <Month
             dayList={dayList.length === 0 ? [] : dayList}

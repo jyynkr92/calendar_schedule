@@ -4,7 +4,7 @@ import leftArrow from "../img/left-arrow.png";
 import styled from "styled-components";
 import ImageList from "../components/ImageList";
 
-const MonthSelect = ({ date, setCalendar, selectImage, mode, setImage, imageList }) => {
+const MonthSelect = ({ date, setCalendar, selectImage, mode, setImage, imageList, imageShow }) => {
   return (
     <CalendarTR>
       <CalendarTH mode={mode} selectImage={selectImage} colSpan="7">
@@ -32,9 +32,11 @@ const MonthSelect = ({ date, setCalendar, selectImage, mode, setImage, imageList
           </span>
         </MonthBtn>
       </CalendarTH>
-      <th id="imageList" data-html2canvas-ignore="true" rowspan="8">
-        <ImageList setImage={setImage} imageList={imageList} />
-      </th>
+      {imageShow ? (
+        <th id="imageList" data-html2canvas-ignore="true" rowspan="8">
+          <ImageList setImage={setImage} imageList={imageList} />
+        </th>
+      ) : null}
     </CalendarTR>
   );
 };

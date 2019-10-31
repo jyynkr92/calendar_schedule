@@ -1,12 +1,9 @@
 .calendar {
-  width: 100%;
   border-collapse: collapse;
   background-size: cover;
   position: relative;
   color: #efe0e0;
   background-color: #696169;
-  margin-left: auto;
-  margin-right: auto;
   margin-top: 10px;
   margin-bottom: 20px;
 }
@@ -61,7 +58,7 @@
 }
 
 .today .dayText {
-  background-color: #cecfff;
+  /* background-color: #cecfff; */
 }
 
 .not_thisMonth {
@@ -110,6 +107,7 @@
   width: 100px;
   height: 100px;
   margin: 20px;
+  display: inline-block;
 }
 
 .backgroundImg img {
@@ -119,9 +117,13 @@
 
 #imageList {
   background-color: #ffffff;
+  border: none;
 }
 
 body {
   margin: 0;
   padding: 0;
+}
+.imageList {
+  width: 237px;
 }

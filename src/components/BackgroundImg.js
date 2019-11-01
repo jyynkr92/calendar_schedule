@@ -1,9 +1,9 @@
 import React from "react";
 
-const BackgroundImg = ({ imageUrl, setImage }) => {
+const BackgroundImg = ({ imageUrl, setImage, imageId }) => {
   return (
     <div className="backgroundImg">
-      <img src={imageUrl} alt="images" onClick={setImage} />
+      <img id={imageId} src={imageUrl} alt="images" onClick={setImage} />
     </div>
   );
 };

@@ -37,10 +37,10 @@ class CalendarContainer extends PureComponent {
   };
 
   setImage = e => {
-    const imageUrl = e.target.src;
+    const imageId = e.target.id;
     const { setImage } = this.props;
 
-    setImage(imageUrl);
+    setImage(imageId);
   };
 
   render() {
@@ -52,13 +52,10 @@ class CalendarContainer extends PureComponent {
       scheduleList,
       selectImage,
       mode,
-      mobileImageList,
-      desktopImageList,
+      imageList,
       imageShow
     } = this.props;
     const { setCalendar, setModal, selectSchedule, setImage } = this;
-
-    const imageList = mode === "mobile" ? mobileImageList : desktopImageList;
 
     return (
       <div id="calendarDiv">
@@ -212,8 +209,7 @@ const mapStateToProps = state => ({
   scheduleList: state.schedule.scheduleList,
   selectImage: state.imagemode.selectImage,
   mode: state.imagemode.mode,
-  mobileImageList: state.imagemode.mobileImageList,
-  desktopImageList: state.imagemode.desktopImageList
+  imageList: state.imagemode.imageList
 });
 
 const mapToDispatch = dispatch => ({
@@ -232,8 +228,8 @@ const mapToDispatch = dispatch => ({
   getScheuleFromFirebase: dateStr => {
     dispatch(getScheuleFromFirebase(dateStr));
   },
-  setImage: imageUrl => {
-    dispatch(setImage(imageUrl));
+  setImage: imageId => {
+    dispatch(setImage(imageId));
   }
 });
 

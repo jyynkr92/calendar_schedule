@@ -55,7 +55,7 @@ const CalendarTH = styled.th`
   ${props =>
     props.mode === "desktop"
       ? `background-color:#d9d9d9`
-      : `background-image: url(${props.selectImage})`};
+      : `background-image: url(${props.selectImage.imageUrl})`};
   background-repeat: no-repeat;
   background-position: center;
   height: 300px;

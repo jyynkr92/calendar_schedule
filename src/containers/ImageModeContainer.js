@@ -3,13 +3,18 @@ import { connect } from "react-redux";
 import CalendarContainer from "./CalendarContainer";
 import ModeBtn from "../components/ModeBtn";
 import SaveImgBtn from "../components/SaveImgBtn";
-import { setMode, setImage } from "../modules/imagemode";
+import { setMode, setImage, getImageListFromFirebase } from "../modules/imagemode";
 import html2canvas from "html2canvas";
 
 class ImageModeContainer extends PureComponent {
   state = {
     imageShow: true
   };
+
+  componentDidMount() {
+    const { getImageListFromFirebase } = this.props;
+    getImageListFromFirebase("mobile");
+  }
 
   componentDidUpdate() {
     const { imageShow } = this.state;
@@ -19,11 +24,11 @@ class ImageModeContainer extends PureComponent {
   }
 
   setMode = e => {
-    const { setMode, mode } = this.props;
+    const { mode, getImageListFromFirebase } = this.props;
     const targetMode = e.target.id;
 
     if (mode !== targetMode) {
-      setMode(targetMode);
+      getImageListFromFirebase(targetMode);
     }
   };
 
@@ -37,8 +42,12 @@ class ImageModeContainer extends PureComponent {
 
   saveImage = () => {
     const { setSaveImage } = this;
-    html2canvas(document.getElementById("calendarTable")).then(canvas => {
-      var imgSrc = canvas.toDataURL();
+    const scale = window.devicePixelRatio;
+    const option = {
+      scale: scale
+    };
+    html2canvas(document.getElementById("calendarTable"), option).then(canvas => {
+      var imgSrc = canvas.toDataURL("image/png", 1);
       var fileName = "calendar.png";
       var a = document.createElement("a");
       a.href = imgSrc;
@@ -78,6 +87,9 @@ const mapToDispatch = dispatch => ({
   },
   setImage: imageUrl => {
     dispatch(setImage(imageUrl));
+  },
+  getImageListFromFirebase: mode => {
+    dispatch(getImageListFromFirebase(mode));
   }
 });
 

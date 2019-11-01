@@ -1,6 +1,9 @@
+import firestore from "../firebase";
+
 /** define action */
 const SET_MODE = "SET_MODE";
 const SET_IMAGE = "SET_IMAGE";
+const SET_IMAGE_LIST = "SET_IMAGE_LIST";
 
 /** define action function */
 export const setMode = mode => ({
@@ -8,26 +11,52 @@ export const setMode = mode => ({
   mode
 });
 
-export const setImage = imageUrl => ({
+export const setImage = imageId => ({
   type: SET_IMAGE,
-  imageUrl
+  imageId
 });
+
+export const setMobileImageList = (imageList, mode) => ({
+  type: SET_IMAGE_LIST,
+  imageList,
+  mode
+});
+
+export const setDesktopImageList = (imageList, mode) => ({
+  type: SET_IMAGE_LIST,
+  imageList,
+  mode
+});
+
+export const getImageListFromFirebase = mode => {
+  return dispatch => {
+    firestore
+      .collection(mode + "Image")
+      .get()
+      .then(function(querySnapshot) {
+        const imageList = [];
+        querySnapshot.forEach(function(doc) {
+          imageList.push(doc.data());
+        });
+
+        if (mode === "mobile") {
+          dispatch(setMobileImageList(imageList, mode));
+        } else {
+          dispatch(setDesktopImageList(imageList, mode));
+        }
+      });
+  };
+};
 
 /** define initial state */
 const initialState = {
   mode: "mobile",
   selectImage: "../backgroundImg/background2.png",
-  mobileImageList: [
+  imageList: [
     "../backgroundImg/background2.png",
     "../backgroundImg/background3.jpg",
     "../backgroundImg/background4.jpg",
     "../backgroundImg/background5.jpg"
-  ],
-  desktopImageList: [
-    "../backgroundImg/background.jpg",
-    "../backgroundImg/background6.jpg",
-    "../backgroundImg/background7.jpg",
-    "../backgroundImg/background8.jpg"
   ]
 };
 
@@ -43,7 +72,16 @@ function imagemode(state = initialState, action) {
     case SET_IMAGE:
       return {
         ...state,
-        selectImage: action.imageUrl
+        selectImage: state.imageList.filter(image => {
+          return image.imageId === action.imageId;
+        })[0]
+      };
+    case SET_IMAGE_LIST:
+      return {
+        ...state,
+        mode: action.mode,
+        selectImage: action.imageList[0],
+        imageList: action.imageList
       };
     default:
       return state;

@@ -25,7 +25,7 @@ export default class Calendar extends Component {
         <tbody>
           {mode === "desktop" ? (
             <tr>
-              <DesktopImgTD rowSpan="8" selectImage={selectImage}>
+              <DesktopImgTD id={selectImage.imageId} rowSpan="8" selectImage={selectImage}>
                 <div className="emptyDiv">&nbsp;</div>
               </DesktopImgTD>
             </tr>
@@ -55,7 +55,7 @@ export default class Calendar extends Component {
 }
 
 const DesktopImgTD = styled.td`
-  background-image: url(${props => props.selectImage});
+  background-image: url(${props => props.selectImage.imageUrl});
   background-size: 100% 100%;
   background-repeat: norepeat;
 `;

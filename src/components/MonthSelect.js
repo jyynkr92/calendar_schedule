@@ -7,7 +7,7 @@ import ImageList from "../components/ImageList";
 const MonthSelect = ({ date, setCalendar, selectImage, mode, setImage, imageList, imageShow }) => {
   return (
     <CalendarTR>
-      <CalendarTH mode={mode} selectImage={selectImage} colSpan="7">
+      <CalendarTH className="topDesign" mode={mode} selectImage={selectImage} colSpan="7">
         <MonthBtn>
           <span>
             <img
@@ -54,11 +54,11 @@ const CalendarTR = styled.tr`
 const CalendarTH = styled.th`
   ${props =>
     props.mode === "desktop"
-      ? `background-color:#d9d9d9`
+      ? `background-color:${props.selectImage.topColor}`
       : `background-image: url(${props.selectImage.imageUrl})`};
+  ${props => (props.mode === "desktop" ? `height:211px` : `height:300px`)};
   background-repeat: no-repeat;
   background-position: center;
-  height: 300px;
   background-size: cover;
   position: relative;
 `;

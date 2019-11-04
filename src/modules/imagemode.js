@@ -51,7 +51,13 @@ export const getImageListFromFirebase = mode => {
 /** define initial state */
 const initialState = {
   mode: "mobile",
-  selectImage: "../backgroundImg/background2.png",
+  selectImage: {
+    backgroundColor: "#696169",
+    weekNameColor: "#9c7872",
+    topColor: "#d9d9d9",
+    imageUrl: "../backgroundImg/background2.png",
+    fontColor: "#d9d9d9"
+  },
   imageList: [
     "../backgroundImg/background2.png",
     "../backgroundImg/background3.jpg",

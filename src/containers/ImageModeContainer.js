@@ -41,15 +41,16 @@ class ImageModeContainer extends PureComponent {
   };
 
   saveImage = () => {
+    window.scroll(0, 0);
     const { setSaveImage } = this;
-    const scale = window.devicePixelRatio;
     const option = {
-      scale: scale
+      scale: 1.5
     };
+
     html2canvas(document.getElementById("calendarTable"), option).then(canvas => {
-      var imgSrc = canvas.toDataURL("image/png", 1);
-      var fileName = "calendar.png";
-      var a = document.createElement("a");
+      const imgSrc = canvas.toDataURL("image/png", 1);
+      const fileName = "calendar.png";
+      const a = document.createElement("a");
       a.href = imgSrc;
       a.download = fileName;
       document.body.appendChild(a);

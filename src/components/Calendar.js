@@ -21,12 +21,15 @@ export default class Calendar extends Component {
     } = this.props;
 
     return (
-      <table id="calendarTable" className="calendar">
+      <CalendarTable id="calendarTable" className="calendar" selectImage={selectImage}>
         <tbody>
           {mode === "desktop" ? (
             <tr>
               <DesktopImgTD id={selectImage.imageId} rowSpan="8" selectImage={selectImage}>
                 <div className="emptyDiv">&nbsp;</div>
+                <div className="imageDiv">
+                  <img src={selectImage.imageUrl} alt="testImage" />
+                </div>
               </DesktopImgTD>
             </tr>
           ) : null}
@@ -49,13 +52,19 @@ export default class Calendar extends Component {
             mode={mode}
           ></Month>
         </tbody>
-      </table>
+      </CalendarTable>
     );
   }
 }
 
+const CalendarTable = styled.table`
+  border-collapse: collapse;
+  background-size: cover;
+  position: relative;
+  color: ${props => props.selectImage.fontColor};
+  margin-top: 10px;
+  margin-bottom: 20px;
+`;
 const DesktopImgTD = styled.td`
-  background-image: url(${props => props.selectImage.imageUrl});
-  background-size: 100% 100%;
-  background-repeat: norepeat;
+  position: relative;
 `;

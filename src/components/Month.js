@@ -2,13 +2,18 @@ import React from "react";
 import Week from "./Week";
 import WeekName from "./WeekName";
 
-const Month = ({ dayList, today, setModal, scheduleList, selectSchedule }) => {
+const Month = ({ dayList, today, setModal, scheduleList, selectSchedule, selectImage }) => {
   const weekName = ["일", "월", "화", "수", "목", "금", "토"];
   return (
     <>
       <tr>
         {weekName.map((text, index) => (
-          <WeekName key={"weekName" + index} name={text} index={index}></WeekName>
+          <WeekName
+            key={"weekName" + index}
+            name={text}
+            index={index}
+            selectImage={selectImage}
+          ></WeekName>
         ))}
       </tr>
       {dayList.map((line, index) => (
@@ -19,6 +24,7 @@ const Month = ({ dayList, today, setModal, scheduleList, selectSchedule }) => {
           setModal={setModal}
           scheduleList={scheduleList}
           selectSchedule={selectSchedule}
+          selectImage={selectImage}
         ></Week>
       ))}
     </>

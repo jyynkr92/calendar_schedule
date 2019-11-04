@@ -1,7 +1,7 @@
 import React from "react";
 import Day from "./Day";
 
-const Week = ({ line, today, setModal, scheduleList, selectSchedule }) => {
+const Week = ({ line, today, setModal, scheduleList, selectSchedule, selectImage }) => {
   return (
     <>
       <tr>
@@ -13,6 +13,7 @@ const Week = ({ line, today, setModal, scheduleList, selectSchedule }) => {
             setModal={setModal}
             scheduleList={scheduleList}
             selectSchedule={selectSchedule}
+            selectImage={selectImage}
           ></Day>
         ))}
       </tr>

@@ -1,11 +1,12 @@
 import React from "react";
 import DayText from "./DayText";
 import { getDateFromString } from "../lib/common";
+import styled from "styled-components";
 
-const Day = ({ day, today, setModal, scheduleList, selectSchedule }) => {
+const Day = ({ day, today, setModal, scheduleList, selectSchedule, selectImage }) => {
   const isToday = today === day.date ? "today" : "";
   const isThisMonth = day.isThisMonth ? "" : "not_thisMonth";
-  const classes = `days ${isToday} ${isThisMonth}`;
+  const classes = `${isToday} ${isThisMonth}`;
   const schedules =
     scheduleList === null || scheduleList === undefined
       ? []
@@ -19,8 +20,9 @@ const Day = ({ day, today, setModal, scheduleList, selectSchedule }) => {
         });
 
   return (
-    <td
+    <DayTD
       className={classes}
+      selectImage={selectImage}
       onClick={() => {
         setModal(day.date);
       }}
@@ -32,7 +34,6 @@ const Day = ({ day, today, setModal, scheduleList, selectSchedule }) => {
           id={schedule.scheduleId}
           onClick={e => {
             e.stopPropagation();
-            console.log(schedule.scheduleId);
             selectSchedule(schedule.scheduleId, day.date);
           }}
           className="schedule_title"
@@ -40,8 +41,15 @@ const Day = ({ day, today, setModal, scheduleList, selectSchedule }) => {
           {schedule.title}
         </div>
       ))}
-    </td>
+    </DayTD>
   );
 };
+
+const DayTD = styled.td`
+  height: 80px;
+  vertical-align: top;
+  width: 80px;
+  background-color: ${props => props.selectImage.backgroundColor};
+`;
 
 export default Day;

@@ -1,6 +1,6 @@
 import React from "react";
 import { ButtonToolbar, Button } from "react-bootstrap";
-import "../App.css";
+import "../../App.css";
 
 const ModeBtn = ({ mode, setMode }) => {
   return (

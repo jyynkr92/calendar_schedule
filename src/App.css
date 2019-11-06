@@ -145,3 +145,7 @@ body {
 .imageList {
   width: 237px;
 }
+
+.styleRed {
+  background-color: red;
+}

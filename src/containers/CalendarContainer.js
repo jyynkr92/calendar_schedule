@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { setInitMonth, setMonth } from "../modules/calendar";
 import { setModal, selectSchedule, getScheuleFromFirebase } from "../modules/schedule";
-import Calendar from "../components/Calendar";
+import Calendar from "../components/calendar/Calendar";
 import ModalContainer from "./ModalContainer";
 import { setImage } from "../modules/imagemode";
 

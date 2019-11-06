@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import CalendarContainer from "./CalendarContainer";
-import ModeBtn from "../components/ModeBtn";
-import SaveImgBtn from "../components/SaveImgBtn";
+import ModeBtn from "../components/imagemode/ModeBtn";
+import SaveImgBtn from "../components/imagemode/SaveImgBtn";
 import { setMode, setImage, getImageListFromFirebase } from "../modules/imagemode";
 import html2canvas from "html2canvas";
 

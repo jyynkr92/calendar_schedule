@@ -77,6 +77,11 @@ const CustomModal = ({
               name="allDayFlag"
             />
           </Form.Group>
+          {/* <Form.Group controlId="formBasicRadio"> 
+            <Form.Check inline type="radio" label="예매" id="resevation" name="scheduleType" />
+            <Form.Check inline type="radio" label="콘서트" id="concert" name="scheduleType" />
+            <Form.Check inline type="radio" label="방송" id="tvshow" name="scheduleType" />
+          </Form.Group> */}
           <div>시작일</div>
           <Form.Row>
             <Form.Group md="4" as={Col}>

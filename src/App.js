@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
-import ImageModeContainer from "./containers/ImageModeContainer";
+import HomePage from "./components/homepage/Homepage";
 
 function App() {
-  return <ImageModeContainer></ImageModeContainer>;
+  return <HomePage></HomePage>;
 }
 
 export default App;

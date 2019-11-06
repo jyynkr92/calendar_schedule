@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import CustomModal from "../components/CustomModal";
+import CustomModal from "../components/modal/CustomModal";
 import {
   addScheduleToFirebase,
   closeModal,

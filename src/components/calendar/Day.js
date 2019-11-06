@@ -1,6 +1,6 @@
 import React from "react";
 import DayText from "./DayText";
-import { getDateFromString } from "../lib/common";
+import { getDateFromString } from "../../lib/common";
 import styled from "styled-components";
 
 const Day = ({ day, today, setModal, scheduleList, selectSchedule, selectImage }) => {

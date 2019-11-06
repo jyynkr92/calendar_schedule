@@ -1,8 +1,8 @@
 import React from "react";
-import rightArrow from "../img/arrow-point-to-right.png";
-import leftArrow from "../img/left-arrow.png";
+import rightArrow from "../../img/arrow-point-to-right.png";
+import leftArrow from "../../img/left-arrow.png";
 import styled from "styled-components";
-import ImageList from "../components/ImageList";
+import ImageList from "../imagemode/ImageList";
 
 const MonthSelect = ({ date, setCalendar, selectImage, mode, setImage, imageList, imageShow }) => {
   return (

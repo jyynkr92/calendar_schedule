@@ -2,13 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
-import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import ReduxThunk from "redux-thunk";
 import { createLogger } from "redux-logger";
 import rootReducer from "./modules/rootReducer";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
 
 const logger = createLogger();
 const store = createStore(rootReducer, applyMiddleware(logger, ReduxThunk));

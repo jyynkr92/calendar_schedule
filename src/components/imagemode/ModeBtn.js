@@ -9,11 +9,17 @@ const ModeBtn = ({ mode, setMode }) => {
         onClick={setMode}
         variant={mode === "mobile" ? "danger" : "outline-danger"}
         id="mobile"
+        size="sm"
       >
-        모바일
+        작은 이미지
       </Button>
-      <Button onClick={setMode} variant={mode === "desktop" ? "info" : "outline-info"} id="desktop">
-        데스크탑
+      <Button
+        onClick={setMode}
+        variant={mode === "desktop" ? "info" : "outline-info"}
+        id="desktop"
+        size="sm"
+      >
+        큰 이미지
       </Button>
     </ButtonToolbar>
   );

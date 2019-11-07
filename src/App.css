@@ -149,3 +149,48 @@ body {
 .styleRed {
   background-color: red;
 }
+
+.btn-toolbar {
+  margin-bottom: 10px;
+}
+
+.btn-outline-info {
+  border: 1px solid #e8d3ff !important;
+  color: #4f4cb4 !important;
+}
+
+.btn-info,
+.btn-outline-info:hover {
+  border: 1px solid #e8d3ff !important;
+  background-color: #e8d3ff !important;
+}
+
+.btn-outline-danger {
+  border: 1px solid #c6cfff !important;
+  color: #4f4cb4 !important;
+}
+
+.btn-danger,
+.btn-outline-danger:hover {
+  border: 1px solid #c6cfff !important;
+  background-color: #c6cfff !important;
+}
+
+.btn-info:hover {
+  border: 1px solid #e0c3ff !important;
+  background-color: #e0c3ff !important;
+}
+
+.btn-danger:hover {
+  border: 1px solid #adb9ff !important;
+  background-color: #adb9ff !important;
+}
+
+.btn-success {
+  border: 1px solid #8186d5 !important;
+  background-color: #8186d5 !important;
+}
+
+.btn-success:hover {
+  background-color: #686fd1 !important;
+}

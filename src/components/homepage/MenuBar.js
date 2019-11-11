@@ -4,7 +4,7 @@ import styled from "styled-components";
 const MenuBar = () => {
   return (
     <MenuList>
-      <span>Schedule</span>
+      <Menus>Schedule</Menus>
     </MenuList>
   );
 };
@@ -17,6 +17,12 @@ const MenuList = styled.div`
   left: 0;
   background-color: #c6cbef;
   height: 39px;
+`;
+
+const Menus = styled.div`
+  display: inline-block;
+  padding: 8px 10px 10px 10px;
+  font-size: 12pt;
 `;
 
 export default MenuBar;

@@ -1,4 +1,5 @@
-.imageDiv {
+.imageDiv,
+.topImage {
   position: absolute;
   left: 0;
   top: 0;
@@ -14,6 +15,14 @@
   width: 100%;
   height: 100%;
   position: absolute;
+}
+
+.topImage img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .calendar td,
@@ -137,13 +146,14 @@
   border: none;
 }
 
+.imageList {
+  border: 1px solid #d9d9d9;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-size: 0.8rem !important;
-}
-.imageList {
-  width: 237px;
 }
 
 .styleRed {
@@ -193,4 +203,9 @@ body {
 
 .btn-success:hover {
   background-color: #686fd1 !important;
+}
+
+#root {
+  display: table;
+  width: 100%;
 }

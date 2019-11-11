@@ -5,6 +5,7 @@ import ModeBtn from "../components/imagemode/ModeBtn";
 import SaveImgBtn from "../components/imagemode/SaveImgBtn";
 import { setMode, setImage, getImageListFromFirebase } from "../modules/imagemode";
 import html2canvas from "html2canvas";
+import ImageList from "../components/imagemode/ImageList";
 
 class ImageModeContainer extends PureComponent {
   state = {
@@ -62,15 +63,27 @@ class ImageModeContainer extends PureComponent {
     });
   };
 
+  setImage = e => {
+    const imageId = e.target.id;
+    const { setImage } = this.props;
+
+    setImage(imageId);
+  };
+
   render() {
-    const { mode } = this.props;
-    const { setMode, setSaveImage } = this;
+    const { mode, imageList } = this.props;
+    const { setMode, setSaveImage, setImage } = this;
     const { imageShow } = this.state;
 
     return (
       <div>
         <ModeBtn mode={mode} setMode={setMode} />
         <SaveImgBtn setSaveImage={setSaveImage} />
+        {imageShow ? (
+          <div id="imageList" rowspan="8">
+            <ImageList setImage={setImage} imageList={imageList} />
+          </div>
+        ) : null}
         <CalendarContainer imageShow={imageShow} />
       </div>
     );
@@ -79,15 +92,16 @@ class ImageModeContainer extends PureComponent {
 
 const mapStateToProps = state => ({
   mode: state.imagemode.mode,
-  selectImage: state.imagemode.selectImage
+  selectImage: state.imagemode.selectImage,
+  imageList: state.imagemode.imageList
 });
 
 const mapToDispatch = dispatch => ({
   setMode: mode => {
     dispatch(setMode(mode));
   },
-  setImage: imageUrl => {
-    dispatch(setImage(imageUrl));
+  setImage: imageId => {
+    dispatch(setImage(imageId));
   },
   getImageListFromFirebase: mode => {
     dispatch(getImageListFromFirebase(mode));

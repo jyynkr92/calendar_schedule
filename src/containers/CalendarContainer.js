@@ -4,7 +4,6 @@ import { setInitMonth, setMonth } from "../modules/calendar";
 import { setModal, selectSchedule, getScheuleFromFirebase } from "../modules/schedule";
 import Calendar from "../components/calendar/Calendar";
 import ModalContainer from "./ModalContainer";
-import { setImage } from "../modules/imagemode";
 
 class CalendarContainer extends PureComponent {
   componentDidMount() {
@@ -36,26 +35,9 @@ class CalendarContainer extends PureComponent {
     selectSchedule(scheduleId);
   };
 
-  setImage = e => {
-    const imageId = e.target.id;
-    const { setImage } = this.props;
-
-    setImage(imageId);
-  };
-
   render() {
-    const {
-      date,
-      dayList,
-      today,
-      modal,
-      scheduleList,
-      selectImage,
-      mode,
-      imageList,
-      imageShow
-    } = this.props;
-    const { setCalendar, setModal, selectSchedule, setImage } = this;
+    const { date, dayList, today, modal, scheduleList, selectImage, mode } = this.props;
+    const { setCalendar, setModal, selectSchedule } = this;
 
     return (
       <div id="calendarDiv">
@@ -69,9 +51,6 @@ class CalendarContainer extends PureComponent {
           selectSchedule={selectSchedule}
           selectImage={selectImage}
           mode={mode}
-          setImage={setImage}
-          imageList={imageList}
-          imageShow={imageShow}
         ></Calendar>
         {modal ? <ModalContainer /> : null}
       </div>
@@ -227,9 +206,6 @@ const mapToDispatch = dispatch => ({
   },
   getScheuleFromFirebase: dateStr => {
     dispatch(getScheuleFromFirebase(dateStr));
-  },
-  setImage: imageId => {
-    dispatch(setImage(imageId));
   }
 });
 

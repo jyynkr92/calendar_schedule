@@ -2,12 +2,16 @@ import React from "react";
 import rightArrow from "../../img/arrow-point-to-right.png";
 import leftArrow from "../../img/left-arrow.png";
 import styled from "styled-components";
-import ImageList from "../imagemode/ImageList";
 
-const MonthSelect = ({ date, setCalendar, selectImage, mode, setImage, imageList, imageShow }) => {
+const MonthSelect = ({ date, setCalendar, selectImage, mode }) => {
   return (
     <CalendarTR>
       <CalendarTH className="topDesign" mode={mode} selectImage={selectImage} colSpan="7">
+        {mode === "mobile" ? (
+          <div className="topImage">
+            <img src={selectImage.imageUrl} alt="topImage" />
+          </div>
+        ) : null}
         <MonthBtn>
           <span>
             <img
@@ -32,11 +36,6 @@ const MonthSelect = ({ date, setCalendar, selectImage, mode, setImage, imageList
           </span>
         </MonthBtn>
       </CalendarTH>
-      {imageShow ? (
-        <th id="imageList" data-html2canvas-ignore="true" rowspan="8">
-          <ImageList setImage={setImage} imageList={imageList} />
-        </th>
-      ) : null}
     </CalendarTR>
   );
 };
@@ -52,10 +51,7 @@ const CalendarTR = styled.tr`
 `;
 
 const CalendarTH = styled.th`
-  ${props =>
-    props.mode === "desktop"
-      ? `background-color:${props.selectImage.topColor}`
-      : `background-image: url(${props.selectImage.imageUrl})`};
+  ${props => (props.mode === "desktop" ? `background-color:${props.selectImage.topColor}` : ``)};
   ${props => (props.mode === "desktop" ? `height:211px` : `height:300px`)};
   background-repeat: no-repeat;
   background-position: center;

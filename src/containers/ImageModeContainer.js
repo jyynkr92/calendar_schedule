@@ -71,7 +71,7 @@ class ImageModeContainer extends PureComponent {
   };
 
   render() {
-    const { mode, imageList } = this.props;
+    const { mode, imageList, isLoading } = this.props;
     const { setMode, setSaveImage, setImage } = this;
     const { imageShow } = this.state;
 
@@ -79,12 +79,23 @@ class ImageModeContainer extends PureComponent {
       <div>
         <ModeBtn mode={mode} setMode={setMode} />
         <SaveImgBtn setSaveImage={setSaveImage} />
-        {imageShow ? (
-          <div id="imageList" rowspan="8">
-            <ImageList setImage={setImage} imageList={imageList} />
+        {isLoading ? (
+          <div className="loadingImageDiv">
+            &nbsp;
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"
+              alt="loadingImage"
+              className="loadingImage"
+            />
           </div>
-        ) : null}
-        <CalendarContainer imageShow={imageShow} />
+        ) : (
+          <>
+            <div id="imageList">
+              <ImageList setImage={setImage} imageList={imageList} />
+            </div>
+            <CalendarContainer imageShow={imageShow} />
+          </>
+        )}
       </div>
     );
   }
@@ -93,7 +104,8 @@ class ImageModeContainer extends PureComponent {
 const mapStateToProps = state => ({
   mode: state.imagemode.mode,
   selectImage: state.imagemode.selectImage,
-  imageList: state.imagemode.imageList
+  imageList: state.imagemode.imageList,
+  isLoading: state.imagemode.isLoading
 });
 
 const mapToDispatch = dispatch => ({

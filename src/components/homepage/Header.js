@@ -1,15 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import MenuBar from "./MenuBar";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <HeaderDiv>
       <LoginBtn>
-        <span>login</span>
-        <span>/</span>
-        <span>signup</span>
+        <Link className="loginLink" to="/login">
+          login
+        </Link>
       </LoginBtn>
+      <div className="homepageTitle">Forestella</div>
       <MenuBar />
     </HeaderDiv>
   );
@@ -29,6 +31,8 @@ const LoginBtn = styled.div`
   position: absolute;
   right: 0;
   margin-right: 10px;
+  font-size: 12pt;
+  font-family: "Bree Serif", serif;
   margin-top: 10px;
 `;
 

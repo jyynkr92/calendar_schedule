@@ -38,7 +38,7 @@ export const selectSchedule = scheduleId => ({
   scheduleId
 });
 
-export const getScheuleFromFirebase = dateStr => {
+export const getScheuleFromFirebase = () => {
   return dispatch => {
     return firestore.collection("schedule").onSnapshot(function(snapshot) {
       snapshot.docChanges().forEach(change => {
@@ -141,7 +141,10 @@ function schedule(state = initialState, action) {
     case ADD_SCHEDULE:
       return {
         ...state,
-        scheduleList: state.scheduleList.concat(action.schedule)
+        scheduleList: [].concat(
+          state.scheduleList.filter(val => val.scheduleId !== action.schedule.scheduleId),
+          action.schedule
+        )
       };
     case DELETE_SCHEDULE:
       return {

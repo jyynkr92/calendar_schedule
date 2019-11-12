@@ -4,6 +4,7 @@ import firestore from "../firebase";
 const SET_MODE = "SET_MODE";
 const SET_IMAGE = "SET_IMAGE";
 const SET_IMAGE_LIST = "SET_IMAGE_LIST";
+const SET_LOAD = "SET_LOAD";
 
 /** define action function */
 export const setMode = mode => ({
@@ -28,8 +29,14 @@ export const setDesktopImageList = (imageList, mode) => ({
   mode
 });
 
+export const setLoad = isLoading => ({
+  type: SET_LOAD,
+  isLoading
+});
+
 export const getImageListFromFirebase = mode => {
   return dispatch => {
+    dispatch(setLoad(true));
     firestore
       .collection(mode + "Image")
       .get()
@@ -50,13 +57,14 @@ export const getImageListFromFirebase = mode => {
 
 /** define initial state */
 const initialState = {
+  isLoading: true,
   mode: "mobile",
   selectImage: {
-    backgroundColor: "#696169",
-    weekNameColor: "#9c7872",
+    backgroundColor: "#302f2c",
+    weekNameColor: "#52544f",
     topColor: "#d9d9d9",
-    imageUrl: "../backgroundImg/background2.png",
-    fontColor: "#d9d9d9"
+    imageUrl: "../backgroundImg/background3.png",
+    fontColor: "#eff0dc"
   },
   imageList: [
     "../backgroundImg/background2.png",
@@ -87,7 +95,13 @@ function imagemode(state = initialState, action) {
         ...state,
         mode: action.mode,
         selectImage: action.imageList[0],
-        imageList: action.imageList
+        imageList: action.imageList,
+        isLoading: false
+      };
+    case SET_LOAD:
+      return {
+        ...state,
+        isLoading: action.isLoading
       };
     default:
       return state;

@@ -1,10 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const MenuBar = () => {
   return (
     <MenuList>
-      <Menus>Schedule</Menus>
+      <Menus>
+        <Link to="/schedule">Schedule</Link>
+      </Menus>
     </MenuList>
   );
 };
@@ -21,8 +24,10 @@ const MenuList = styled.div`
 
 const Menus = styled.div`
   display: inline-block;
-  padding: 8px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
   font-size: 12pt;
+  font-family: "Bree Serif", serif;
+  font-weight: bold;
 `;
 
 export default MenuBar;

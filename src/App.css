@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Bree+Serif|Lobster&display=swap");
+
 .imageDiv,
 .topImage {
   position: absolute;
@@ -208,4 +210,97 @@ body {
 #root {
   display: table;
   width: 100%;
+}
+
+.homepageTitle {
+  font-family: "Lobster", cursive;
+  text-align: center;
+  font-size: 46pt;
+  padding-top: 7px;
+}
+
+.loginHeader {
+  font-family: "Bree Serif", serif;
+  font-size: 20pt;
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.loadingImage {
+  width: 250px;
+  height: auto;
+}
+
+.loadingImageDiv {
+  text-align: center;
+}
+
+.loginLink {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.loginLink:hover {
+  color: #bfd3ff;
+  text-decoration: none;
+}
+
+.loginDiv {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.loginBox {
+  display: inline-block;
+  padding: 20px;
+  border: 1px solid #d9d9d9;
+  width: 400px;
+  height: 374px;
+  margin: auto;
+}
+
+.inputImage {
+  width: 25px;
+  height: 25px;
+}
+input:focus {
+  outline: none;
+}
+
+.input_text {
+  margin-left: 20px;
+  height: 45px;
+  width: 263px;
+  padding-top: 5px;
+  border: none;
+}
+
+.inputDiv {
+  height: 50px;
+  border: 1px solid #d9d9d9;
+  display: inline-block;
+  border-radius: 30px;
+  width: 350px;
+  margin-bottom: 15px;
+}
+
+.loginBtn {
+  font-family: "Bree Serif", serif;
+  font-size: 15pt;
+  text-align: center;
+  padding-top: 8px;
+}
+
+.loginBtn:hover {
+  color: #ffffff;
+  background-color: #a7afea;
+  cursor: pointer;
+}
+
+.signUpDiv {
+  margin-top: 20px;
+}
+.signUp {
+  text-decoration: underline;
+  cursor: pointer;
 }

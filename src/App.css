@@ -304,3 +304,12 @@ input:focus {
   text-decoration: underline;
   cursor: pointer;
 }
+
+.loginModal {
+  text-align: center;
+}
+
+.warningMsg {
+  color: red;
+  text-align: center;
+}

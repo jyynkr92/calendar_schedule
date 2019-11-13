@@ -2,7 +2,7 @@ import React from "react";
 import mailIcon from "../../img/envelope.png";
 import passwordIcon from "../../img/closed-lock.png";
 
-const Login = () => {
+const Login = ({ setLoginModal }) => {
   return (
     <div className="loginBox">
       <div className="loginHeader">Login</div>
@@ -26,7 +26,10 @@ const Login = () => {
         <span>Login</span>
       </div>
       <div className="signUpDiv">
-        Now a member? <span className="signUp">sign up now</span>
+        Now a member?{" "}
+        <span onClick={setLoginModal} className="signUp">
+          sign up now
+        </span>
       </div>
     </div>
   );

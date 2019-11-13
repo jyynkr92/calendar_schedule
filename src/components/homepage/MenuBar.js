@@ -6,7 +6,9 @@ const MenuBar = () => {
   return (
     <MenuList>
       <Menus>
-        <Link to="/schedule">Schedule</Link>
+        <Link className="menus" to="/schedule">
+          Schedule
+        </Link>
       </Menus>
     </MenuList>
   );

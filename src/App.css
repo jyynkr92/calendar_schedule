@@ -313,3 +313,12 @@ input:focus {
   color: red;
   text-align: center;
 }
+
+.menus:hover {
+  color: #242761;
+  text-decoration: none;
+}
+
+.menus {
+  color: #5b5faf;
+}

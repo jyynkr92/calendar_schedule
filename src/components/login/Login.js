@@ -2,7 +2,7 @@ import React from "react";
 import mailIcon from "../../img/envelope.png";
 import passwordIcon from "../../img/closed-lock.png";
 
-const Login = ({ setLoginModal }) => {
+const Login = ({ setLoginModal, signInUser, changeText }) => {
   return (
     <div className="loginBox">
       <div className="loginHeader">Login</div>
@@ -12,7 +12,13 @@ const Login = ({ setLoginModal }) => {
             <img className="inputImage" src={mailIcon} alt="mailIcon" />
           </span>
         </span>
-        <input placeholder="Email" className="input_text" />
+        <input
+          type="text"
+          name="loginEmail"
+          onChange={changeText}
+          placeholder="Email"
+          className="input_text"
+        />
       </div>
       <div className="inputDiv">
         <span>
@@ -20,9 +26,15 @@ const Login = ({ setLoginModal }) => {
             <img className="inputImage" src={passwordIcon} alt="passwordIcon" />
           </span>
         </span>
-        <input placeholder="Password" className="input_text" />
+        <input
+          type="password"
+          onChange={changeText}
+          name="loginPassword"
+          placeholder="Password"
+          className="input_text"
+        />
       </div>
-      <div className="inputDiv loginBtn">
+      <div className="inputDiv loginBtn" onClick={signInUser}>
         <span>Login</span>
       </div>
       <div className="signUpDiv">

@@ -2,12 +2,14 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import Login from "../components/login/Login";
 import SignUp from "../components/login/SignUp";
-import { setLoginModal, closeLoginModal, signUpUser } from "../modules/login";
+import { setLoginModal, closeLoginModal, signUpUser, signInUser } from "../modules/login";
 
 class LoginContainer extends PureComponent {
   state = {
-    email: "",
-    password: "",
+    signUpEmail: "",
+    signUpPassword: "",
+    loginEmail: "",
+    loginPassword: "",
     warning: "",
     createCount: false
   };
@@ -20,37 +22,45 @@ class LoginContainer extends PureComponent {
 
   availableAccount = () => {
     const email_regex = /^([a-zA-Z0-9_.+-])+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    const { email, password } = this.state;
+    const { signUpEmail, signUpPassword } = this.state;
     const { signUpUser } = this.props;
-    console.log(email_regex.test(email));
-    if (!email_regex.test(email)) {
+
+    if (!email_regex.test(signUpEmail)) {
       this.setState({
         warning: "Please Enter Correct Email",
         createCount: false
       });
-    } else if (password.length < 8) {
+    } else if (signUpPassword.length < 8) {
       this.setState({
         warning: "Please Enter Password More Than 8 Characters",
         createCount: false
       });
     } else {
       this.setState({
+        signUpPassword: "",
+        signUpEmail: "",
         warning: "",
         createCount: true
       });
 
-      signUpUser(email, password);
+      signUpUser(signUpEmail, signUpPassword);
     }
+  };
+
+  signInUser = () => {
+    const { loginEmail, loginPassword } = this.state;
+    const { signInUser } = this.props;
+    signInUser(loginEmail, loginPassword);
   };
 
   render() {
     const { setLoginModal, loginModal, closeLoginModal } = this.props;
-    const { changeText, availableAccount } = this;
+    const { changeText, availableAccount, signInUser } = this;
     const { warning } = this.state;
 
     return (
       <div className="loginDiv">
-        <Login setLoginModal={setLoginModal} />
+        <Login setLoginModal={setLoginModal} signInUser={signInUser} changeText={changeText} />
         {loginModal && (
           <SignUp
             changeText={changeText}
@@ -76,8 +86,11 @@ const mapToDispatch = dispatch => ({
   closeLoginModal: () => {
     dispatch(closeLoginModal());
   },
-  signUpUser: (emai, password) => {
-    dispatch(signUpUser(emai, password));
+  signUpUser: (email, password) => {
+    dispatch(signUpUser(email, password));
+  },
+  signInUser: (email, password) => {
+    dispatch(signInUser(email, password));
   }
 });
 

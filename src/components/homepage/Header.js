@@ -1,15 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 import MenuBar from "./MenuBar";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ signInStatus, signOutUser }) => {
   return (
     <HeaderDiv>
       <LoginBtn>
-        <Link className="loginLink" to="/login">
-          login
-        </Link>
+        {signInStatus ? (
+          <>
+            <span className="loginLink" onClick={signOutUser}>
+              logout
+            </span>
+            <Redirect to="/" />
+          </>
+        ) : (
+          <Link className="loginLink" to="/login">
+            login
+          </Link>
+        )}
       </LoginBtn>
       <div className="homepageTitle">Forestella</div>
       <MenuBar />

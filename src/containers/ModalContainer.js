@@ -149,7 +149,7 @@ class ModalContainer extends PureComponent {
   };
 
   render() {
-    const { modal } = this.props;
+    const { modal, isAdmin } = this.props;
     const {
       startDate,
       endDate,
@@ -187,6 +187,7 @@ class ModalContainer extends PureComponent {
         deleteSchedule={deleteSchedule}
         mode={mode}
         modifyScheudle={modifyScheudle}
+        isAdmin={isAdmin}
       ></CustomModal>
     );
   }
@@ -198,7 +199,8 @@ const mapStateToProps = state => ({
   selectSchedule: state.schedule.selectSchedule,
   scheduleList: state.schedule.scheduleList,
   lastScheduleId: state.schedule.lastScheduleId,
-  mode: state.schedule.mode
+  mode: state.schedule.mode,
+  isAdmin: state.login.isAdmin
 });
 
 const mapToDispatch = dispatch => ({

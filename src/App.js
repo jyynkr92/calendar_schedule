@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
-import HomePage from "./components/homepage/Homepage";
+import HomePageContainer from "./containers/HomePageContainer";
 
 function App() {
-  return <HomePage></HomePage>;
+  return <HomePageContainer></HomePageContainer>;
 }
 
 export default App;

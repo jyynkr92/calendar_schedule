@@ -23,7 +23,8 @@ const CustomModal = ({
   memo,
   deleteSchedule,
   mode,
-  modifyScheudle
+  modifyScheudle,
+  isAdmin
 }) => {
   const changeValue = e => {
     const targetName = e.target.name;
@@ -195,9 +196,10 @@ const CustomModal = ({
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        {mode === "add" ? <Button onClick={addSchedule}>입력</Button> : null}
-        {mode === "show" ? <Button onClick={modifyScheudle}>수정</Button> : null}
-        <Button onClick={deleteSchedule}>삭제</Button>
+        {mode === "add" && isAdmin ? <Button onClick={addSchedule}>입력</Button> : null}
+        {mode === "show" && isAdmin ? <Button onClick={modifyScheudle}>수정</Button> : null}
+        {isAdmin ? <Button onClick={deleteSchedule}>삭제</Button> : null}
+        {!isAdmin ? <Button onClick={onHide}>닫기</Button> : null}
       </Modal.Footer>
     </Modal>
   );

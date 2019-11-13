@@ -24,7 +24,7 @@ const SignUp = ({ show, onHide, createUser, changeText, warning }) => {
           </span>
           <input
             type="text"
-            name="email"
+            name="signUpEmail"
             onChange={changeText}
             placeholder="Email"
             className="input_text"
@@ -38,7 +38,7 @@ const SignUp = ({ show, onHide, createUser, changeText, warning }) => {
           </span>
           <input
             type="password"
-            name="password"
+            name="signUpPassword"
             onChange={changeText}
             placeholder="Password"
             className="input_text"

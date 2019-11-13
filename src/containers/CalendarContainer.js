@@ -36,7 +36,7 @@ class CalendarContainer extends PureComponent {
   };
 
   render() {
-    const { date, dayList, today, modal, scheduleList, selectImage, mode } = this.props;
+    const { date, dayList, today, modal, scheduleList, selectImage, mode, isAdmin } = this.props;
     const { setCalendar, setModal, selectSchedule } = this;
 
     return (
@@ -51,6 +51,7 @@ class CalendarContainer extends PureComponent {
           selectSchedule={selectSchedule}
           selectImage={selectImage}
           mode={mode}
+          isAdmin={isAdmin}
         ></Calendar>
         {modal ? <ModalContainer /> : null}
       </div>
@@ -188,7 +189,8 @@ const mapStateToProps = state => ({
   scheduleList: state.schedule.scheduleList,
   selectImage: state.imagemode.selectImage,
   mode: state.imagemode.mode,
-  imageList: state.imagemode.imageList
+  imageList: state.imagemode.imageList,
+  isAdmin: state.login.isAdmin
 });
 
 const mapToDispatch = dispatch => ({

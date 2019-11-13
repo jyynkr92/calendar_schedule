@@ -68,6 +68,7 @@ const CustomModal = ({
               onChange={changeValue}
               value={title}
               name="title"
+              disabled={isAdmin ? false : true}
             />
           </Form.Group>
           <Form.Group controlId="formBasicCheckbox">
@@ -76,6 +77,7 @@ const CustomModal = ({
               type="checkbox"
               label="하루 종일"
               name="allDayFlag"
+              disabled={isAdmin ? false : true}
             />
           </Form.Group>
           {/* <Form.Group controlId="formBasicRadio"> 
@@ -86,17 +88,21 @@ const CustomModal = ({
           <div>시작일</div>
           <Form.Row>
             <Form.Group md="4" as={Col}>
-              <div className="datepicker_div">
-                <DayPickerInput
-                  id="startDate"
-                  value={startDate}
-                  dayPickerProps={{
-                    locale: "ko",
-                    localeUtils: MomentLocaleUtils
-                  }}
-                  onDayChange={day => changeDateValue(day, "startDate")}
-                />
-              </div>
+              {isAdmin ? (
+                <div className="datepicker_div">
+                  <DayPickerInput
+                    id="startDate"
+                    value={startDate}
+                    dayPickerProps={{
+                      locale: "ko",
+                      localeUtils: MomentLocaleUtils
+                    }}
+                    onDayChange={day => changeDateValue(day, "startDate")}
+                  />
+                </div>
+              ) : (
+                <Form.Control type="text" value={startDate} disabled />
+              )}
             </Form.Group>
             {allDayFlag ? null : (
               <>
@@ -106,6 +112,7 @@ const CustomModal = ({
                     onChange={changeValue}
                     value={startAmPm}
                     name="startAmPm"
+                    disabled={isAdmin ? false : true}
                   >
                     <option value="am">오전</option>
                     <option value="pm">오후</option>
@@ -117,6 +124,7 @@ const CustomModal = ({
                     onChange={changeValue}
                     value={startHour}
                     name="startHour"
+                    disabled={isAdmin ? false : true}
                   >
                     {[...Array(12)].map((x, i) => (
                       <option> {i + 1 < 10 ? "0" + (i + 1) : i + 1} </option>
@@ -132,6 +140,7 @@ const CustomModal = ({
                     onChange={changeValue}
                     name="startMinute"
                     value={startMinute}
+                    disabled={isAdmin ? false : true}
                   >
                     {[...Array(12)].map((x, i) => (
                       <option> {i * 5 < 10 ? "0" + i * 5 : i * 5} </option>
@@ -144,28 +153,44 @@ const CustomModal = ({
           <div>종료일</div>
           <Form.Row>
             <Form.Group md="4" as={Col}>
-              <div className="datepicker_div">
-                <DayPickerInput
-                  id="endDate"
-                  value={endDate}
-                  dayPickerProps={{
-                    locale: "ko",
-                    localeUtils: MomentLocaleUtils
-                  }}
-                  onDayChange={day => changeDateValue(day, "endDate")}
-                />
-              </div>
+              {isAdmin ? (
+                <div className="datepicker_div">
+                  <DayPickerInput
+                    id="endDate"
+                    value={endDate}
+                    dayPickerProps={{
+                      locale: "ko",
+                      localeUtils: MomentLocaleUtils
+                    }}
+                    onDayChange={day => changeDateValue(day, "endDate")}
+                  />
+                </div>
+              ) : (
+                <Form.Control type="text" value={endDate} disabled />
+              )}
             </Form.Group>
             {allDayFlag ? null : (
               <>
                 <Form.Group md="3" as={Col} controlId="endTime_ampm">
-                  <Form.Control as="select" onChange={changeValue} value={endAmPm} name="endAmPm">
+                  <Form.Control
+                    as="select"
+                    onChange={changeValue}
+                    value={endAmPm}
+                    name="endAmPm"
+                    disabled={isAdmin ? false : true}
+                  >
                     <option value="am">오전</option>
                     <option value="pm">오후</option>
                   </Form.Control>
                 </Form.Group>
                 <Form.Group as={Col} md="2" controlId="endTime_hour">
-                  <Form.Control as="select" onChange={changeValue} value={endHour} name="endHour">
+                  <Form.Control
+                    as="select"
+                    onChange={changeValue}
+                    value={endHour}
+                    name="endHour"
+                    disabled={isAdmin ? false : true}
+                  >
                     {[...Array(12)].map((x, i) => (
                       <option> {i + 1 < 10 ? "0" + (i + 1) : i + 1} </option>
                     ))}
@@ -180,6 +205,7 @@ const CustomModal = ({
                     onChange={changeValue}
                     value={endMinute}
                     name="endMinute"
+                    disabled={isAdmin ? false : true}
                   >
                     {[...Array(12)].map((x, i) => (
                       <option> {i * 5 < 10 ? "0" + i * 5 : i * 5} </option>
@@ -191,7 +217,14 @@ const CustomModal = ({
           </Form.Row>
           <Form.Group>
             <Form.Label>메모</Form.Label>
-            <Form.Control as="textarea" rows="3" onChange={changeValue} value={memo} name="memo" />
+            <Form.Control
+              as="textarea"
+              rows="3"
+              onChange={changeValue}
+              value={memo}
+              name="memo"
+              disabled={isAdmin ? false : true}
+            />
           </Form.Group>
         </Form>
       </Modal.Body>

@@ -3,7 +3,7 @@ import DayText from "./DayText";
 import { getDateFromString } from "../../lib/common";
 import styled from "styled-components";
 
-const Day = ({ day, today, setModal, scheduleList, selectSchedule, selectImage }) => {
+const Day = ({ day, today, setModal, scheduleList, selectSchedule, selectImage, isAdmin }) => {
   const isToday = today === day.date ? "today" : "";
   const isThisMonth = day.isThisMonth ? "" : "not_thisMonth";
   const classes = `${isToday} ${isThisMonth}`;
@@ -24,7 +24,9 @@ const Day = ({ day, today, setModal, scheduleList, selectSchedule, selectImage }
       className={classes}
       selectImage={selectImage}
       onClick={() => {
-        setModal(day.date);
+        if (isAdmin) {
+          setModal(day.date);
+        }
       }}
     >
       <DayText key={day.date} dayName={day.dayNum}></DayText>

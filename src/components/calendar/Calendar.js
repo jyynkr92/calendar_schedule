@@ -14,7 +14,8 @@ export default class Calendar extends Component {
       scheduleList,
       selectSchedule,
       selectImage,
-      mode
+      mode,
+      isAdmin
     } = this.props;
 
     return (
@@ -44,6 +45,7 @@ export default class Calendar extends Component {
             selectSchedule={selectSchedule}
             selectImage={selectImage}
             mode={mode}
+            isAdmin={isAdmin}
           ></Month>
         </tbody>
       </CalendarTable>

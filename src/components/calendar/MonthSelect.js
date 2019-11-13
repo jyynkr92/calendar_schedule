@@ -1,5 +1,5 @@
 import React from "react";
-import rightArrow from "../../img/arrow-point-to-right.png";
+import rightArrow from "../../img/right-arrow.png";
 import leftArrow from "../../img/left-arrow.png";
 import styled from "styled-components";
 

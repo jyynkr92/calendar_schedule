@@ -25,9 +25,9 @@ export default class Calendar extends Component {
             <tr>
               <DesktopImgTD id={selectImage.imageId} rowSpan="8" selectImage={selectImage}>
                 <div className="emptyDiv">&nbsp;</div>
-                <div className="imageDiv">
+                <ImageDiv className="imageDiv" selectImage={selectImage}>
                   <img src={selectImage.imageUrl} alt="testImage" />
-                </div>
+                </ImageDiv>
               </DesktopImgTD>
             </tr>
           ) : null}
@@ -63,4 +63,11 @@ const CalendarTable = styled.table`
 `;
 const DesktopImgTD = styled.td`
   position: relative;
+`;
+
+const ImageDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${props => props.selectImage.topColor};
 `;

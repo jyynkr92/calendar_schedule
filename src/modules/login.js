@@ -15,9 +15,10 @@ export const closeLoginModal = () => ({
   type: CLOSE_LOGIN_MODAL
 });
 
-export const userSignIn = isAdmin => ({
+export const userSignIn = (isAdmin, userId) => ({
   type: USER_SIGN_IN,
-  isAdmin
+  isAdmin,
+  userId
 });
 
 export const userSignOut = () => ({
@@ -51,9 +52,9 @@ export const signInUser = (email, password) => {
       .signInWithEmailAndPassword(email, password)
       .then(() => {
         if (email === "jyynkr92@gmail.com") {
-          dispatch(userSignIn(true));
+          dispatch(userSignIn(true, email));
         } else {
-          dispatch(userSignIn(false));
+          dispatch(userSignIn(false, email));
         }
       })
       .catch(function(error) {
@@ -110,13 +111,15 @@ function login(state = initialState, action) {
       return {
         ...state,
         signInStatus: true,
-        isAdmin: action.isAdmin
+        isAdmin: action.isAdmin,
+        userId: action.userId
       };
     case USER_SIGN_OUT:
       return {
         ...state,
         signInStatus: false,
-        isAdmin: false
+        isAdmin: false,
+        userId: ""
       };
     default:
       return state;

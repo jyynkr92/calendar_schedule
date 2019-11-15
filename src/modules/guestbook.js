@@ -30,7 +30,7 @@ export const getGuestbook = () => {
         if (change.type === "added") {
           dispatch(addGuestbook(childData));
         } else if (change.type === "removed") {
-          dispatch(deleteGuestbook(childData.geustbookId));
+          dispatch(deleteGuestbook(childData.guestbookId));
         } else if (change.type === "modified") {
           dispatch(modifyGuestbook(childData));
         }
@@ -105,7 +105,7 @@ function guestbook(state = initialState, action) {
       return {
         ...state,
         guestbookList: state.guestbookList.filter(guestbook => {
-          return guestbook.guestbookId !== action.geustbookId;
+          return guestbook.guestbookId !== action.guestbookId;
         })
       };
     default:

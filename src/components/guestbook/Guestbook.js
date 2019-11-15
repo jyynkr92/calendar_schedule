@@ -3,13 +3,32 @@ import GuestName from "./GuestName";
 import GuestContents from "./GuestContents";
 import GuestButtons from "./GuestButtons";
 
-const Guestbook = ({ guestbook, modifyGuestbook, deleteGuestbook, isAdmin, userId }) => {
+const Guestbook = ({
+  guestbook,
+  modifyGuestbook,
+  deleteGuestbook,
+  isAdmin,
+  userId,
+  changeInput
+}) => {
   const { guestbookId, contents, userName, userEmail } = guestbook;
 
   return (
-    <div>
-      <GuestName userEmail={userEmail} userName={userName} userId={userId} isAdmin={isAdmin} />
-      <GuestContents contents={contents} />
+    <div className="guestbook">
+      <GuestName
+        userEmail={userEmail}
+        userName={userName}
+        userId={userId}
+        isAdmin={isAdmin}
+        changeInput={changeInput}
+      />
+      <GuestContents
+        contents={contents}
+        userId={userId}
+        changeInput={changeInput}
+        userEmail={userEmail}
+        isAdmin={isAdmin}
+      />
       <GuestButtons
         userEmail={userEmail}
         guestbookId={guestbookId}

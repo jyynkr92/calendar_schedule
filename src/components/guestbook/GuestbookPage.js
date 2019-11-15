@@ -1,7 +1,14 @@
 import React from "react";
 import Guestbook from "./Guestbook";
 
-const GuestbookPage = ({ guestbookList, modifyGuestbook, deleteGuestbook, isAdmin, userId }) => {
+const GuestbookPage = ({
+  guestbookList,
+  modifyGuestbook,
+  deleteGuestbook,
+  isAdmin,
+  userId,
+  changeInput
+}) => {
   return (
     <div>
       {guestbookList.map(guestbook => (
@@ -11,6 +18,7 @@ const GuestbookPage = ({ guestbookList, modifyGuestbook, deleteGuestbook, isAdmi
           deleteGuestbook={deleteGuestbook}
           isAdmin={isAdmin}
           userId={userId}
+          changeInput={changeInput}
         />
       ))}
     </div>

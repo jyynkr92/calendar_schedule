@@ -12,7 +12,9 @@ import {
 class GuestBookContainer extends PureComponent {
   state = {
     userName: "",
-    contents: ""
+    contents: "",
+    addUserName: "",
+    addContents: ""
   };
 
   componentDidMount() {
@@ -23,47 +25,96 @@ class GuestBookContainer extends PureComponent {
   clearState = () => {
     this.setState({
       userName: "",
-      contents: ""
+      contents: "",
+      addUserName: "",
+      addContents: ""
+    });
+  };
+
+  changeInput = e => {
+    this.setState({
+      [e.target.name]: e.target.value
     });
   };
 
   addGuestbook = () => {
-    const { addGuestbookToFirebase } = this.props;
-    const { userName, contents } = this.state;
+    const { addGuestbook, userId } = this.props;
+    const { addUserName, addContents } = this.state;
     const { clearState } = this;
-    const guestbook = { userName, contents };
+    const guestbook = { userName: addUserName, contents: addContents, userEmail: userId };
 
-    addGuestbookToFirebase(guestbook);
+    addGuestbook(guestbook);
     clearState();
   };
 
   modifyGuestbook = guestbookId => {
-    const { modifyGuestbookToFirebase } = this.props;
+    const { modifyGuestbook, guestbookList } = this.props;
     const { userName, contents } = this.state;
     const { clearState } = this;
 
-    const guestbook = { userName, contents, guestbookId };
-    modifyGuestbookToFirebase(guestbook);
+    const beforeGuestbook = guestbookList.filter(guestbook => {
+      return guestbook.guestbookId === guestbookId;
+    })[0];
+
+    const userEmail = beforeGuestbook.userEmail;
+
+    if (contents === "" || userName === "") {
+      if (contents === "") {
+        const beforeContents = beforeGuestbook.contents;
+        const guestbook = {
+          userName,
+          contents: beforeContents,
+          guestbookId,
+          userEmail
+        };
+        modifyGuestbook(guestbook);
+      } else if (userName === "") {
+        const beforeUserName = beforeGuestbook.userName;
+        const guestbook = {
+          userName: beforeUserName,
+          contents,
+          guestbookId,
+          userEmail
+        };
+        modifyGuestbook(guestbook);
+      } else {
+        const beforeContents = beforeGuestbook.contents;
+        const beforeUserName = beforeGuestbook.userName;
+        const guestbook = {
+          userName: beforeUserName,
+          contents: beforeContents,
+          guestbookId,
+          userEmail
+        };
+        modifyGuestbook(guestbook);
+      }
+    } else {
+      const guestbook = { userName, contents, guestbookId, userEmail };
+      modifyGuestbook(guestbook);
+    }
+
     clearState();
   };
 
   deleteGuestbook = guestbookId => {
-    const { deleteGuestbookToFirebase } = this.props;
-    deleteGuestbookToFirebase(guestbookId);
+    const { deleteGuestbook } = this.props;
+    console.log(guestbookId);
+    deleteGuestbook(guestbookId);
   };
 
   render() {
     const { guestbookList, isAdmin, userId } = this.props;
-    const { addGuestbook, modifyGuestbook, deleteGuestbook } = this;
+    const { addGuestbook, modifyGuestbook, deleteGuestbook, changeInput } = this;
     return (
       <div>
-        <GuestAddContents addGuestbook={addGuestbook} />
+        <GuestAddContents addGuestbook={addGuestbook} changeInput={changeInput} />
         <GuestbookPage
           guestbookList={guestbookList}
           modifyGuestbook={modifyGuestbook}
           deleteGuestbook={deleteGuestbook}
           isAdmin={isAdmin}
           userId={userId}
+          changeInput={changeInput}
         />
       </div>
     );

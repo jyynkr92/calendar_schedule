@@ -47,7 +47,7 @@ class LoginContainer extends PureComponent {
     }
   };
 
-  signInUser = () => {
+  userLogin = () => {
     const { loginEmail, loginPassword } = this.state;
     const { signInUser } = this.props;
     signInUser(loginEmail, loginPassword);
@@ -55,12 +55,12 @@ class LoginContainer extends PureComponent {
 
   render() {
     const { setLoginModal, loginModal, closeLoginModal } = this.props;
-    const { changeText, availableAccount, signInUser } = this;
+    const { changeText, availableAccount, userLogin } = this;
     const { warning } = this.state;
 
     return (
       <div className="loginDiv">
-        <Login setLoginModal={setLoginModal} signInUser={signInUser} changeText={changeText} />
+        <Login setLoginModal={setLoginModal} signInUser={userLogin} changeText={changeText} />
         {loginModal && (
           <SignUp
             changeText={changeText}

@@ -11,7 +11,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
 const logger = createLogger();
-const store = createStore(rootReducer, applyMiddleware(logger, ReduxThunk));
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk, logger));
 
 ReactDOM.render(
   <Provider store={store}>

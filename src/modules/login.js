@@ -45,22 +45,45 @@ export const signUpUser = (email, password) => {
   };
 };
 
+export const getUserSession = email => {
+  return dispatch => {
+    if (email === "jyynkr92@gmail.com") {
+      dispatch(userSignIn(true, email));
+    } else {
+      dispatch(userSignIn(false, email));
+    }
+  };
+};
+
 export const signInUser = (email, password) => {
   return dispatch => {
     firebase
       .auth()
-      .signInWithEmailAndPassword(email, password)
+      .setPersistence(firebase.auth.Auth.Persistence.SESSION)
       .then(() => {
-        if (email === "jyynkr92@gmail.com") {
-          dispatch(userSignIn(true, email));
-        } else {
-          dispatch(userSignIn(false, email));
-        }
+        firebase
+          .auth()
+          .signInWithEmailAndPassword(email, password)
+          .then(() => {
+            if (email === "jyynkr92@gmail.com") {
+              console.log(email);
+              dispatch(userSignIn(true, email));
+            } else {
+              dispatch(userSignIn(false, email));
+            }
+          })
+          .catch(error => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode);
+            console.log(errorMessage);
+          });
       })
-      .catch(function(error) {
+      .catch(error => {
         // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        const errorCode = error.code;
+        const errorMessage = error.message;
         console.log(errorCode);
         console.log(errorMessage);
       });

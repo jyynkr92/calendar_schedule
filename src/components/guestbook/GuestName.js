@@ -6,7 +6,7 @@ const GuestName = ({ userEmail, userName, userId, isAdmin, changeInput }) => {
   return (
     <div className="userName">
       {(userId === userEmail && userId !== "") || isAdmin ? (
-        <div>
+        <div className="inputEmail_div">
           <span>
             <img src={emailImg} alt="emailImg" />
           </span>

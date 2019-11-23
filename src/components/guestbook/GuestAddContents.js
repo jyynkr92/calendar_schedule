@@ -1,11 +1,13 @@
 import React from "react";
 import userImg from "../../img/user.png";
 
-const GuestAddContents = ({ addGuestbook, changeInput }) => {
+const GuestAddContents = ({ addGuestbook, changeInput, addUserName, addContents }) => {
   return (
     <div>
-      <div># 로그인 없이 등록은 가능하나, 수정 및 삭제는 불가능 합니다.</div>
-      <div className="guestbook">
+      <div className="addGuestbook_alert">
+        # 로그인 없이 등록은 가능하나, 수정 및 삭제는 불가능 합니다.
+      </div>
+      <div className="guestbook addGuestbook">
         <div className="userName">
           <span>
             <img src={userImg} alt="userImage" />
@@ -13,6 +15,7 @@ const GuestAddContents = ({ addGuestbook, changeInput }) => {
           <input
             type="text"
             name="addUserName"
+            value={addUserName}
             onChange={changeInput}
             placeholder="user name"
             className="userName_text"
@@ -22,6 +25,7 @@ const GuestAddContents = ({ addGuestbook, changeInput }) => {
           <textarea
             className="guestbook_textarea"
             placeholder="contents"
+            value={addContents}
             onChange={changeInput}
             name="addContents"
           />

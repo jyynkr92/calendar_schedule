@@ -40,11 +40,16 @@ class GuestBookContainer extends PureComponent {
   addGuestbook = () => {
     const { addGuestbook, userId } = this.props;
     const { addUserName, addContents } = this.state;
-    const { clearState } = this;
     const guestbook = { userName: addUserName, contents: addContents, userEmail: userId };
 
     addGuestbook(guestbook);
-    clearState();
+
+    this.setState({
+      userName: "",
+      contents: "",
+      addUserName: "",
+      addContents: ""
+    });
   };
 
   modifyGuestbook = guestbookId => {
@@ -98,16 +103,21 @@ class GuestBookContainer extends PureComponent {
 
   deleteGuestbook = guestbookId => {
     const { deleteGuestbook } = this.props;
-    console.log(guestbookId);
     deleteGuestbook(guestbookId);
   };
 
   render() {
     const { guestbookList, isAdmin, userId } = this.props;
     const { addGuestbook, modifyGuestbook, deleteGuestbook, changeInput } = this;
+    const { addUserName, addContents } = this.state;
     return (
       <div>
-        <GuestAddContents addGuestbook={addGuestbook} changeInput={changeInput} />
+        <GuestAddContents
+          addGuestbook={addGuestbook}
+          changeInput={changeInput}
+          addUserName={addUserName}
+          addContents={addContents}
+        />
         <GuestbookPage
           guestbookList={guestbookList}
           modifyGuestbook={modifyGuestbook}

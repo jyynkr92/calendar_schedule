@@ -166,44 +166,47 @@ body {
 }
 
 .btn-outline-info {
-  border: 1px solid #e8d3ff !important;
-  color: #4f4cb4 !important;
+  border: 1px solid #fff0db !important;
+  color: #777777 !important;
 }
 
 .btn-info,
 .btn-outline-info:hover {
-  border: 1px solid #e8d3ff !important;
-  background-color: #e8d3ff !important;
+  border: 1px solid #fff0db !important;
+  background-color: #fff0db !important;
+  color: #777777 !important;
 }
 
 .btn-outline-danger {
-  border: 1px solid #c6cfff !important;
-  color: #4f4cb4 !important;
+  border: 1px solid #eed9c4 !important;
+  color: #777777 !important;
 }
 
 .btn-danger,
 .btn-outline-danger:hover {
-  border: 1px solid #c6cfff !important;
-  background-color: #c6cfff !important;
+  border: 1px solid #eed9c4 !important;
+  background-color: #eed9c4 !important;
+  color: #777777 !important;
 }
 
 .btn-info:hover {
-  border: 1px solid #e0c3ff !important;
-  background-color: #e0c3ff !important;
+  border: 1px solid #ffd9a3 !important;
+  background-color: #ffd9a3 !important;
 }
 
 .btn-danger:hover {
-  border: 1px solid #adb9ff !important;
-  background-color: #adb9ff !important;
+  border: 1px solid #dec7b2 !important;
+  background-color: #dec7b2 !important;
 }
 
 .btn-success {
-  border: 1px solid #8186d5 !important;
-  background-color: #8186d5 !important;
+  border: 1px solid #faf0e6 !important;
+  background-color: #faf0e6 !important;
+  color: #777777 !important;
 }
 
 .btn-success:hover {
-  background-color: #686fd1 !important;
+  background-color: #e4d5b7 !important;
 }
 
 #root {
@@ -240,7 +243,7 @@ body {
 }
 
 .loginLink:hover {
-  color: #bfd3ff;
+  color: #242761;
   text-decoration: none;
 }
 
@@ -319,7 +322,7 @@ input:focus {
 }
 
 .menus {
-  color: #5b5faf;
+  color: #777777;
   margin-right: 20px;
 }
 
@@ -337,7 +340,7 @@ input:focus {
   border-radius: 0;
   border: none;
   margin: 0px;
-  border-bottom: 1px dashed #8186d5;
+  border-bottom: 1px dashed #d9b99b;
 }
 
 .addGuestbook_alert {
@@ -395,4 +398,37 @@ input:focus {
 
 .inputEmail_div {
   margin-bottom: 10px;
+}
+
+.memberPhoto img {
+  height: auto;
+}
+
+.memberDetail {
+  padding: 20px;
+  width: 50%;
+  height: 280px;
+}
+
+.memberPhoto {
+  width: 40%;
+  text-align: center;
+  background-color: #ebe7dc;
+  padding: 20px 0px;
+}
+
+.memberName {
+  font-size: 20pt;
+  margin-bottom: 10%;
+  font-weight: bold;
+}
+
+.memberInfo {
+  border: 1px solid #d9d9d9;
+}
+
+.profileTable {
+  width: 80%;
+  margin-right: auto;
+  margin-left: auto;
 }

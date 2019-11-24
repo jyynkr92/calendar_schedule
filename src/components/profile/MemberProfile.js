@@ -6,15 +6,25 @@ const MemberProfile = ({ memberInfo, idx }) => {
   return (
     <>
       {idx % 2 === 0 ? (
-        <div>
-          <MemberPhoto memberInfo={memberInfo} />
-          <MemberDetail memberInfo={memberInfo} />
-        </div>
+        <>
+          <tr>
+            <MemberPhoto memberInfo={memberInfo} />
+            <MemberDetail memberInfo={memberInfo} />
+          </tr>
+          <tr>
+            <td colSpan="2">&nbsp;</td>
+          </tr>
+        </>
       ) : (
-        <div>
-          <MemberDetail memberInfo={memberInfo} />
-          <MemberPhoto memberInfo={memberInfo} />
-        </div>
+        <>
+          <tr>
+            <MemberDetail memberInfo={memberInfo} />
+            <MemberPhoto memberInfo={memberInfo} />
+          </tr>
+          <tr>
+            <td colSpan="2">&nbsp;</td>
+          </tr>
+        </>
       )}
     </>
   );

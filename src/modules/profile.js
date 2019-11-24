@@ -42,7 +42,8 @@ const initialState = {
     isGroup: true,
     memberBio: ""
   },
-  memberList: []
+  memberList: [],
+  isLoading: true
 };
 
 /** define reduce function */
@@ -52,7 +53,8 @@ function profile(state = initialState, action) {
       return {
         ...state,
         groupInfo: action.groupInfo,
-        memberList: action.memberList
+        memberList: action.memberList,
+        isLoading: false
       };
     default:
       return state;

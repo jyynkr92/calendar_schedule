@@ -11,22 +11,36 @@ class ProfileContainer extends PureComponent {
   }
 
   render() {
-    const { memberList, groupInfo } = this.props;
+    const { memberList, groupInfo, isLoading } = this.props;
     return (
-      <div>
-        <ProfileHeader />
-        <MemberProfile memberInfo={groupInfo} idx="0" />
-        {memberList.map((member, idx) => (
-          <MemberProfile memberInfo={member} idx={idx + 1} />
-        ))}
-      </div>
+      <>
+        {isLoading ? (
+          <div className="loadingImageDiv">
+            &nbsp;
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"
+              alt="loadingImage"
+              className="loadingImage"
+            />
+          </div>
+        ) : (
+          <table className="profileTable">
+            <MemberProfile memberInfo={groupInfo} idx="0" />
+            {memberList.map((member, idx) => (
+              <MemberProfile memberInfo={member} idx={idx + 1} />
+            ))}
+            <ProfileHeader />
+          </table>
+        )}
+      </>
     );
   }
 }
 
 const mapStateToProps = state => ({
   memberList: state.profile.memberList,
-  groupInfo: state.profile.groupInfo
+  groupInfo: state.profile.groupInfo,
+  isLoading: state.profile.isLoading
 });
 
 const mapToDispatch = dispatch => ({

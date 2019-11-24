@@ -41,7 +41,4 @@ const mapToDispatch = dispatch => ({
   }
 });
 
-export default connect(
-  mapStateToProps,
-  mapToDispatch
-)(HomePageContainer);
+export default connect(mapStateToProps, mapToDispatch)(HomePageContainer);

@@ -60,6 +60,8 @@ const CalendarTable = styled.table`
   color: ${props => props.selectImage.fontColor};
   margin-top: 10px;
   margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
 `;
 const DesktopImgTD = styled.td`
   position: relative;

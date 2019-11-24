@@ -29,9 +29,9 @@ const Header = ({ signInStatus, signOutUser }) => {
 const HeaderDiv = styled.div`
   width: 100%;
   height: 150px;
-  background-color: #8186d5;
+  background-color: #d9b99b;
   position: relative;
-  border-bottom: 1px solid #8186d5;
+  border-bottom: 1px solid #d9b99b;
   margin-bottom: 20px;
   color: #ffffff;
 `;

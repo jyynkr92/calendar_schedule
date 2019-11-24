@@ -26,7 +26,7 @@ const MenuList = styled.div`
   bottom: 0;
   right: 0;
   left: 0;
-  background-color: #c6cbef;
+  background-color: #e4d5b7;
   height: 39px;
 `;
 

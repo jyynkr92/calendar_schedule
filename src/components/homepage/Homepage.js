@@ -4,6 +4,8 @@ import ImageModeContainer from "../../containers/ImageModeContainer";
 import LoginContainer from "../../containers/LoginContainer";
 import GuestbookContainer from "../../containers/GuestbookContainer";
 import ProfileContainer from "../../containers/ProfileContainer";
+import NewsContainer from "../../containers/NewsContainer";
+
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 const Homepage = ({ signInStatus, signOutUser }) => {
@@ -14,6 +16,7 @@ const Homepage = ({ signInStatus, signOutUser }) => {
         <Route exact path="/" component={ProfileContainer} />
         <Route exact path="/profile" component={ProfileContainer} />
         <Route exact path="/schedule" component={ImageModeContainer} />
+        <Route exact path="/news" component={NewsContainer} />
         <Route exact path="/login" component={LoginContainer} />
         <Route exact path="/guestbook" component={GuestbookContainer} />
       </Router>

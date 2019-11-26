@@ -5,6 +5,7 @@ import imagemode from "./imagemode";
 import login from "./login";
 import guestbook from "./guestbook";
 import profile from "./profile";
+import news from "./news";
 
 const rootReducer = combineReducers({
   calendar,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   imagemode,
   login,
   guestbook,
-  profile
+  profile,
+  news
 });
 
 export default rootReducer;

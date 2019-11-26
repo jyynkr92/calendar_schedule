@@ -12,6 +12,9 @@ const MenuBar = () => {
         <Link className="menus" to="/schedule">
           Schedule
         </Link>
+        <Link className="menus" to="/news">
+          News
+        </Link>
         <Link className="menus" to="/guestbook">
           Guestbook
         </Link>

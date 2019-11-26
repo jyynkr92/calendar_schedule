@@ -2,8 +2,10 @@
   "name": "calendat_schedule",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://openapi.naver.com",
   "dependencies": {
     "antd": "^3.23.6",
+    "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
     "firebase": "^7.2.1",
     "html2canvas": "^1.0.0-rc.5",

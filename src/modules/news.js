@@ -16,9 +16,10 @@ export const requestNewsList = () => ({
 
 export const getNewsList = () => async dispatch => {
   dispatch(requestNewsList());
+
   try {
     const queryStr = encodeURI("포레스텔라");
-    const url = "/v1/search/news.json?query=" + queryStr + "&display=10&start=1&sort=sim";
+    const url = "/v1/search/news.json?query=" + queryStr + "&display=10&start=1&sort=date";
 
     const config = {
       headers: {
@@ -30,7 +31,7 @@ export const getNewsList = () => async dispatch => {
     const {
       data: { items }
     } = await axios.get(url, config);
-    console.log(items);
+
     dispatch(setNewsList(items));
   } catch (error) {
     console.log(error);

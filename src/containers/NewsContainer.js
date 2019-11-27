@@ -13,7 +13,9 @@ class NewsContainer extends PureComponent {
     const { newsList } = this.props;
     return (
       <div>
-        <News newsList={newsList} />
+        {newsList.map((news, idx) => (
+          <News news={news} idx={idx} />
+        ))}
       </div>
     );
   }

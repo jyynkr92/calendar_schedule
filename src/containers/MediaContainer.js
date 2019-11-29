@@ -2,20 +2,14 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import News from "../components/media/News";
 import Video from "../components/media/Video";
-import { getNewsList, getVideoList } from "../modules/media";
+import Pagination from "../components/media/Pagination";
+import { getNewsList, getVideoList, changeMediaMode } from "../modules/media";
 import styled from "styled-components";
 
 class MediaContainer extends PureComponent {
-  state = {
-    mode: "news"
-  };
-
   componentDidMount() {
-    const { getNewsList } = this.props;
-    getNewsList();
-
-    const { getVideoList } = this.props;
-    getVideoList();
+    const { changeMediaMode } = this.props;
+    changeMediaMode("news");
   }
 
   openNews = url => {
@@ -28,16 +22,38 @@ class MediaContainer extends PureComponent {
 
   changeMediaMode = e => {
     const mode = e.target.id;
+    const { changeMediaMode } = this.props;
 
-    this.setState({
-      mode
-    });
+    changeMediaMode(mode);
+  };
+
+  moveOnePage = moveToward => {
+    const { curPage } = this.props;
+
+    if (moveToward === -1 && curPage === 1) {
+      return;
+    } else if (moveToward === 10 && curPage === 10) {
+      return;
+    }
+
+    const nextPage = curPage + moveToward;
+    const { movePage } = this;
+    movePage(nextPage);
+  };
+
+  movePage = pageNum => {
+    const { mode, getNewsList, getVideoList } = this.props;
+
+    if (mode === "news") {
+      getNewsList(pageNum);
+    } else {
+      getVideoList(pageNum);
+    }
   };
 
   render() {
-    const { newsList, videoList } = this.props;
-    const { openNews, changeMediaMode, openVideo } = this;
-    const { mode } = this.state;
+    const { mode, newsList, videoList, curPage } = this.props;
+    const { openNews, changeMediaMode, openVideo, moveOnePage, movePage } = this;
 
     return (
       <div>
@@ -62,6 +78,7 @@ class MediaContainer extends PureComponent {
             ))}
           </>
         )}
+        <Pagination moveOnePage={moveOnePage} movePage={movePage} curPage={curPage} />
       </div>
     );
   }
@@ -87,15 +104,20 @@ const MediaOption = styled.span`
 
 const mapStateToProps = state => ({
   newsList: state.media.newsList,
-  videoList: state.media.videoList
+  videoList: state.media.videoList,
+  curPage: state.media.curPage,
+  mode: state.media.mode
 });
 
 const mapToDispatch = dispatch => ({
-  getNewsList: () => {
-    dispatch(getNewsList());
+  getNewsList: pageNum => {
+    dispatch(getNewsList(pageNum));
   },
-  getVideoList: () => {
-    dispatch(getVideoList());
+  getVideoList: pageNum => {
+    dispatch(getVideoList(pageNum));
+  },
+  changeMediaMode: mode => {
+    dispatch(changeMediaMode(mode));
   }
 });
 

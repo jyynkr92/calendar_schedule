@@ -6,26 +6,40 @@ const REQUEST_NEWSLIST = "REQUEST_NEWSLIST";
 const GET_VIDEOLIST = "GET_VIDEOLIST";
 
 /** define action function */
-export const setNewsList = newsList => ({
+export const setNewsList = (newsList, curPage) => ({
   type: GET_NEWSLIST,
-  newsList
+  newsList,
+  curPage,
+  mode: "news"
 });
 
 export const requestNewsList = () => ({
   type: REQUEST_NEWSLIST
 });
 
-export const setVideoList = videoList => ({
+export const setVideoList = (videoList, curPage) => ({
   type: GET_VIDEOLIST,
-  videoList
+  videoList,
+  curPage,
+  mode: "video"
 });
 
-export const getNewsList = () => async dispatch => {
+export const changeMediaMode = mode => dispatch => {
+  if (mode === "news") {
+    dispatch(getNewsList(1));
+  } else {
+    dispatch(getVideoList(1));
+  }
+};
+
+export const getNewsList = pageNum => async dispatch => {
   dispatch(requestNewsList());
 
   try {
     const queryStr = encodeURI("포레스텔라");
-    const url = "/v1/search/news.json?query=" + queryStr + "&display=10&start=1&sort=sim";
+    const startPage = pageNum * 10;
+    const url =
+      "/v1/search/news.json?query=" + queryStr + "&display=10&start=" + startPage + "&sort=sim";
 
     const config = {
       headers: {
@@ -38,16 +52,17 @@ export const getNewsList = () => async dispatch => {
       data: { items }
     } = await axios.get(url, config);
 
-    dispatch(setNewsList(items));
+    dispatch(setNewsList(items, pageNum));
   } catch (error) {
     console.log(error);
   }
 };
 
-export const getVideoList = () => async dispatch => {
+export const getVideoList = pageNum => async dispatch => {
   try {
     const queryStr = encodeURI("포레스텔라");
-    const url = "https://dapi.kakao.com/v2/search/vclip?query=" + queryStr + "&sort=recency";
+    const url =
+      "https://dapi.kakao.com/v2/search/vclip?query=" + queryStr + "&sort=recency&page=" + pageNum;
 
     const config = {
       headers: {
@@ -60,8 +75,7 @@ export const getVideoList = () => async dispatch => {
       data: { documents }
     } = await axios.get(url, config);
 
-    dispatch(setVideoList(documents));
-    console.log(documents);
+    dispatch(setVideoList(documents, pageNum));
   } catch (error) {
     console.log(error);
   }
@@ -70,7 +84,9 @@ export const getVideoList = () => async dispatch => {
 const initialState = {
   newsList: [],
   videoList: [],
-  isLoading: true
+  isLoading: true,
+  curPage: 1,
+  mode: "news"
 };
 
 /** define reduce function */
@@ -80,7 +96,9 @@ function media(state = initialState, action) {
       return {
         ...state,
         newsList: action.newsList,
-        isLoading: false
+        isLoading: false,
+        mode: action.mode,
+        curPage: action.curPage
       };
     case REQUEST_NEWSLIST:
       return {
@@ -90,7 +108,9 @@ function media(state = initialState, action) {
     case GET_VIDEOLIST:
       return {
         ...state,
-        videoList: action.videoList
+        videoList: action.videoList,
+        mode: action.mode,
+        curPage: action.curPage
       };
     default:
       return state;

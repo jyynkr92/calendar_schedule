@@ -432,3 +432,15 @@ input:focus {
   margin-right: auto;
   margin-left: auto;
 }
+
+.newsMenuHeader {
+  margin-bottom: 10px;
+  font-size: 15pt;
+  font-weight: bold;
+  text-align: center;
+}
+
+.videoThumbnail {
+  width: 100%;
+  height: auto;
+}

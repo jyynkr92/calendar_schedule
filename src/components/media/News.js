@@ -2,13 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { getCleanValue, getDateFormatFromDate } from "../../lib/common";
 
-const News = ({ news, idx }) => {
+const News = ({ news, idx, openNews }) => {
   return (
-    <NewsCard url={news.link} idx={idx}>
-      <NewsTitle>{getCleanValue(news.title)}</NewsTitle> {/** title 영역 */}
+    <NewsCard idx={idx} onClick={() => openNews(news.link)}>
+      <NewsTitle>{getCleanValue(news.title)}</NewsTitle>
       <PubDate>{getDateFormatFromDate(news.pubDate)}</PubDate>
       <div>{getCleanValue(news.description)}</div>
-      {/** description 영역 */}
     </NewsCard>
   );
 };
@@ -20,6 +19,11 @@ const NewsCard = styled.div`
   height: 217px;
   margin: 10px;
   padding: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #fdf8ef;
+  }
 `;
 
 const NewsTitle = styled.h6`

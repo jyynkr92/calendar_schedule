@@ -120,7 +120,4 @@ const mapToDispatch = dispatch => ({
   }
 });
 
-export default connect(
-  mapStateToProps,
-  mapToDispatch
-)(ImageModeContainer);
+export default connect(mapStateToProps, mapToDispatch)(ImageModeContainer);

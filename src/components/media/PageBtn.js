@@ -16,7 +16,7 @@ const PageBtn = ({ curPage, movePage, value }) => {
 };
 
 const PageSpan = styled.div`
-  background-color: ${props => (props.curPage === props.value ? `#d9b99b` : `#e4d5b7`)};
+  background-color: ${props => (props.curPage === props.value ? `#d9b99b` : `#fffaf0`)};
   display: inline-block;
   border: 1px solid #d9d9d9;
   border-radius: 50%;

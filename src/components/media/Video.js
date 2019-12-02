@@ -26,11 +26,13 @@ const VideoCard = styled.div`
   margin: 10px;
   padding: 10px;
   cursor: pointer;
+  text-align: left;
 `;
 
 const VideoTitle = styled.div`
   height: 100px;
   font-weight: bold;
+  margin-top: 10px;
 `;
 
 const VideoDate = styled.div`

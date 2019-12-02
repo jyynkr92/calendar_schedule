@@ -444,3 +444,7 @@ input:focus {
   width: 100%;
   height: auto;
 }
+
+.media_body {
+  text-align: center;
+}

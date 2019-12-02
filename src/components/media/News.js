@@ -20,6 +20,7 @@ const NewsCard = styled.div`
   margin: 10px;
   padding: 10px;
   cursor: pointer;
+  text-align: left;
 
   &:hover {
     background-color: #fdf8ef;

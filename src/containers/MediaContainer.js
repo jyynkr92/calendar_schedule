@@ -56,7 +56,7 @@ class MediaContainer extends PureComponent {
     const { openNews, changeMediaMode, openVideo, moveOnePage, movePage } = this;
 
     return (
-      <div>
+      <div className="media_body">
         <MediaOptionHeader>
           <MediaOption mode={mode} id="news" onClick={changeMediaMode}>
             News

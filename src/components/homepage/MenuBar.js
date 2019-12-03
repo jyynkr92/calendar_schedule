@@ -15,7 +15,7 @@ const MenuBar = () => {
         <Link className="menus" to="/media">
           Media
         </Link>
-        <Link className="menus" to="/guestbook">
+        <Link className="menus guestMenu" to="/guestbook">
           Guestbook
         </Link>
       </Menus>
@@ -39,6 +39,7 @@ const Menus = styled.div`
   font-size: 12pt;
   font-family: "Bree Serif", serif;
   font-weight: bold;
+  width: 100%;
 `;
 
 export default MenuBar;

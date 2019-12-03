@@ -111,13 +111,15 @@ class GuestBookContainer extends PureComponent {
     const { addGuestbook, modifyGuestbook, deleteGuestbook, changeInput } = this;
     const { addUserName, addContents } = this.state;
     return (
-      <div>
-        <GuestAddContents
-          addGuestbook={addGuestbook}
-          changeInput={changeInput}
-          addUserName={addUserName}
-          addContents={addContents}
-        />
+      <div className="guestbook_area">
+        {userId !== "" ? (
+          <GuestAddContents
+            addGuestbook={addGuestbook}
+            changeInput={changeInput}
+            addUserName={addUserName}
+            addContents={addContents}
+          />
+        ) : null}
         <GuestbookPage
           guestbookList={guestbookList}
           modifyGuestbook={modifyGuestbook}
@@ -152,7 +154,4 @@ const mapToDispatch = dispatch => ({
   }
 });
 
-export default connect(
-  mapStateToProps,
-  mapToDispatch
-)(GuestBookContainer);
+export default connect(mapStateToProps, mapToDispatch)(GuestBookContainer);

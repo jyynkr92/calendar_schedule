@@ -451,3 +451,12 @@ input:focus {
   margin-left: auto;
   margin-right: auto;
 }
+
+.guestbook_area {
+  text-align: center;
+}
+
+.guestMenu {
+  float: right;
+  margin-right: 0px;
+}

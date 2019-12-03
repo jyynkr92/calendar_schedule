@@ -1,4 +1,5 @@
 import axios from "axios";
+import config from "../config";
 
 /** define action */
 const GET_NEWSLIST = "GET_NEWSLIST";
@@ -37,20 +38,20 @@ export const getNewsList = pageNum => async dispatch => {
 
   try {
     const queryStr = encodeURI("포레스텔라");
-    const startPage = pageNum * 10;
+    const startPage = (pageNum - 1) * 12 + 1;
     const url =
-      "/v1/search/news.json?query=" + queryStr + "&display=10&start=" + startPage + "&sort=sim";
+      "/v1/search/news.json?query=" + queryStr + "&display=12&start=" + startPage + "&sort=sim";
 
-    const config = {
+    const header = {
       headers: {
-        "X-Naver-Client-Id": "65W8kd2kxGp2Fj6ufHZq",
-        "X-Naver-Client-Secret": "vM18wFU3wW"
+        "X-Naver-Client-Id": config.NaverClientId,
+        "X-Naver-Client-Secret": config.NaverClientSecret
       }
     };
 
     const {
       data: { items }
-    } = await axios.get(url, config);
+    } = await axios.get(url, header);
 
     dispatch(setNewsList(items, pageNum));
   } catch (error) {
@@ -62,18 +63,22 @@ export const getVideoList = pageNum => async dispatch => {
   try {
     const queryStr = encodeURI("포레스텔라");
     const url =
-      "https://dapi.kakao.com/v2/search/vclip?query=" + queryStr + "&sort=recency&page=" + pageNum;
+      "https://dapi.kakao.com/v2/search/vclip?query=" +
+      queryStr +
+      "&sort=recency&page=" +
+      pageNum +
+      "&size=12";
 
-    const config = {
+    const header = {
       headers: {
-        Authorization: "KakaoAK 0cbab15cb6a4273f546992f36e7b90e0"
+        Authorization: "KakaoAK " + config.kakaoKey
       },
       contentType: "application/json"
     };
 
     const {
       data: { documents }
-    } = await axios.get(url, config);
+    } = await axios.get(url, header);
 
     dispatch(setVideoList(documents, pageNum));
   } catch (error) {

@@ -9,7 +9,7 @@ import styled from "styled-components";
 class MediaContainer extends PureComponent {
   componentDidMount() {
     const { changeMediaMode } = this.props;
-    changeMediaMode("news");
+    changeMediaMode("video");
   }
 
   openNews = url => {

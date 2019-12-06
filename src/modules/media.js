@@ -37,22 +37,14 @@ export const getNewsList = pageNum => async dispatch => {
   dispatch(requestNewsList());
 
   try {
-    const queryStr = encodeURI("포레스텔라");
     const startPage = (pageNum - 1) * 12 + 1;
     const url =
-      "/v1/search/news.json?query=" + queryStr + "&display=12&start=" + startPage + "&sort=sim";
-
-    const header = {
-      headers: {
-        "X-Naver-Client-Id": config.NaverClientId,
-        "X-Naver-Client-Secret": config.NaverClientSecret
-      }
-    };
+      "https://us-central1-forestellaschedule.cloudfunctions.net/getNewsList?pageNum=" + startPage;
 
     const {
       data: { items }
-    } = await axios.get(url, header);
-
+    } = await axios.get(url);
+    console.log(items);
     dispatch(setNewsList(items, pageNum));
   } catch (error) {
     console.log(error);
@@ -91,7 +83,7 @@ const initialState = {
   videoList: [],
   isLoading: true,
   curPage: 1,
-  mode: "news"
+  mode: "video"
 };
 
 /** define reduce function */

@@ -88,7 +88,7 @@ export const modifyScheduleToFirebase = schedule => {
     });
   };
 };
-/** dfine initial state */
+/** define initial state */
 const initialState = {
   scheduleList: [],
   lastScheduleId: 1,

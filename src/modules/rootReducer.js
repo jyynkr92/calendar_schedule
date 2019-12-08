@@ -6,6 +6,7 @@ import login from "./login";
 import guestbook from "./guestbook";
 import profile from "./profile";
 import media from "./media";
+import timeline from "./timeline";
 
 const rootReducer = combineReducers({
   calendar,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   login,
   guestbook,
   profile,
-  media
+  media,
+  timeline
 });
 
 export default rootReducer;

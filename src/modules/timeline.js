@@ -6,6 +6,10 @@ const ADD_TIMELINE = "ADD_TIMELINE";
 const MODIFY_TIMELINE = "MODIFY_TIMELINE";
 const DELETE_TIMELINE = "DELETE_TIMELINE";
 
+/** modal area */
+const OPEN_MODAL = "OPEN_MODAL";
+const CLOSE_MODAL = "CLOSE_MODAL";
+
 /** define action function */
 export const getTimeline = timelineList => ({
   type: GET_TIMELINE,
@@ -25,6 +29,14 @@ export const modfyTimeline = timeline => ({
 export const deleteTimeline = timelineId => ({
   type: DELETE_TIMELINE,
   timelineId
+});
+
+export const openModal = () => ({
+  type: OPEN_MODAL
+});
+
+export const closeModal = () => ({
+  type: CLOSE_MODAL
 });
 
 export const getTimelineList = () => {
@@ -80,7 +92,8 @@ export const modifyTimelineToFirebase = timeline => {
 const initialState = {
   timelineList: [],
   isLoading: false,
-  mode: "add"
+  mode: "add",
+  modal: false
 };
 
 /** define reduce function */
@@ -125,6 +138,16 @@ function timeline(state = initialState, action) {
         timelineList: state.timelineList.filter(timeline => {
           return timeline.timelineId !== action.timelineId;
         })
+      };
+    case OPEN_MODAL:
+      return {
+        ...state,
+        modal: true
+      };
+    case CLOSE_MODAL:
+      return {
+        ...state,
+        modal: false
       };
     default:
       return state;

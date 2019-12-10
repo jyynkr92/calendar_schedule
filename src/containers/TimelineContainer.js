@@ -5,17 +5,17 @@ import TimelineModalContainer from "./TimelineModalContainer";
 import { openModal, getTimeline } from "../modules/timeline";
 
 class TimelineContainer extends PureComponent {
-  openMdoal = () => {
+  setModal = () => {
     const { openModal } = this.props;
     openModal();
   };
 
   render() {
-    const { openModal } = this;
+    const { setModal } = this;
     const { modal } = this.props;
     return (
       <div>
-        <div onClick={openModal}>add timeline</div>
+        <div onClick={setModal}>add timeline</div>
         <Timeline />
         {modal ? <TimelineModalContainer /> : null}
       </div>

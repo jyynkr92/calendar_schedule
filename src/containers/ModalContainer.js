@@ -218,7 +218,4 @@ const mapToDispatch = dispatch => ({
   }
 });
 
-export default connect(
-  mapStateToProps,
-  mapToDispatch
-)(ModalContainer);
+export default connect(mapStateToProps, mapToDispatch)(ModalContainer);

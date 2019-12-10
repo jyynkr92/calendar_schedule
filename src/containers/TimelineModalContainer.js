@@ -14,7 +14,7 @@ class TimelineModalContainer extends PureComponent {
     title: ""
   };
 
-  closeModal = () => {
+  onHide = () => {
     const { closeModal } = this.props;
     closeModal();
   };
@@ -26,11 +26,15 @@ class TimelineModalContainer extends PureComponent {
   };
 
   render() {
-    return <TimelineModal></TimelineModal>;
+    const { onHide } = this;
+    const { modal } = this.props;
+    return <TimelineModal onHide={onHide} show={modal}></TimelineModal>;
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  modal: state.timeline.modal
+});
 
 const mapToDispatch = dispatch => ({
   closeModal: () => {

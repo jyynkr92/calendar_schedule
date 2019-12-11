@@ -107,6 +107,7 @@ function timeline(state = initialState, action) {
     case ADD_TIMELINE:
       return {
         ...state,
+        modal: false,
         timelineList: [].concat(
           state.timelineList.filter(val => val.timelineId !== action.timeline.timelineId),
           action.timeline

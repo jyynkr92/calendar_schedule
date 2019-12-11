@@ -118,7 +118,8 @@
   text-align: center;
 }
 
-#memo_area {
+#memo_area,
+#contents_area {
   resize: none;
 }
 

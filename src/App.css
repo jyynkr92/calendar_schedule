@@ -461,3 +461,8 @@ input:focus {
   float: right;
   margin-right: 0px;
 }
+
+.image_preview img {
+  max-width: 300px;
+  max-height: 300px;
+}

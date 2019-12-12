@@ -16,13 +16,22 @@ const TimelineModal = ({
   imageUrl,
   title,
   changeInput,
-  addTimeline
+  addTimeline,
+  imageObj
 }) => {
   const fullDate = year + "-" + month + "-" + date;
   const changeValue = e => {
     const targetName = e.target.name;
-    const targetValue = e.target.value;
-    changeInput(targetName, targetValue);
+
+    if (targetName === "image") {
+      if (e.target.files[0]) {
+        const image = e.target.files[0];
+        changeInput(targetName, image);
+      }
+    } else {
+      const targetValue = e.target.value;
+      changeInput(targetName, targetValue);
+    }
   };
 
   const changeDateValue = (day, targetName) => {
@@ -123,6 +132,10 @@ const TimelineModal = ({
               ) : (
                 <div>이미지표시되는 부분</div>
               )}
+            </div>
+            <div>
+              <span>File</span>
+              <input type="file" name="image" onChange={changeValue} />
             </div>
           </Form.Group>
           <Form.Group>

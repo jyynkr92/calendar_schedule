@@ -11,7 +11,8 @@ class TimelineModalContainer extends PureComponent {
     month: "",
     date: "",
     image: "",
-    title: ""
+    title: "",
+    imageUrl: ""
   };
 
   componentDidMount() {
@@ -27,7 +28,8 @@ class TimelineModalContainer extends PureComponent {
       month: month,
       date: date,
       image: "",
-      title: ""
+      title: "",
+      imageUrl: ""
     });
   }
   onHide = () => {
@@ -43,6 +45,13 @@ class TimelineModalContainer extends PureComponent {
         month: Number(dateArr[1]),
         date: Number(dateArr[2])
       });
+    } else if (targetName === "image") {
+      let imageUrl = URL.createObjectURL(targetValue);
+
+      this.setState({
+        [targetName]: targetValue,
+        imageUrl: imageUrl
+      });
     } else {
       this.setState({
         [targetName]: targetValue
@@ -51,17 +60,18 @@ class TimelineModalContainer extends PureComponent {
   };
 
   addTimeline = () => {
-    const { addTimelineToFirebase } = this.props;
+    const { addTimelineToFirebase, closeModal } = this.props;
     const { content, type, year, month, date, image, title } = this.state;
 
     const timeline = { content, type, year, month, date, image, title };
     addTimelineToFirebase(timeline);
+    closeModal();
   };
 
   render() {
     const { onHide, changeInput, addTimeline } = this;
     const { modal } = this.props;
-    const { content, type, year, month, date, image, title } = this.state;
+    const { content, type, year, month, date, image, title, imageUrl } = this.state;
     return (
       <TimelineModal
         onHide={onHide}
@@ -71,10 +81,11 @@ class TimelineModalContainer extends PureComponent {
         year={year}
         month={month}
         date={date}
-        imageUrl={image}
+        imageObj={image}
         title={title}
         changeInput={changeInput}
         addTimeline={addTimeline}
+        imageUrl={imageUrl}
       ></TimelineModal>
     );
   }

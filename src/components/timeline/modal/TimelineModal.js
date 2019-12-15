@@ -123,19 +123,19 @@ const TimelineModal = ({
             ></DayPickerInput>
           </Form.Group>
           <Form.Group>
-            <div>
+            <div className="filebox">
               <Form.Label>이미지 등록</Form.Label>
+              <label className="uploadImageBtn" htmlFor="ex_file">
+                Upload
+              </label>
+              <input type="file" name="image" id="ex_file" onChange={changeValue} />
             </div>
             <div className="image_preview">
               {imageUrl !== "" ? (
                 <img src={imageUrl} alt="timeline_image" />
               ) : (
-                <div>이미지표시되는 부분</div>
+                <div className="timeline_noImg">&nbsp;</div>
               )}
-            </div>
-            <div>
-              <span>File</span>
-              <input type="file" name="image" onChange={changeValue} />
             </div>
           </Form.Group>
           <Form.Group>

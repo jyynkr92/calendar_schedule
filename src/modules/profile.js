@@ -1,4 +1,4 @@
-import firestore from "../firebase";
+import { firestore } from "../firebase";
 
 /** define action */
 const GET_MEMBERPROFILE = "GET_MEMBERPROFILE";

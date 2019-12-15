@@ -1,4 +1,4 @@
-import firestore from "../firebase";
+import { firestore, storageRef } from "../firebase";
 
 /** define action */
 const GET_TIMELINE = "GET_TIMELINE";
@@ -59,10 +59,25 @@ export const getTimelineList = () => {
 
 export const addTimelineToFirebase = timeline => {
   return () => {
-    const doc = firestore.collection("timeline");
-    const docId = doc.doc().id;
-    timeline.timelineId = docId;
-    return doc.add(timeline);
+    //image upload
+    const { image } = timeline;
+    // Create the file metadata
+    const metadata = {
+      contentType: "image/jpeg"
+    };
+    const uploadTask = storageRef.child(`images/${image.name}`).put(image, metadata);
+    uploadTask.on("state_changed", () => {
+      storageRef
+        .child(`images/${image.name}`)
+        .getDownloadURL()
+        .then(url => {
+          timeline.image = url;
+          const doc = firestore.collection("timeline");
+          const docId = doc.doc().id;
+          timeline.timelineId = docId;
+          return doc.add(timeline);
+        });
+    });
   };
 };
 

@@ -463,6 +463,39 @@ input:focus {
 }
 
 .image_preview img {
-  max-width: 300px;
-  max-height: 300px;
+  max-width: 150px;
+  max-height: 100px;
+}
+
+.filebox label.uploadImageBtn {
+  display: inline-block;
+  padding: 0.2em 0.5em;
+  color: #345a82;
+  font-size: inherit;
+  line-height: normal;
+  vertical-align: middle;
+  background-color: #b0d7ff;
+  cursor: pointer;
+  border: 1px solid #5191d2;
+  border-radius: 0.25em;
+  margin: 0px 0px 3px 7px;
+}
+
+.filebox input[type="file"] {
+  /* 파일 필드 숨기기 */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.timeline_noImg {
+  width: 150px;
+  height: 100px;
+  border: 1px solid #d9d9d9;
+  background: url("/backgroundImg/upload.png") no-repeat center center;
 }

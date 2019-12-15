@@ -1,4 +1,4 @@
-import firestore from "../firebase";
+import { firestore } from "../firebase";
 
 /** define action */
 const SET_MODE = "SET_MODE";

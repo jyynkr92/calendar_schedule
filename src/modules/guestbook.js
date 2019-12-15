@@ -1,4 +1,4 @@
-import firestore from "../firebase";
+import { firestore } from "../firebase";
 
 /** define action */
 const ADD_GUESTBOOK = "ADD_GUESTBOOK";

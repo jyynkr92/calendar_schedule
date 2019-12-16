@@ -1,4 +1,4 @@
-import { firebase } from "firebase";
+import firebase from "firebase";
 
 /** define action */
 const SET_LOGIN_MODAL = "SET_LOGIN_MODAL";

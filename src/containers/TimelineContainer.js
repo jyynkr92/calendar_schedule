@@ -29,7 +29,7 @@ class TimelineContainer extends PureComponent {
     const { modal, timelineList } = this.props;
     const { selectedYear } = this.state;
     return (
-      <div>
+      <div className="timeline_container">
         <div onClick={setModal}>add timeline</div>
         <Timeline year={selectedYear} timelineList={timelineList} />
         {modal ? <TimelineModalContainer /> : null}

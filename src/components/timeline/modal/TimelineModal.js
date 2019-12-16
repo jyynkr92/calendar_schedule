@@ -128,7 +128,13 @@ const TimelineModal = ({
               <label className="uploadImageBtn" htmlFor="ex_file">
                 Upload
               </label>
-              <input type="file" name="image" id="ex_file" onChange={changeValue} />
+              <input
+                type="file"
+                name="image"
+                accept="image/*"
+                id="ex_file"
+                onChange={changeValue}
+              />
             </div>
             <div className="image_preview">
               {imageUrl !== "" ? (

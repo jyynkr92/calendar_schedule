@@ -1,4 +1,5 @@
 import React from "react";
+import TimelineItem from "./TimelineItem";
 
 const Timeline = ({ year, timelineList }) => {
   const timelines =
@@ -9,16 +10,9 @@ const Timeline = ({ year, timelineList }) => {
         });
 
   return (
-    <div>
+    <div className="timeline_container">
       {timelines.map(timeline => (
-        <div key={timeline.timeilneId}>
-          {timeline.title}
-          <br />
-          {timeline.type}
-          <br />
-          {timeline.content}
-          {timeline.image ? <img src={timeline.image} alt="timeline" /> : null}
-        </div>
+        <TimelineItem timeline={timeline} key={timeline.timeilneId} />
       ))}
     </div>
   );

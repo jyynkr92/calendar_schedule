@@ -41,19 +41,24 @@ export const closeModal = () => ({
 
 export const getTimelineList = () => {
   return dispatch => {
-    return firestore.collection("timeline").onSnapshot(function(snapshot) {
-      snapshot.docChanges().forEach(change => {
-        const childData = change.doc.data();
+    return firestore
+      .collection("timeline")
+      .orderBy("year")
+      .orderBy("month")
+      .orderBy("date")
+      .onSnapshot(function(snapshot) {
+        snapshot.docChanges().forEach(change => {
+          const childData = change.doc.data();
 
-        if (change.type === "added") {
-          dispatch(addTimeline(childData));
-        } else if (change.type === "removed") {
-          dispatch(deleteTimeline(childData.timelineId));
-        } else if (change.type === "modified") {
-          dispatch(modfyTimeline(childData));
-        }
+          if (change.type === "added") {
+            dispatch(addTimeline(childData));
+          } else if (change.type === "removed") {
+            dispatch(deleteTimeline(childData.timelineId));
+          } else if (change.type === "modified") {
+            dispatch(modfyTimeline(childData));
+          }
+        });
       });
-    });
   };
 };
 
@@ -66,15 +71,27 @@ export const addTimelineToFirebase = timeline => {
       contentType: "image/jpeg"
     };
     const uploadTask = storageRef.child(`images/${image.name}`).put(image, metadata);
-    uploadTask.on("state_changed", snapshot => {
-      uploadTask.snapshot.ref.getDownloadURL().then(url => {
-        timeline.image = url;
-        const doc = firestore.collection("timeline");
-        const docId = doc.doc().id;
-        timeline.timelineId = docId;
-        return doc.add(timeline);
-      });
-    });
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        // progress function ...
+        const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        console.log(progress);
+      },
+      error => {
+        // Error function ...
+        console.log(error);
+      },
+      () => {
+        uploadTask.snapshot.ref.getDownloadURL().then(url => {
+          timeline.image = url;
+          const doc = firestore.collection("timeline");
+          const docId = doc.doc().id;
+          timeline.timelineId = docId;
+          return doc.add(timeline);
+        });
+      }
+    );
   };
 };
 

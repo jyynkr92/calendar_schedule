@@ -17,6 +17,7 @@ const Timeline = ({ year, timelineList }) => {
           {timeline.type}
           <br />
           {timeline.content}
+          {timeline.image ? <img src={timeline.image} alt="timeline" /> : null}
         </div>
       ))}
     </div>

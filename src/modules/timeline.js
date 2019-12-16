@@ -66,17 +66,14 @@ export const addTimelineToFirebase = timeline => {
       contentType: "image/jpeg"
     };
     const uploadTask = storageRef.child(`images/${image.name}`).put(image, metadata);
-    uploadTask.on("state_changed", () => {
-      storageRef
-        .child(`images/${image.name}`)
-        .getDownloadURL()
-        .then(url => {
-          timeline.image = url;
-          const doc = firestore.collection("timeline");
-          const docId = doc.doc().id;
-          timeline.timelineId = docId;
-          return doc.add(timeline);
-        });
+    uploadTask.on("state_changed", snapshot => {
+      uploadTask.snapshot.ref.getDownloadURL().then(url => {
+        timeline.image = url;
+        const doc = firestore.collection("timeline");
+        const docId = doc.doc().id;
+        timeline.timelineId = docId;
+        return doc.add(timeline);
+      });
     });
   };
 };

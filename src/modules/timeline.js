@@ -39,26 +39,21 @@ export const closeModal = () => ({
   type: CLOSE_MODAL
 });
 
-export const getTimelineList = () => {
-  return dispatch => {
-    return firestore
+export const getTimelineList = year => {
+  return async dispatch => {
+    const timelineList = [];
+    await firestore
       .collection("timeline")
-      .orderBy("year")
+      .where("year", "==", year)
       .orderBy("month")
       .orderBy("date")
-      .onSnapshot(function(snapshot) {
-        snapshot.docChanges().forEach(change => {
-          const childData = change.doc.data();
-
-          if (change.type === "added") {
-            dispatch(addTimeline(childData));
-          } else if (change.type === "removed") {
-            dispatch(deleteTimeline(childData.timelineId));
-          } else if (change.type === "modified") {
-            dispatch(modfyTimeline(childData));
-          }
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.docs.forEach(doc => {
+          timelineList.push(doc.data());
         });
       });
+    dispatch(getTimeline(timelineList));
   };
 };
 
@@ -122,7 +117,8 @@ const initialState = {
   timelineList: [],
   isLoading: false,
   mode: "add",
-  modal: false
+  modal: false,
+  selectYear: 0
 };
 
 /** define reduce function */

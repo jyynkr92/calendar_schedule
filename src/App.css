@@ -509,7 +509,7 @@ input:focus {
 }
 
 .timeline_item .timeline_image {
-  width: 100%;
+  max-width: 100%;
 }
 
 .timeline_item_content {

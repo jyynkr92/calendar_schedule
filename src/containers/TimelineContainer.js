@@ -6,7 +6,7 @@ import { openModal, getTimelineList } from "../modules/timeline";
 
 class TimelineContainer extends PureComponent {
   state = {
-    selectedYear: 0
+    yearList: []
   };
 
   setModal = () => {
@@ -16,22 +16,37 @@ class TimelineContainer extends PureComponent {
 
   componentDidMount() {
     const { getTimelineList } = this.props;
-    getTimelineList();
     const year = new Date().getFullYear();
+    let firstYear = 2017;
+    getTimelineList(year);
 
+    const yearList = [];
+    console.log(year);
+    console.log(firstYear);
+    while (year >= firstYear) {
+      console.log(firstYear);
+      yearList.push(firstYear);
+      firstYear++;
+    }
+    console.log(yearList);
     this.setState({
-      selectedYear: year
+      yearList
     });
   }
 
   render() {
     const { setModal } = this;
     const { modal, timelineList } = this.props;
-    const { selectedYear } = this.state;
+    const { yearList } = this.state;
     return (
       <div className="timeline_container">
         <div onClick={setModal}>add timeline</div>
-        <Timeline year={selectedYear} timelineList={timelineList} />
+        <div>
+          {yearList.map(year => (
+            <span>{year}</span>
+          ))}
+        </div>
+        <Timeline timelineList={timelineList} />
         {modal ? <TimelineModalContainer /> : null}
       </div>
     );
@@ -47,8 +62,8 @@ const mapToDispatch = dispatch => ({
   openModal: () => {
     dispatch(openModal());
   },
-  getTimelineList: () => {
-    dispatch(getTimelineList());
+  getTimelineList: year => {
+    dispatch(getTimelineList(year));
   }
 });
 

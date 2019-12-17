@@ -64,6 +64,8 @@ const TimelineTitle = styled.p`
 
 const TimelineImage = styled.div`
   padding-bottom: 5px;
+  width: 100%;
+  text-align: center;
 `;
 
 const TimelineContent = styled.p``;

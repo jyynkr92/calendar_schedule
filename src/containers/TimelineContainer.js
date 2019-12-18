@@ -21,14 +21,12 @@ class TimelineContainer extends PureComponent {
     getTimelineList(year);
 
     const yearList = [];
-    console.log(year);
-    console.log(firstYear);
+
     while (year >= firstYear) {
-      console.log(firstYear);
       yearList.push(firstYear);
       firstYear++;
     }
-    console.log(yearList);
+
     this.setState({
       yearList
     });

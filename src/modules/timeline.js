@@ -11,9 +11,10 @@ const OPEN_MODAL = "OPEN_MODAL";
 const CLOSE_MODAL = "CLOSE_MODAL";
 
 /** define action function */
-export const getTimeline = timelineList => ({
+export const getTimeline = (timelineList, selectYear) => ({
   type: GET_TIMELINE,
-  timelineList
+  timelineList,
+  selectYear
 });
 
 export const addTimeline = timeline => ({
@@ -53,12 +54,12 @@ export const getTimelineList = year => {
           timelineList.push(doc.data());
         });
       });
-    dispatch(getTimeline(timelineList));
+    dispatch(getTimeline(timelineList, year));
   };
 };
 
-export const addTimelineToFirebase = timeline => {
-  return () => {
+export const addTimelineToFirebase = (timeline, selectYear) => {
+  return dispatch => {
     //image upload
     const { image } = timeline;
     // Create the file metadata
@@ -83,7 +84,10 @@ export const addTimelineToFirebase = timeline => {
           const doc = firestore.collection("timeline");
           const docId = doc.doc().id;
           timeline.timelineId = docId;
-          return doc.add(timeline);
+          doc.add(timeline).then(() => {
+            console.log(selectYear);
+            dispatch(getTimelineList(selectYear));
+          });
         });
       }
     );
@@ -127,7 +131,8 @@ function timeline(state = initialState, action) {
     case GET_TIMELINE:
       return {
         ...state,
-        timelineList: action.timelineList
+        timelineList: action.timelineList,
+        selectYear: action.selectYear
       };
     case ADD_TIMELINE:
       return {

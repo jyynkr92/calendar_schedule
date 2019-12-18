@@ -60,11 +60,11 @@ class TimelineModalContainer extends PureComponent {
   };
 
   addTimeline = () => {
-    const { addTimelineToFirebase, closeModal } = this.props;
+    const { addTimelineToFirebase, closeModal, selectYear } = this.props;
     const { content, type, year, month, date, image, title } = this.state;
 
     const timeline = { content, type, year, month, date, image, title };
-    addTimelineToFirebase(timeline);
+    addTimelineToFirebase(timeline, selectYear);
     closeModal();
   };
 
@@ -92,15 +92,16 @@ class TimelineModalContainer extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  modal: state.timeline.modal
+  modal: state.timeline.modal,
+  selectYear: state.timeline.selectYear
 });
 
 const mapToDispatch = dispatch => ({
   closeModal: () => {
     dispatch(closeModal());
   },
-  addTimelineToFirebase: timeline => {
-    dispatch(addTimelineToFirebase(timeline));
+  addTimelineToFirebase: (timeline, selectYear) => {
+    dispatch(addTimelineToFirebase(timeline, selectYear));
   }
 });
 

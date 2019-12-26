@@ -53,8 +53,8 @@ export const getTimelineList = year => {
         querySnapshot.docs.forEach(doc => {
           timelineList.push(doc.data());
         });
+        dispatch(getTimeline(timelineList, year));
       });
-    dispatch(getTimeline(timelineList, year));
   };
 };
 
@@ -84,8 +84,8 @@ export const addTimelineToFirebase = (timeline, selectYear) => {
           const doc = firestore.collection("timeline");
           const docId = doc.doc().id;
           timeline.timelineId = docId;
+
           doc.add(timeline).then(() => {
-            console.log(selectYear);
             dispatch(getTimelineList(selectYear));
           });
         });
@@ -113,6 +113,12 @@ export const modifyTimelineToFirebase = timeline => {
         doc.ref.set(timeline);
       });
     });
+  };
+};
+
+export const changeYear = year => {
+  return dispatch => {
+    dispatch(getTimelineList(year));
   };
 };
 

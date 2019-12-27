@@ -5,7 +5,7 @@ const Timeline = ({ timelineList }) => {
   return (
     <div className="timeline_container">
       {timelineList.map(timeline => (
-        <TimelineItem timeline={timeline} key={timeline.timeilneId} />
+        <TimelineItem timeline={timeline} key={timeline.timelineId} />
       ))}
     </div>
   );

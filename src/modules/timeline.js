@@ -40,20 +40,22 @@ export const closeModal = () => ({
   type: CLOSE_MODAL
 });
 
-export const getTimelineList = year => {
+export const getTimelineList = selectYear => {
   return async dispatch => {
-    const timelineList = [];
     await firestore
       .collection("timeline")
-      .where("year", "==", year)
+      .where("year", "==", Number(selectYear))
       .orderBy("month")
       .orderBy("date")
       .get()
       .then(querySnapshot => {
+        const timelineList = [];
+
         querySnapshot.docs.forEach(doc => {
           timelineList.push(doc.data());
         });
-        dispatch(getTimeline(timelineList, year));
+
+        dispatch(getTimeline(timelineList, selectYear));
       });
   };
 };
@@ -62,6 +64,18 @@ export const addTimelineToFirebase = (timeline, selectYear) => {
   return dispatch => {
     //image upload
     const { image } = timeline;
+
+    if (image === "") {
+      const doc = firestore.collection("timeline");
+      const docId = doc.doc().id;
+      timeline.timelineId = docId;
+
+      doc.add(timeline).then(() => {
+        dispatch(getTimelineList(selectYear));
+      });
+      return;
+    }
+
     // Create the file metadata
     const metadata = {
       contentType: "image/jpeg"

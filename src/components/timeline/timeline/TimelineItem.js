@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import deleteIcon from "../../../img/recycle-bin.png";
+import editIcon from "../../../img/pencil.png";
 
-const TimelineItem = ({ timeline }) => {
+const TimelineItem = ({ timeline, isAdmin }) => {
   const getTypeText = () => {
     const { type } = timeline;
     switch (type) {
@@ -33,11 +35,21 @@ const TimelineItem = ({ timeline }) => {
           ) : null}
         </TimelineImage>
         <TimelineContent>{timeline.content}</TimelineContent>
+        {isAdmin ? (
+          <div className="iconArea">
+            <Icon src={deleteIcon} alt="delete timeline" />
+            <Icon src={editIcon} alt="edit timeline" />
+          </div>
+        ) : null}
         <span className="circle" />
       </div>
     </div>
   );
 };
+
+const Icon = styled.img`
+  width: 20px;
+`;
 
 const Tag = styled.span`
   background-color: ${props => {

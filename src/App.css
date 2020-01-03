@@ -618,3 +618,15 @@ input:focus {
 .timeline_container {
   padding: 0 1rem;
 }
+
+.timeline_item:nth-child(odd) .timeline_item_content .iconArea {
+  text-align: right;
+}
+
+.timeline_item:nth-child(even) .timeline_item_content .iconArea {
+  text-align: left;
+}
+
+.iconArea {
+  width: 100%;
+}

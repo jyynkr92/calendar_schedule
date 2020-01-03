@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Timeline from "../components/timeline/timeline/Timeline";
 import TimelineModalContainer from "./TimelineModalContainer";
 import { openModal, getTimelineList, changeYear } from "../modules/timeline";
+import addTimeline from "../img/add-event.png";
 import styled from "styled-components";
 
 class TimelineContainer extends PureComponent {
@@ -36,17 +37,20 @@ class TimelineContainer extends PureComponent {
   changeTimelineYear = e => {
     const { changeYear } = this.props;
     const year = e.target.getAttribute("data-year");
-    console.log(year);
     changeYear(year);
   };
 
   render() {
     const { setModal, changeTimelineYear } = this;
-    const { modal, timelineList, selectYear } = this.props;
+    const { modal, timelineList, selectYear, userId, isAdmin } = this.props;
     const { yearList } = this.state;
     return (
       <div>
-        <div onClick={setModal}>add timeline</div>
+        {userId !== "" && isAdmin ? (
+          <div>
+            <IimelineIcon src={addTimeline} alt="add_timeline_icon" onClick={setModal} />
+          </div>
+        ) : null}
         <YearDiv>
           {yearList.map(year => (
             <YearText
@@ -59,7 +63,7 @@ class TimelineContainer extends PureComponent {
             </YearText>
           ))}
         </YearDiv>
-        <Timeline timelineList={timelineList} />
+        <Timeline timelineList={timelineList} isAdmin={isAdmin} />
         {modal ? <TimelineModalContainer /> : null}
       </div>
     );
@@ -69,7 +73,9 @@ class TimelineContainer extends PureComponent {
 const mapStateToProps = state => ({
   modal: state.timeline.modal,
   timelineList: state.timeline.timelineList,
-  selectYear: state.timeline.selectYear
+  selectYear: state.timeline.selectYear,
+  isAdmin: state.login.isAdmin,
+  userId: state.login.userId
 });
 
 const mapToDispatch = dispatch => ({
@@ -103,4 +109,10 @@ const YearText = styled.span`
     border-bottom: 4px solid #8c7966;
     cursor: pointer;
   }
+`;
+
+const IimelineIcon = styled.img`
+  cursor: pointer;
+  width: 30px;
+  float: right;
 `;

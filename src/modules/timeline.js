@@ -95,6 +95,7 @@ export const addTimelineToFirebase = (timeline, selectYear) => {
       () => {
         uploadTask.snapshot.ref.getDownloadURL().then(url => {
           timeline.image = url;
+          timeline.imageName = image.name;
           const doc = firestore.collection("timeline");
           const docId = doc.doc().id;
           timeline.timelineId = docId;
@@ -108,23 +109,86 @@ export const addTimelineToFirebase = (timeline, selectYear) => {
   };
 };
 
-export const deleteTimlineToFirebase = timelineId => {
-  return async () => {
+export const deleteTimelineToFirebase = (timelineId, selectYear) => {
+  return async dispatch => {
     const doc = firestore.collection("timeline").where("timelineId", "==", timelineId);
     return doc.get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
-        doc.ref.delete();
+        const docData = doc.data();
+
+        if (docData.image === "") {
+          doc.ref.delete().then(() => {
+            dispatch(getTimelineList(selectYear));
+          });
+        } else {
+          const imageData = storageRef.child(`images/${docData.imageName}`);
+
+          imageData.delete().then(() => {
+            doc.ref.delete().then(() => {
+              dispatch(getTimelineList(selectYear));
+            });
+          });
+        }
       });
     });
   };
 };
 
-export const modifyTimelineToFirebase = timeline => {
-  return async () => {
+const uploadImage = (image, timeline) => {
+  // Create the file metadata
+  const metadata = {
+    contentType: "image/jpeg"
+  };
+  const uploadTask = storageRef.child(`images/${image.name}`).put(image, metadata);
+  uploadTask.on(
+    "state_changed",
+    snapshot => {
+      // progress function ...
+      const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+      console.log(progress);
+    },
+    error => {
+      // Error function ...
+      console.log(error);
+    },
+    () => {
+      uploadTask.snapshot.ref.getDownloadURL().then(url => {
+        timeline.image = url;
+        timeline.imageName = image.name;
+        return timeline;
+      });
+    }
+  );
+};
+
+const deleteImage = imageName => {
+  const imageData = storageRef.child(`images/${imageName}`);
+  imageData.delete();
+};
+
+export const modifyTimelineToFirebase = (timeline, selectYear) => {
+  return async dispatch => {
     const doc = firestore.collection("timeline").where("timelineId", "==", timeline.timelineId);
-    return doc.get().then(function(querySnapshot) {
+    doc.get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
-        doc.ref.set(timeline);
+        //image upload
+        const { image } = timeline;
+        const docData = doc.data();
+        if (docData.image !== "") {
+          deleteImage(docData.imageName);
+        }
+
+        if (image === "") {
+          doc.ref.set(timeline).then(() => {
+            dispatch(getTimelineList(selectYear));
+          });
+        } else {
+          const newTimeline = uploadImage(image, timeline);
+
+          doc.ref.set(newTimeline).then(() => {
+            dispatch(getTimelineList(selectYear));
+          });
+        }
       });
     });
   };
@@ -142,7 +206,17 @@ const initialState = {
   isLoading: false,
   mode: "add",
   modal: false,
-  selectYear: 0
+  selectYear: 0,
+  selectTimeline: {
+    content: "",
+    date: 0,
+    image: "",
+    month: 0,
+    timelineId: "",
+    title: "",
+    type: "",
+    year: 0
+  }
 };
 
 /** define reduce function */

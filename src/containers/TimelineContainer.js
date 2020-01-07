@@ -2,7 +2,12 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import Timeline from "../components/timeline/timeline/Timeline";
 import TimelineModalContainer from "./TimelineModalContainer";
-import { openModal, getTimelineList, changeYear } from "../modules/timeline";
+import {
+  openModal,
+  getTimelineList,
+  changeYear,
+  deleteTimelineToFirebase
+} from "../modules/timeline";
 import addTimeline from "../img/add-event.png";
 import styled from "styled-components";
 
@@ -14,6 +19,12 @@ class TimelineContainer extends PureComponent {
   setModal = () => {
     const { openModal } = this.props;
     openModal();
+  };
+
+  deleteTimeline = e => {
+    const { deleteTimelineToFirebase, selectYear } = this.props;
+    const timelineId = e.target.getAttribute("data-timelineId");
+    deleteTimelineToFirebase(timelineId, selectYear);
   };
 
   componentDidMount() {
@@ -41,7 +52,7 @@ class TimelineContainer extends PureComponent {
   };
 
   render() {
-    const { setModal, changeTimelineYear } = this;
+    const { setModal, changeTimelineYear, deleteTimeline } = this;
     const { modal, timelineList, selectYear, userId, isAdmin } = this.props;
     const { yearList } = this.state;
     return (
@@ -58,12 +69,13 @@ class TimelineContainer extends PureComponent {
               year={year}
               data-year={year}
               onClick={changeTimelineYear}
+              key={"timeline" + year}
             >
               {year}
             </YearText>
           ))}
         </YearDiv>
-        <Timeline timelineList={timelineList} isAdmin={isAdmin} />
+        <Timeline timelineList={timelineList} isAdmin={isAdmin} deleteTimeline={deleteTimeline} />
         {modal ? <TimelineModalContainer /> : null}
       </div>
     );
@@ -87,6 +99,9 @@ const mapToDispatch = dispatch => ({
   },
   changeYear: year => {
     dispatch(changeYear(year));
+  },
+  deleteTimelineToFirebase: (timelineId, selectYear) => {
+    dispatch(deleteTimelineToFirebase(timelineId, selectYear));
   }
 });
 

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import deleteIcon from "../../../img/recycle-bin.png";
 import editIcon from "../../../img/pencil.png";
 
-const TimelineItem = ({ timeline, isAdmin }) => {
+const TimelineItem = ({ timeline, isAdmin, deleteTimeline }) => {
   const getTypeText = () => {
     const { type } = timeline;
     switch (type) {
@@ -37,7 +37,12 @@ const TimelineItem = ({ timeline, isAdmin }) => {
         <TimelineContent>{timeline.content}</TimelineContent>
         {isAdmin ? (
           <div className="iconArea">
-            <Icon src={deleteIcon} alt="delete timeline" />
+            <Icon
+              src={deleteIcon}
+              data-timelineId={timeline.timelineId}
+              onClick={deleteTimeline}
+              alt="delete timeline"
+            />
             <Icon src={editIcon} alt="edit timeline" />
           </div>
         ) : null}

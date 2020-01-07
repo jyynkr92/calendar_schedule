@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import TimelineModal from "../components/timeline/modal/TimelineModal";
-import { closeModal, addTimelineToFirebase } from "../modules/timeline";
+import { closeModal, addTimelineToFirebase, modifyTimelineToFirebase } from "../modules/timeline";
 
 class TimelineModalContainer extends PureComponent {
   state = {
@@ -102,6 +102,9 @@ const mapToDispatch = dispatch => ({
   },
   addTimelineToFirebase: (timeline, selectYear) => {
     dispatch(addTimelineToFirebase(timeline, selectYear));
+  },
+  modifyTimelineToFirebase: (timeline, selectYear) => {
+    dispatch(modifyTimelineToFirebase(timeline, selectYear));
   }
 });
 

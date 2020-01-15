@@ -16,22 +16,38 @@ class TimelineModalContainer extends PureComponent {
   };
 
   componentDidMount() {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = today.getMonth() + 1;
-    const date = today.getDate();
+    const { mode, selectTimeline } = this.props;
 
-    this.setState({
-      content: "",
-      type: "C",
-      year: year,
-      month: month,
-      date: date,
-      image: "",
-      title: "",
-      imageUrl: ""
-    });
+    if (mode === "add") {
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = today.getMonth() + 1;
+      const date = today.getDate();
+
+      this.setState({
+        content: "",
+        type: "C",
+        year: year,
+        month: month,
+        date: date,
+        image: "",
+        title: "",
+        imageUrl: ""
+      });
+    } else if (mode === "edit") {
+      const { content, type, year, month, date, image, title } = selectTimeline;
+      this.setState({
+        content,
+        type,
+        year,
+        month,
+        date,
+        imageUrl: image,
+        title
+      });
+    }
   }
+
   onHide = () => {
     const { closeModal } = this.props;
     closeModal();
@@ -93,7 +109,9 @@ class TimelineModalContainer extends PureComponent {
 
 const mapStateToProps = state => ({
   modal: state.timeline.modal,
-  selectYear: state.timeline.selectYear
+  selectYear: state.timeline.selectYear,
+  mode: state.timeline.mode,
+  selectTimeline: state.timeline.selectTimeline
 });
 
 const mapToDispatch = dispatch => ({

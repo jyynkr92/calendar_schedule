@@ -9,6 +9,7 @@ const DELETE_TIMELINE = "DELETE_TIMELINE";
 /** modal area */
 const OPEN_MODAL = "OPEN_MODAL";
 const CLOSE_MODAL = "CLOSE_MODAL";
+const SET_EDITMODE = "SET_EDITMODE";
 
 /** define action function */
 export const getTimeline = (timelineList, selectYear) => ({
@@ -38,6 +39,11 @@ export const openModal = () => ({
 
 export const closeModal = () => ({
   type: CLOSE_MODAL
+});
+
+export const setEditMode = timeline => ({
+  type: SET_EDITMODE,
+  timeline
 });
 
 export const getTimelineList = selectYear => {
@@ -194,6 +200,17 @@ export const modifyTimelineToFirebase = (timeline, selectYear) => {
   };
 };
 
+export const setEditModal = timelineId => {
+  return async dispatch => {
+    const doc = firestore.collection("timeline").where("timelineId", "==", timelineId);
+    doc.get().then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+        const docData = doc.data();
+        dispatch(setEditMode(docData));
+      });
+    });
+  };
+};
 export const changeYear = year => {
   return dispatch => {
     dispatch(getTimelineList(year));
@@ -272,6 +289,13 @@ function timeline(state = initialState, action) {
       return {
         ...state,
         modal: false
+      };
+    case SET_EDITMODE:
+      return {
+        ...state,
+        selectTimeline: action.timeline,
+        mode: "edit",
+        modal: true
       };
     default:
       return state;

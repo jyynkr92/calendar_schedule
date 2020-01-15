@@ -44,7 +44,7 @@ export const getNewsList = pageNum => async dispatch => {
     const {
       data: { items }
     } = await axios.get(url);
-    console.log(items);
+
     dispatch(setNewsList(items, pageNum));
   } catch (error) {
     console.log(error);

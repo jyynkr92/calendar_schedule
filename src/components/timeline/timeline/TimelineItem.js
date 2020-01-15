@@ -3,7 +3,7 @@ import styled from "styled-components";
 import deleteIcon from "../../../img/recycle-bin.png";
 import editIcon from "../../../img/pencil.png";
 
-const TimelineItem = ({ timeline, isAdmin, deleteTimeline }) => {
+const TimelineItem = ({ timeline, isAdmin, deleteTimeline, setEditModal }) => {
   const getTypeText = () => {
     const { type } = timeline;
     switch (type) {
@@ -43,7 +43,12 @@ const TimelineItem = ({ timeline, isAdmin, deleteTimeline }) => {
               onClick={deleteTimeline}
               alt="delete timeline"
             />
-            <Icon src={editIcon} alt="edit timeline" />
+            <Icon
+              src={editIcon}
+              data-timelineId={timeline.timelineId}
+              onClick={setEditModal}
+              alt="edit timeline"
+            />
           </div>
         ) : null}
         <span className="circle" />

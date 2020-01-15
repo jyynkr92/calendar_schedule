@@ -6,7 +6,8 @@ import {
   openModal,
   getTimelineList,
   changeYear,
-  deleteTimelineToFirebase
+  deleteTimelineToFirebase,
+  setEditModal
 } from "../modules/timeline";
 import addTimeline from "../img/add-event.png";
 import styled from "styled-components";
@@ -51,8 +52,15 @@ class TimelineContainer extends PureComponent {
     changeYear(year);
   };
 
+  setEditModal = e => {
+    const timelineId = e.target.getAttribute("data-timelineId");
+    const { setEditModal } = this.props;
+
+    setEditModal(timelineId);
+  };
+
   render() {
-    const { setModal, changeTimelineYear, deleteTimeline } = this;
+    const { setModal, changeTimelineYear, deleteTimeline, setEditModal } = this;
     const { modal, timelineList, selectYear, userId, isAdmin } = this.props;
     const { yearList } = this.state;
     return (
@@ -75,7 +83,12 @@ class TimelineContainer extends PureComponent {
             </YearText>
           ))}
         </YearDiv>
-        <Timeline timelineList={timelineList} isAdmin={isAdmin} deleteTimeline={deleteTimeline} />
+        <Timeline
+          timelineList={timelineList}
+          isAdmin={isAdmin}
+          deleteTimeline={deleteTimeline}
+          setEditModal={setEditModal}
+        />
         {modal ? <TimelineModalContainer /> : null}
       </div>
     );
@@ -102,6 +115,9 @@ const mapToDispatch = dispatch => ({
   },
   deleteTimelineToFirebase: (timelineId, selectYear) => {
     dispatch(deleteTimelineToFirebase(timelineId, selectYear));
+  },
+  setEditModal: timelineId => {
+    dispatch(setEditModal(timelineId));
   }
 });
 

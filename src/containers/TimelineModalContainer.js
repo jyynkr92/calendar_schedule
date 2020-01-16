@@ -84,6 +84,16 @@ class TimelineModalContainer extends PureComponent {
     closeModal();
   };
 
+  editTimeline = () => {
+    const { modifyTimelineToFirebase, closeModal, selectYear } = this.props;
+    const { content, type, year, month, date, image, title } = this.state;
+
+    const timeline = { content, type, year, month, date, image, title };
+
+    modifyTimelineToFirebase(timeline, selectYear);
+    closeModal();
+  };
+
   render() {
     const { onHide, changeInput, addTimeline } = this;
     const { modal } = this.props;

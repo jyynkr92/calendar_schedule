@@ -142,29 +142,32 @@ export const deleteTimelineToFirebase = (timelineId, selectYear) => {
 
 const uploadImage = (image, timeline) => {
   // Create the file metadata
-  const metadata = {
-    contentType: "image/jpeg"
-  };
-  const uploadTask = storageRef.child(`images/${image.name}`).put(image, metadata);
-  uploadTask.on(
-    "state_changed",
-    snapshot => {
-      // progress function ...
-      const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-      console.log(progress);
-    },
-    error => {
-      // Error function ...
-      console.log(error);
-    },
-    () => {
-      uploadTask.snapshot.ref.getDownloadURL().then(url => {
+  return new Promise((resolve, reject) => {
+    const metadata = {
+      contentType: "image/jpeg"
+    };
+    const uploadTask = storageRef.child(`images/${image.name}`).put(image, metadata);
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        // progress function ...
+        const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        console.log(progress);
+      },
+      error => {
+        // Error function ...
+        console.log(error);
+        reject(error);
+        return;
+      },
+      async () => {
+        const url = await uploadTask.snapshot.ref.getDownloadURL();
         timeline.image = url;
         timeline.imageName = image.name;
-        return timeline;
-      });
-    }
-  );
+        resolve(timeline);
+      }
+    );
+  });
 };
 
 const deleteImage = imageName => {
@@ -173,23 +176,29 @@ const deleteImage = imageName => {
 };
 
 export const modifyTimelineToFirebase = (timeline, selectYear) => {
-  return async dispatch => {
+  return dispatch => {
     const doc = firestore.collection("timeline").where("timelineId", "==", timeline.timelineId);
-    doc.get().then(function(querySnapshot) {
-      querySnapshot.forEach(function(doc) {
+    doc.get().then(querySnapshot => {
+      querySnapshot.forEach(async doc => {
         //image upload
         const { image } = timeline;
         const docData = doc.data();
-        if (docData.image !== "") {
-          deleteImage(docData.imageName);
-        }
+        console.log(timeline);
+        console.log(docData);
+
+        console.log(docData.image);
+        console.log(image);
 
         if (image === "") {
           doc.ref.set(timeline).then(() => {
             dispatch(getTimelineList(selectYear));
           });
         } else {
-          const newTimeline = uploadImage(image, timeline);
+          if (docData.image !== "") {
+            deleteImage(docData.imageName);
+          }
+
+          const newTimeline = await uploadImage(image, timeline);
 
           doc.ref.set(newTimeline).then(() => {
             dispatch(getTimelineList(selectYear));
@@ -288,6 +297,7 @@ function timeline(state = initialState, action) {
     case CLOSE_MODAL:
       return {
         ...state,
+        mode: "add",
         modal: false
       };
     case SET_EDITMODE:

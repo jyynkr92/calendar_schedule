@@ -17,7 +17,10 @@ const TimelineModal = ({
   title,
   changeInput,
   addTimeline,
-  imageObj
+  imageObj,
+  editTimeline,
+  mode,
+  timelineId
 }) => {
   const fullDate = year + "-" + month + "-" + date;
   const changeValue = e => {
@@ -152,7 +155,11 @@ const TimelineModal = ({
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={addTimeline}>등록</Button>
+        {mode === "edit" ? (
+          <Button onClick={editTimeline}>수정</Button>
+        ) : (
+          <Button onClick={addTimeline}>등록</Button>
+        )}
         <Button onClick={onHide}>닫기</Button>
       </Modal.Footer>
     </Modal>

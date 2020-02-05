@@ -39,13 +39,13 @@ const TimelineItem = ({ timeline, isAdmin, deleteTimeline, setEditModal }) => {
           <div className="iconArea">
             <Icon
               src={deleteIcon}
-              data-timelineId={timeline.timelineId}
+              data-timelineid={timeline.timelineId}
               onClick={deleteTimeline}
               alt="delete timeline"
             />
             <Icon
               src={editIcon}
-              data-timelineId={timeline.timelineId}
+              data-timelineid={timeline.timelineId}
               onClick={setEditModal}
               alt="edit timeline"
             />

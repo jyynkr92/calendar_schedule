@@ -12,7 +12,8 @@ class TimelineModalContainer extends PureComponent {
     date: "",
     image: "",
     title: "",
-    imageUrl: ""
+    imageUrl: "",
+    timelineId: ""
   };
 
   componentDidMount() {
@@ -35,7 +36,7 @@ class TimelineModalContainer extends PureComponent {
         imageUrl: ""
       });
     } else if (mode === "edit") {
-      const { content, type, year, month, date, image, title } = selectTimeline;
+      const { content, type, year, month, date, image, title, timelineId } = selectTimeline;
       this.setState({
         content,
         type,
@@ -43,7 +44,8 @@ class TimelineModalContainer extends PureComponent {
         month,
         date,
         imageUrl: image,
-        title
+        title,
+        timelineId
       });
     }
   }
@@ -86,18 +88,19 @@ class TimelineModalContainer extends PureComponent {
 
   editTimeline = () => {
     const { modifyTimelineToFirebase, closeModal, selectYear } = this.props;
-    const { content, type, year, month, date, image, title } = this.state;
+    const { content, type, year, month, date, image, title, timelineId } = this.state;
 
-    const timeline = { content, type, year, month, date, image, title };
+    const timeline = { content, type, year, month, date, image, title, timelineId };
 
     modifyTimelineToFirebase(timeline, selectYear);
     closeModal();
   };
 
   render() {
-    const { onHide, changeInput, addTimeline } = this;
-    const { modal } = this.props;
-    const { content, type, year, month, date, image, title, imageUrl } = this.state;
+    const { onHide, changeInput, addTimeline, editTimeline } = this;
+    const { modal, mode } = this.props;
+    const { content, type, year, month, date, image, title, imageUrl, timelineId } = this.state;
+
     return (
       <TimelineModal
         onHide={onHide}
@@ -112,6 +115,9 @@ class TimelineModalContainer extends PureComponent {
         changeInput={changeInput}
         addTimeline={addTimeline}
         imageUrl={imageUrl}
+        editTimeline={editTimeline}
+        mode={mode}
+        timelineId={timelineId}
       ></TimelineModal>
     );
   }

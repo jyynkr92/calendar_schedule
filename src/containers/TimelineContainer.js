@@ -24,7 +24,7 @@ class TimelineContainer extends PureComponent {
 
   deleteTimeline = e => {
     const { deleteTimelineToFirebase, selectYear } = this.props;
-    const timelineId = e.target.getAttribute("data-timelineId");
+    const timelineId = e.target.getAttribute("data-timelineid");
     deleteTimelineToFirebase(timelineId, selectYear);
   };
 
@@ -53,7 +53,7 @@ class TimelineContainer extends PureComponent {
   };
 
   setEditModal = e => {
-    const timelineId = e.target.getAttribute("data-timelineId");
+    const timelineId = e.target.getAttribute("data-timelineid");
     const { setEditModal } = this.props;
 
     setEditModal(timelineId);
